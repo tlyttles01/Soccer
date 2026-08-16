@@ -524,3 +524,255 @@ main {
         grid-template-columns: 1fr 1fr;
     }
 }
+
+/* SCHEDULE PAGE */
+
+.schedule-hero {
+    min-height: 220px;
+}
+
+.schedule-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-number {
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.summary-label {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+
+.summary-card.alert {
+    border-left: 4px solid #c58b27;
+}
+
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.schedule-key {
+    display: flex;
+    gap: 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.key-covered {
+    color: var(--green);
+}
+
+.key-open {
+    color: #a36a08;
+}
+
+.game-card {
+    display: grid;
+    grid-template-columns: 110px 1fr 220px;
+    gap: 24px;
+    align-items: center;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.game-card:last-child {
+    border-bottom: 0;
+}
+
+.game-date {
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.game-month {
+    display: block;
+    background: var(--green);
+    color: white;
+    padding: 6px;
+    font-weight: 900;
+    font-size: 0.72rem;
+}
+
+.game-day {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    padding-top: 8px;
+}
+
+.game-time {
+    display: block;
+    padding: 4px 8px 10px;
+    color: var(--muted);
+    font-size: 0.72rem;
+}
+
+.game-main h3 {
+    margin: 5px 0;
+    font-size: 1.1rem;
+}
+
+.game-type {
+    color: var(--green);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+}
+
+.snack-box {
+    padding: 16px;
+    border-radius: 14px;
+}
+
+.snack-box.covered {
+    background: var(--green-soft);
+    color: var(--green-dark);
+}
+
+.snack-box.open {
+    background: #fff5df;
+    color: #77520d;
+}
+
+.snack-label {
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.07em;
+    margin-bottom: 5px;
+}
+
+.snack-box strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.snack-box span {
+    font-size: 0.78rem;
+}
+
+.signup-button {
+    border: 0;
+    background: #9a690f;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.signup-button:hover {
+    background: #77520d;
+}
+
+/* SIGNUP MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 10, 7, 0.7);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 440px;
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.modal-content h2 {
+    margin-bottom: 6px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    border: 0;
+    background: transparent;
+    font-size: 1.7rem;
+    cursor: pointer;
+    color: var(--muted);
+}
+
+.modal-content label {
+    display: block;
+    margin: 16px 0 6px;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.modal-content input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+    font: inherit;
+}
+
+.signup-submit {
+    width: 100%;
+    border: 0;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.form-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.72rem;
+    margin-top: 12px;
+}
+
+@media (max-width: 850px) {
+
+    .schedule-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .game-card {
+        grid-template-columns: 85px 1fr;
+    }
+
+    .snack-box {
+        grid-column: 1 / -1;
+    }
+
+    .schedule-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
