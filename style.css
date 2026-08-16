@@ -1885,3 +1885,176 @@ main {
     }
 
 }
+
+/* =========================================================
+   PLAYBOOK PLACEHOLDER
+========================================================= */
+
+.playbook-hero {
+    min-height: 240px;
+}
+
+
+.playbook-placeholder {
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding:
+        50px 20px;
+
+    text-align: center;
+}
+
+
+.playbook-placeholder-icon {
+    width: 76px;
+    height: 76px;
+
+    margin:
+        0 auto 20px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 22px;
+
+    background:
+        var(--green-soft);
+
+    font-size: 2.3rem;
+}
+
+
+.playbook-placeholder h2 {
+    margin:
+        8px 0 10px;
+
+    font-size:
+        clamp(
+            1.6rem,
+            4vw,
+            2.3rem
+        );
+}
+
+
+.playbook-placeholder > p {
+    max-width: 580px;
+
+    margin:
+        0 auto 32px;
+}
+
+
+/* PLAY PREVIEWS */
+
+.playbook-preview-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 14px;
+
+    margin:
+        34px 0;
+}
+
+
+.playbook-preview-card {
+    padding:
+        24px 14px;
+
+    border-radius: 16px;
+
+    background:
+        #f2f5f3;
+
+    border:
+        1px solid
+        var(--border);
+}
+
+
+.playbook-preview-symbol {
+    width: 52px;
+    height: 52px;
+
+    margin:
+        0 auto 12px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: white;
+
+    font-size: 1.6rem;
+}
+
+
+.playbook-preview-card strong {
+    display: block;
+
+    color:
+        var(--green-dark);
+
+    font-size: 0.9rem;
+}
+
+
+.playbook-preview-card span {
+    display: block;
+
+    margin-top: 5px;
+
+    color:
+        var(--muted);
+
+    font-size: 0.75rem;
+}
+
+
+.playbook-coming-soon {
+    display: inline-block;
+
+    padding:
+        12px 18px;
+
+    border-radius: 999px;
+
+    background:
+        var(--hunter-green);
+
+    color: white;
+
+    font-size: 0.8rem;
+
+    font-weight: 900;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+
+    .playbook-preview-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .playbook-preview-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+}
