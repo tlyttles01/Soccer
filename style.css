@@ -1710,3 +1710,178 @@ main {
     }
 
 }
+
+/* =========================================================
+   PARENTS PAGE
+========================================================= */
+
+.parents-hero {
+    min-height: 240px;
+}
+
+
+.parent-checklist {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.parent-check-item {
+    padding: 13px 14px;
+    border-radius: 12px;
+    background: #f2f5f3;
+    font-weight: 800;
+    font-size: 0.85rem;
+}
+
+
+.parent-game {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    margin-top: 14px;
+}
+
+.parent-game-date {
+    font-size: 1.1rem;
+    font-weight: 900;
+}
+
+.parent-game-field {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+.parent-jersey {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #f3f6f4;
+    color: var(--muted);
+}
+
+.parent-jersey strong {
+    color: var(--text);
+}
+
+
+.parent-status-good,
+.parent-status-needed {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 15px;
+    padding: 16px;
+    border-radius: 14px;
+}
+
+.parent-status-good {
+    background: var(--green-soft);
+    color: var(--green-dark);
+}
+
+.parent-status-needed {
+    background: var(--snack-bg);
+    color: var(--snack-text);
+}
+
+
+.parent-practice {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.parent-practice-focus {
+    margin-top: 8px;
+    padding: 11px 13px;
+    border-radius: 10px;
+    background: var(--practice-bg);
+    color: var(--green-dark);
+}
+
+
+.parent-values {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.parent-value-card {
+    padding: 18px;
+    border-radius: 14px;
+    background: #f2f5f3;
+    border-top: 4px solid var(--green);
+}
+
+.parent-value-card strong {
+    display: block;
+    color: var(--green-dark);
+    margin-bottom: 7px;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+}
+
+.parent-value-card span {
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+
+.parent-reminders {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.parent-reminder {
+    padding: 18px;
+    border-radius: 14px;
+    background: #f7f9f7;
+    border: 1px solid var(--border);
+}
+
+.parent-reminder strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.parent-reminder span {
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+
+@media (max-width: 850px) {
+
+    .parent-values {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .parent-reminders {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 560px) {
+
+    .parent-checklist,
+    .parent-values {
+        grid-template-columns: 1fr;
+    }
+
+    .parent-game {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}
