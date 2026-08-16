@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FC Wolfpack | Practice
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-mark">
+                🐺
+            </div>
+
+            FC WOLFPACK
+        </div>
+
+        <div class="tagline">
+            Patient. Fast. Fierce. Together.
+        </div>
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Pack HQ
+            </a>
+
+            <a href="schedule.html">
+                Schedule
+            </a>
+
+            <a href="#">
+                The Pack
+            </a>
+
+            <a href="#">
+                Playbook
+            </a>
+
+            <a
+                class="active"
+                href="practice.html"
+            >
+                Practice
+            </a>
+
+            <a href="parents.html">
+                Parents
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main>
+
+        <div class="topbar">
+
+            <div class="page-label">
+                2026 Season
+            </div>
+
+            <div class="topbar-note">
+                FC Wolfpack
+            </div>
+
+        </div>
+
+
+        <section class="hero practice-hero">
+
+            <div class="hero-content">
+
+                <small>
+                    This Week
+                </small>
+
+                <h1>
+                    Practice
+                </h1>
+
+                <p id="weekRangeText">
+                    Loading this week's practice plan...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="card card-full">
+
+            <div class="schedule-header">
+
+                <div>
+
+                    <div class="eyebrow">
+                        Weekly Focus
+                    </div>
+
+                    <h2>
+                        This Week With The Pack
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="loadingMessage"
+                class="muted"
+            >
+                Loading practices...
+            </div>
+
+
+            <div
+                id="errorMessage"
+                class="muted"
+                style="display:none;"
+            >
+                Practice information could not be loaded.
+            </div>
+
+
+            <div
+                id="practiceList"
+                class="practice-week-list"
+            >
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbx5Fl8Ua7z60fT1d5VsT87W-hCGosv0m5AbIdpRUIsTQjrkjAInCySOYi7WyTxFyz8c/exec";
+
+
+/* ======================================================
+   LOAD PRACTICES
+====================================================== */
+
+async function loadPractices() {
+
+    const loading =
+        document.getElementById(
+            "loadingMessage"
+        );
+
+    const error =
+        document.getElementById(
+            "errorMessage"
+        );
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL +
+                "?action=practices"
+            );
+
+        const data =
+            await response.json();
+
+        if (!data.ok) {
+
+            throw new Error(
+                data.error ||
+                "Unable to load practices."
+            );
+
+        }
+
+        const practices =
+            data.practices || [];
+
+        const week =
+            getCurrentWeekRange();
+
+        updateWeekHeader(
+            week.start,
+            week.end
+        );
+
+        const thisWeeksPractices =
+            practices.filter(
+                practice => {
+
+                    const date =
+                        parseApiDate(
+                            practice.date
+                        );
+
+                    return (
+                        date >= week.start &&
+                        date <= week.end
+                    );
+
+                }
+            );
+
+        thisWeeksPractices.sort(
+            (a, b) =>
+                parseApiDate(a.date) -
+                parseApiDate(b.date)
+        );
+
+        renderPractices(
+            thisWeeksPractices
+        );
+
+        loading.style.display =
+            "none";
+
+    } catch (err) {
+
+        console.error(err);
+
+        loading.style.display =
+            "none";
+
+        error.style.display =
+            "block";
+
+        error.textContent =
+            "This week's practice plan could not be loaded.";
+
+    }
+
+}
+
+
+/* ======================================================
+   CURRENT WEEK
+====================================================== */
+
+function getCurrentWeekRange() {
+
+    const now =
+        new Date();
+
+    /*
+     * JavaScript:
+     * Sunday = 0
+     * Monday = 1
+     * ...
+     * Saturday = 6
+     */
+
+    const sunday =
+        new Date(now);
+
+    sunday.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+    sunday.setDate(
+        now.getDate() -
+        now.getDay()
+    );
+
+
+    const saturday =
+        new Date(sunday);
+
+    saturday.setDate(
+        sunday.getDate() + 6
+    );
+
+    saturday.setHours(
+        23,
+        59,
+        59,
+        999
+    );
+
+
+    return {
+        start: sunday,
+        end: saturday
+    };
+
+}
+
+/* ======================================================
+   WEEK HEADER
+====================================================== */
+
+function updateWeekHeader(
+    start,
+    end
+) {
+
+    const startText =
+        start.toLocaleDateString(
+            "en-US",
+            {
+                month: "long",
+                day: "numeric"
+            }
+        );
+
+    const endText =
+        end.toLocaleDateString(
+            "en-US",
+            {
+                month: "long",
+                day: "numeric"
+            }
+        );
+
+    document
+        .getElementById(
+            "weekRangeText"
+        )
+        .textContent =
+        `${startText} – ${endText}`;
+
+}
+
+
+/* ======================================================
+   RENDER PRACTICES
+====================================================== */
+
+function renderPractices(
+    practices
+) {
+
+    const list =
+        document.getElementById(
+            "practiceList"
+        );
+
+    list.innerHTML =
+        "";
+
+
+    if (
+        practices.length === 0
+    ) {
+
+        list.innerHTML = `
+
+            <div class="practice-empty">
+
+                <div class="practice-empty-icon">
+                    🐺
+                </div>
+
+                <h3>
+                    No practices this week
+                </h3>
+
+                <p class="muted">
+                    The Pack does not have a practice scheduled
+                    for the current week.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    practices.forEach(
+        practice => {
+
+            list.appendChild(
+                createPracticeCard(
+                    practice
+                )
+            );
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+   PRACTICE CARD
+====================================================== */
+
+function createPracticeCard(
+    practice
+) {
+
+    const date =
+        parseApiDate(
+            practice.date
+        );
+
+    const dayName =
+        date.toLocaleDateString(
+            "en-US",
+            {
+                weekday: "long"
+            }
+        );
+
+    const fullDate =
+        date.toLocaleDateString(
+            "en-US",
+            {
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+            }
+        );
+
+    const card =
+        document.createElement(
+            "article"
+        );
+
+    card.className =
+        "practice-week-card";
+
+
+    card.innerHTML = `
+
+        <div class="practice-week-date">
+
+            <span class="practice-week-day">
+                ${dayName}
+            </span>
+
+            <strong>
+                ${fullDate}
+            </strong>
+
+        </div>
+
+
+        <div class="practice-week-details">
+
+            <div class="eyebrow">
+                Practice
+            </div>
+
+            <h3>
+                ${
+                    escapeHTML(
+                        practice.field ||
+                        "Field TBD"
+                    )
+                }
+            </h3>
+
+            <p class="muted">
+
+                ${
+                    practice.time
+                    ? escapeHTML(
+                        practice.time
+                      )
+                    : "Time TBD"
+                }
+
+            </p>
+
+        </div>
+
+
+        <div class="practice-week-focus">
+
+            <div class="snack-label">
+                FOCUS
+            </div>
+
+            <strong>
+                ${
+                    escapeHTML(
+                        practice.focus ||
+                        "Pack Development"
+                    )
+                }
+            </strong>
+
+        </div>
+
+    `;
+
+
+    return card;
+
+}
+
+
+/* ======================================================
+   DATE HELPER
+====================================================== */
+
+function parseApiDate(
+    value
+) {
+
+    return new Date(
+        value +
+        "T12:00:00"
+    );
+
+}
+
+
+/* ======================================================
+   ESCAPE HTML
+====================================================== */
+
+function escapeHTML(
+    value
+) {
+
+    return String(
+        value || ""
+    )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* ======================================================
+   START
+====================================================== */
+
+loadPractices();
+
+</script>
+
+</body>
+
+</html>
