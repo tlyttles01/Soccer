@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC Wolfpack | Schedule</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FC Wolfpack | Schedule
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
 
 <body>
@@ -14,7 +26,10 @@
     <aside class="sidebar">
 
         <div class="brand">
-            <div class="brand-mark">🐺</div>
+            <div class="brand-mark">
+                🐺
+            </div>
+
             FC WOLFPACK
         </div>
 
@@ -23,82 +38,190 @@
         </div>
 
         <nav class="nav">
-            <a href="index.html">Pack HQ</a>
-            <a class="active" href="schedule.html">Schedule</a>
-            <a href="#">The Pack</a>
-            <a href="#">Playbook</a>
-            <a href="#">Practice</a>
-            <a href="parents.html">Parents</a>
+
+            <a href="index.html">
+                Pack HQ
+            </a>
+
+            <a
+                class="active"
+                href="schedule.html"
+            >
+                Schedule
+            </a>
+
+            <a href="#">
+                The Pack
+            </a>
+
+            <a href="#">
+                Playbook
+            </a>
+
+            <a href="#">
+                Practice
+            </a>
+
+            <a href="parents.html">
+                Parents
+            </a>
+
         </nav>
 
     </aside>
 
+
     <main>
 
         <div class="topbar">
-            <div class="page-label">2026 Season</div>
-            <div class="topbar-note">FC Wolfpack</div>
+
+            <div class="page-label">
+                2026 Season
+            </div>
+
+            <div class="topbar-note">
+                FC Wolfpack
+            </div>
+
         </div>
+
 
         <section class="hero schedule-hero">
 
             <div class="hero-content">
-                <small>Game Day Central</small>
-                <h1>Schedule</h1>
+
+                <small>
+                    Pack Calendar
+                </small>
+
+                <h1>
+                    Schedule
+                </h1>
 
                 <p>
-                    Dates, fields, jersey colors, and snack volunteers
-                    for the Pack.
+                    Practices, game days, fields,
+                    jersey colors, and snack volunteers.
                 </p>
+
             </div>
 
         </section>
 
+
+        <!-- SUMMARY -->
+
         <div class="schedule-summary">
 
             <div class="summary-card">
-                <span id="gameCount" class="summary-number">—</span>
-                <span class="summary-label">Games Scheduled</span>
+
+                <span
+                    id="practiceCount"
+                    class="summary-number"
+                >
+                    —
+                </span>
+
+                <span class="summary-label">
+                    Practices
+                </span>
+
             </div>
+
 
             <div class="summary-card">
-                <span id="coveredCount" class="summary-number">—</span>
-                <span class="summary-label">Snack Days Covered</span>
+
+                <span
+                    id="gameCount"
+                    class="summary-number"
+                >
+                    —
+                </span>
+
+                <span class="summary-label">
+                    Games
+                </span>
+
             </div>
 
+
             <div class="summary-card alert">
-                <span id="openCount" class="summary-number">—</span>
-                <span class="summary-label">Need Snack Volunteers</span>
+
+                <span
+                    id="openCount"
+                    class="summary-number"
+                >
+                    —
+                </span>
+
+                <span class="summary-label">
+                    Snack Volunteers Needed
+                </span>
+
             </div>
 
         </div>
+
+
+        <!-- SCHEDULE -->
 
         <section class="card card-full schedule-card">
 
             <div class="schedule-header">
 
                 <div>
-                    <div class="eyebrow">Season Schedule</div>
-                    <h2>Game Days</h2>
+
+                    <div class="eyebrow">
+                        Upcoming
+                    </div>
+
+                    <h2>
+                        Pack Schedule
+                    </h2>
+
                 </div>
 
+
                 <div class="schedule-key">
-                    <span class="key-home">● HOME = Hunter Green</span>
-                    <span class="key-away">● AWAY = White</span>
-                    <span class="key-open">● Snacks Needed</span>
+
+                    <span class="key-home">
+                        ● HOME = Hunter Green
+                    </span>
+
+                    <span class="key-away">
+                        ● AWAY = White
+                    </span>
+
+                    <span class="key-open">
+                        ● Snacks Needed
+                    </span>
+
                 </div>
 
             </div>
 
-            <div id="loadingMessage" class="muted">
+
+            <div
+                id="loadingMessage"
+                class="muted"
+            >
                 Loading Pack schedule...
             </div>
 
-            <div id="errorMessage" class="muted" style="display:none;">
-                The schedule could not be loaded.
+
+            <div
+                id="errorMessage"
+                class="muted"
+                style="display:none;"
+            >
+                Schedule could not be loaded.
             </div>
 
-            <div id="gameList" class="game-list"></div>
+
+            <div
+                id="scheduleList"
+                class="game-list"
+            >
+            </div>
 
         </section>
 
@@ -109,7 +232,10 @@
 
 <!-- SNACK SIGNUP MODAL -->
 
-<div id="signupModal" class="modal">
+<div
+    id="signupModal"
+    class="modal"
+>
 
     <div class="modal-content">
 
@@ -120,23 +246,35 @@
             ×
         </button>
 
+
         <div class="eyebrow">
             Snack Signup
         </div>
 
-        <h2>Help Feed the Pack</h2>
 
-        <p id="signupGame" class="muted"></p>
+        <h2>
+            Help Feed the Pack
+        </h2>
+
+
+        <p
+            id="signupGame"
+            class="muted"
+        >
+        </p>
+
 
         <label for="familyName">
             Family Name
         </label>
+
 
         <input
             id="familyName"
             type="text"
             placeholder="Example: Lyttles Family"
         >
+
 
         <button
             id="signupSubmit"
@@ -146,7 +284,12 @@
             Claim This Snack Day
         </button>
 
-        <p id="signupMessage" class="form-note"></p>
+
+        <p
+            id="signupMessage"
+            class="form-note"
+        >
+        </p>
 
     </div>
 
@@ -159,52 +302,97 @@ const API_URL =
     "https://script.google.com/macros/s/AKfycbx5Fl8Ua7z60fT1d5VsT87W-hCGosv0m5AbIdpRUIsTQjrkjAInCySOYi7WyTxFyz8c/exec";
 
 let selectedGameId = "";
-let selectedGameLabel = "";
 
 
-/* ---------------------------------
-   LOAD GAMES
----------------------------------- */
+/* ======================================================
+   LOAD SCHEDULE
+====================================================== */
 
-async function loadGames() {
+async function loadSchedule() {
 
     const loading =
-        document.getElementById("loadingMessage");
+        document.getElementById(
+            "loadingMessage"
+        );
 
     const error =
-        document.getElementById("errorMessage");
+        document.getElementById(
+            "errorMessage"
+        );
 
-    const gameList =
-        document.getElementById("gameList");
+    const list =
+        document.getElementById(
+            "scheduleList"
+        );
 
-    loading.style.display = "block";
-    error.style.display = "none";
-    gameList.innerHTML = "";
+
+    loading.style.display =
+        "block";
+
+    error.style.display =
+        "none";
+
+    list.innerHTML =
+        "";
+
 
     try {
 
         const response =
-            await fetch(API_URL + "?action=games");
+            await fetch(
+                API_URL +
+                "?action=schedule"
+            );
 
         const data =
             await response.json();
 
+
+        console.log(
+            "FULL API RESPONSE:",
+            data
+        );
+
+        console.log(
+            "GAMES:",
+            data.games
+        );
+
+        console.log(
+            "PRACTICES:",
+            data.practices
+        );
+
+
         if (!data.ok) {
+
             throw new Error(
-                data.error || "Unable to load schedule."
+                data.error ||
+                "Unable to load schedule."
             );
+
         }
 
-        renderGames(data.games || []);
 
-        loading.style.display = "none";
+        renderSchedule(
+            data.games || [],
+            data.practices || []
+        );
+
+
+        loading.style.display =
+            "none";
+
 
     } catch (err) {
 
         console.error(err);
 
-        loading.style.display = "none";
-        error.style.display = "block";
+        loading.style.display =
+            "none";
+
+        error.style.display =
+            "block";
 
         error.textContent =
             "The Pack schedule could not be loaded. Please try again.";
@@ -214,292 +402,634 @@ async function loadGames() {
 }
 
 
-/* ---------------------------------
-   DISPLAY GAMES
----------------------------------- */
+/* ======================================================
+   RENDER SCHEDULE
+====================================================== */
 
-function renderGames(games) {
+function renderSchedule(
+    games,
+    practices
+) {
 
-    const gameList =
-        document.getElementById("gameList");
+    const list =
+        document.getElementById(
+            "scheduleList"
+        );
 
-    gameList.innerHTML = "";
+    list.innerHTML =
+        "";
 
-    let covered = 0;
+
+    let covered =
+        0;
+
 
     games.forEach(game => {
 
-        const hasSnack =
+        if (
             game.snack &&
-            game.snack.familyName;
+            game.snack.familyName
+        ) {
 
-        if (hasSnack) {
             covered++;
+
         }
-
-        const date =
-            parseGameDate(game.date);
-
-        const month =
-            date.month;
-
-        const day =
-            date.day;
-
-        const fullDate =
-            date.fullDate;
-
-        const homeAway =
-            String(game.homeAway || "")
-                .trim()
-                .toLowerCase();
-
-        const isHome =
-            homeAway === "home";
-
-        const statusClass =
-            isHome ? "home" : "away";
-
-        const statusText =
-            isHome ? "HOME" : "AWAY";
-
-        const snackHTML =
-            hasSnack
-                ? `
-                    <div class="snack-box covered">
-                        <div class="snack-label">
-                            🍊 SNACK VOLUNTEER
-                        </div>
-
-                        <strong>
-                            ${escapeHTML(game.snack.familyName)}
-                        </strong>
-
-                        <span>
-                            Covered ✓
-                        </span>
-                    </div>
-                `
-                : `
-                    <div class="snack-box open">
-                        <div class="snack-label">
-                            🍊 SNACK VOLUNTEER
-                        </div>
-
-                        <strong>
-                            Open
-                        </strong>
-
-                        <button
-                            class="signup-button"
-                            onclick="openSignup(
-                                '${escapeJS(game.gameId)}',
-                                '${escapeJS(fullDate)}'
-                            )"
-                        >
-                            Sign Up
-                        </button>
-                    </div>
-                `;
-
-        const article =
-            document.createElement("article");
-
-        article.className =
-            "game-card";
-
-        article.innerHTML = `
-
-            <div class="game-date">
-
-                <span class="game-month">
-                    ${month}
-                </span>
-
-                <span class="game-day">
-                    ${day}
-                </span>
-
-            </div>
-
-            <div class="game-info">
-
-                <h3>
-                    ${escapeHTML(game.field || "Field TBD")}
-                </h3>
-
-                <div class="field-label">
-                    ${fullDate}
-                </div>
-
-            </div>
-
-            <div class="game-status ${statusClass}">
-                ${statusText}
-            </div>
-
-            ${snackHTML}
-        `;
-
-        gameList.appendChild(article);
 
     });
 
 
     document
-        .getElementById("gameCount")
-        .textContent = games.length;
+        .getElementById(
+            "practiceCount"
+        )
+        .textContent =
+        practices.length;
+
 
     document
-        .getElementById("coveredCount")
-        .textContent = covered;
+        .getElementById(
+            "gameCount"
+        )
+        .textContent =
+        games.length;
+
 
     document
-        .getElementById("openCount")
-        .textContent = games.length - covered;
+        .getElementById(
+            "openCount"
+        )
+        .textContent =
+        games.length - covered;
 
 
-    if (games.length === 0) {
+    const items =
+        [];
 
-        gameList.innerHTML = `
+
+    games.forEach(game => {
+
+        items.push({
+
+            type:
+                "game",
+
+            date:
+                game.date,
+
+            data:
+                game
+
+        });
+
+    });
+
+
+    practices.forEach(
+        practice => {
+
+            items.push({
+
+                type:
+                    "practice",
+
+                date:
+                    practice.date,
+
+                data:
+                    practice
+
+            });
+
+        }
+    );
+
+
+    items.sort(
+        (a, b) =>
+            new Date(a.date) -
+            new Date(b.date)
+    );
+
+
+    console.log(
+        "MERGED ITEMS:",
+        items
+    );
+
+
+    if (
+        items.length === 0
+    ) {
+
+        list.innerHTML = `
+
             <p class="muted">
-                No games have been added yet.
+                No practices or games have been added yet.
             </p>
+
         `;
 
+        return;
+
     }
+
+
+    items.forEach(
+        item => {
+
+            if (
+                item.type ===
+                "practice"
+            ) {
+
+                list.appendChild(
+                    createPracticeRow(
+                        item.data
+                    )
+                );
+
+            } else {
+
+                list.appendChild(
+                    createGameRow(
+                        item.data
+                    )
+                );
+
+            }
+
+        }
+    );
 
 }
 
 
-/* ---------------------------------
-   DATE FORMATTING
----------------------------------- */
+/* ======================================================
+   GAME ROW
+====================================================== */
 
-function parseGameDate(dateString) {
+function createGameRow(
+    game
+) {
 
-    if (!dateString) {
-
-        return {
-            month: "TBD",
-            day: "--",
-            fullDate: "Date TBD"
-        };
-
-    }
-
-    /*
-     * Add noon so timezone conversion
-     * does not accidentally shift the date.
-     */
     const date =
-        new Date(dateString + "T12:00:00");
+        formatDate(
+            game.date
+        );
 
-    if (isNaN(date.getTime())) {
+
+    const isHome =
+        String(
+            game.homeAway || ""
+        )
+            .trim()
+            .toLowerCase() ===
+        "home";
+
+
+    const hasSnack =
+        game.snack &&
+        game.snack.familyName;
+
+
+    const article =
+        document.createElement(
+            "article"
+        );
+
+
+    article.className =
+        "game-card";
+
+
+    const snackHTML =
+        hasSnack
+        ? `
+
+            <div class="snack-box covered">
+
+                <div class="snack-label">
+                    🍊 SNACK VOLUNTEER
+                </div>
+
+                <strong>
+                    ${escapeHTML(
+                        game.snack.familyName
+                    )}
+                </strong>
+
+                <span>
+                    Covered ✓
+                </span>
+
+            </div>
+
+        `
+        : `
+
+            <div class="snack-box open">
+
+                <div class="snack-label">
+                    🍊 SNACK VOLUNTEER
+                </div>
+
+                <strong>
+                    Open
+                </strong>
+
+                <button class="signup-button">
+                    Sign Up
+                </button>
+
+            </div>
+
+        `;
+
+
+    article.innerHTML = `
+
+        <div class="game-date">
+
+            <span class="game-month">
+                ${date.month}
+            </span>
+
+            <span class="game-day">
+                ${date.day}
+            </span>
+
+        </div>
+
+
+        <div class="game-info">
+
+            <div class="eyebrow">
+                Game Day
+            </div>
+
+            <h3>
+                ${escapeHTML(
+                    game.field ||
+                    "Field TBD"
+                )}
+            </h3>
+
+            <div class="field-label">
+                ${date.fullDate}
+            </div>
+
+        </div>
+
+
+        <div
+            class="game-status ${
+                isHome
+                ? "home"
+                : "away"
+            }"
+        >
+
+            ${
+                isHome
+                ? "HOME"
+                : "AWAY"
+            }
+
+        </div>
+
+
+        ${snackHTML}
+
+    `;
+
+
+    const signupButton =
+        article.querySelector(
+            ".signup-button"
+        );
+
+
+    if (signupButton) {
+
+        signupButton.addEventListener(
+            "click",
+            () => {
+
+                openSignup(
+                    game.gameId,
+                    date.fullDate
+                );
+
+            }
+        );
+
+    }
+
+
+    return article;
+
+}
+
+
+/* ======================================================
+   PRACTICE ROW
+====================================================== */
+
+function createPracticeRow(
+    practice
+) {
+
+    const date =
+        formatDate(
+            practice.date
+        );
+
+
+    const article =
+        document.createElement(
+            "article"
+        );
+
+
+    article.className =
+        "game-card practice-row";
+
+
+    article.innerHTML = `
+
+        <div class="game-date practice-date">
+
+            <span class="game-month">
+                ${date.month}
+            </span>
+
+            <span class="game-day">
+                ${date.day}
+            </span>
+
+        </div>
+
+
+        <div class="game-info">
+
+            <div class="eyebrow">
+                Practice
+            </div>
+
+            <h3>
+                ${escapeHTML(
+                    practice.field ||
+                    "Field TBD"
+                )}
+            </h3>
+
+            <div class="field-label">
+
+                ${date.fullDate}
+
+                ${
+                    practice.time
+                    ? " • " +
+                      escapeHTML(
+                        practice.time
+                      )
+                    : ""
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="practice-status">
+            PRACTICE
+        </div>
+
+
+        <div class="practice-focus">
+
+            <div class="snack-label">
+                FOCUS
+            </div>
+
+            <strong>
+                ${escapeHTML(
+                    practice.focus ||
+                    "Pack Development"
+                )}
+            </strong>
+
+        </div>
+
+    `;
+
+
+    return article;
+
+}
+
+
+/* ======================================================
+   DATE FORMATTER
+====================================================== */
+
+function formatDate(
+    value
+) {
+
+    if (!value) {
 
         return {
-            month: "",
-            day: "",
-            fullDate: dateString
+
+            month:
+                "TBD",
+
+            day:
+                "--",
+
+            fullDate:
+                "Date TBD"
+
         };
 
     }
 
-    const month =
-        date
-            .toLocaleDateString(
-                "en-US",
-                { month: "short" }
-            )
-            .toUpperCase();
 
-    const day =
-        date
-            .toLocaleDateString(
-                "en-US",
-                { day: "2-digit" }
-            );
+    const date =
+        new Date(
+            value +
+            "T12:00:00"
+        );
 
-    const fullDate =
-        date
-            .toLocaleDateString(
-                "en-US",
-                {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric"
-                }
-            );
+
+    if (
+        isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return {
+
+            month:
+                "",
+
+            day:
+                "",
+
+            fullDate:
+                value
+
+        };
+
+    }
+
 
     return {
-        month,
-        day,
-        fullDate
+
+        month:
+
+            date
+                .toLocaleDateString(
+                    "en-US",
+                    {
+                        month:
+                            "short"
+                    }
+                )
+                .toUpperCase(),
+
+
+        day:
+
+            date
+                .toLocaleDateString(
+                    "en-US",
+                    {
+                        day:
+                            "2-digit"
+                    }
+                ),
+
+
+        fullDate:
+
+            date
+                .toLocaleDateString(
+                    "en-US",
+                    {
+
+                        weekday:
+                            "long",
+
+                        month:
+                            "long",
+
+                        day:
+                            "numeric",
+
+                        year:
+                            "numeric"
+
+                    }
+                )
+
     };
 
 }
 
 
-/* ---------------------------------
-   SIGNUP MODAL
----------------------------------- */
+/* ======================================================
+   OPEN SIGNUP MODAL
+====================================================== */
 
-function openSignup(gameId, gameLabel) {
+function openSignup(
+    gameId,
+    label
+) {
 
     selectedGameId =
         gameId;
 
-    selectedGameLabel =
-        gameLabel;
 
     document
-        .getElementById("signupGame")
+        .getElementById(
+            "signupGame"
+        )
         .textContent =
-        gameLabel;
+        label;
+
 
     document
-        .getElementById("familyName")
-        .value = "";
+        .getElementById(
+            "familyName"
+        )
+        .value =
+        "";
+
 
     document
-        .getElementById("signupMessage")
-        .textContent = "";
+        .getElementById(
+            "signupMessage"
+        )
+        .textContent =
+        "";
+
 
     document
-        .getElementById("signupModal")
+        .getElementById(
+            "signupModal"
+        )
         .classList
-        .add("show");
+        .add(
+            "show"
+        );
 
 }
 
+
+/* ======================================================
+   CLOSE SIGNUP
+====================================================== */
 
 function closeSignup() {
 
     document
-        .getElementById("signupModal")
+        .getElementById(
+            "signupModal"
+        )
         .classList
-        .remove("show");
+        .remove(
+            "show"
+        );
 
 }
 
 
-/* ---------------------------------
+/* ======================================================
    SUBMIT SNACK SIGNUP
----------------------------------- */
+====================================================== */
 
 async function submitSignup() {
 
-    const familyInput =
-        document.getElementById("familyName");
+    const familyName =
+        document
+            .getElementById(
+                "familyName"
+            )
+            .value
+            .trim();
 
-    const submitButton =
-        document.getElementById("signupSubmit");
+
+    const button =
+        document.getElementById(
+            "signupSubmit"
+        );
+
 
     const message =
-        document.getElementById("signupMessage");
-
-    const familyName =
-        familyInput.value.trim();
+        document.getElementById(
+            "signupMessage"
+        );
 
 
     if (!familyName) {
@@ -512,10 +1042,13 @@ async function submitSignup() {
     }
 
 
-    submitButton.disabled = true;
+    button.disabled =
+        true;
 
-    submitButton.textContent =
+
+    button.textContent =
         "Claiming...";
+
 
     message.textContent =
         "";
@@ -526,15 +1059,18 @@ async function submitSignup() {
         const formData =
             new URLSearchParams();
 
+
         formData.append(
             "action",
             "signup"
         );
 
+
         formData.append(
             "gameId",
             selectedGameId
         );
+
 
         formData.append(
             "familyName",
@@ -546,8 +1082,13 @@ async function submitSignup() {
             await fetch(
                 API_URL,
                 {
-                    method: "POST",
-                    body: formData
+
+                    method:
+                        "POST",
+
+                    body:
+                        formData
+
                 }
             );
 
@@ -558,25 +1099,32 @@ async function submitSignup() {
 
         if (!data.ok) {
 
+
             if (
                 data.code ===
                 "already_taken"
             ) {
 
                 message.textContent =
-                    data.familyName
-                        ? `${data.familyName} already claimed this snack day.`
-                        : "This snack day has already been claimed.";
 
-                await loadGames();
+                    data.familyName
+
+                    ? `${data.familyName} already claimed this snack day.`
+
+                    : "That snack day has already been claimed.";
+
+
+                await loadSchedule();
+
 
                 return;
 
             }
 
+
             throw new Error(
                 data.error ||
-                "Unable to save signup."
+                "Signup failed."
             );
 
         }
@@ -586,7 +1134,7 @@ async function submitSignup() {
             "Snack day claimed!";
 
 
-        await loadGames();
+        await loadSchedule();
 
 
         setTimeout(
@@ -599,14 +1147,18 @@ async function submitSignup() {
 
         console.error(err);
 
+
         message.textContent =
             "The signup could not be saved. Please try again.";
 
+
     } finally {
 
-        submitButton.disabled = false;
+        button.disabled =
+            false;
 
-        submitButton.textContent =
+
+        button.textContent =
             "Claim This Snack Day";
 
     }
@@ -614,35 +1166,44 @@ async function submitSignup() {
 }
 
 
-/* ---------------------------------
-   SAFETY HELPERS
----------------------------------- */
+/* ======================================================
+   ESCAPE HTML
+====================================================== */
 
-function escapeHTML(value) {
+function escapeHTML(
+    value
+) {
 
-    return String(value || "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    return String(
+        value || ""
+    )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
 
-function escapeJS(value) {
-
-    return String(value || "")
-        .replaceAll("\\", "\\\\")
-        .replaceAll("'", "\\'")
-        .replaceAll("\n", " ");
-
-}
-
-
-/* ---------------------------------
-   CLOSE MODAL WHEN BACKDROP CLICKED
----------------------------------- */
+/* ======================================================
+   MODAL BACKDROP CLICK
+====================================================== */
 
 window.onclick =
     function(event) {
@@ -652,20 +1213,27 @@ window.onclick =
                 "signupModal"
             );
 
-        if (event.target === modal) {
+
+        if (
+            event.target ===
+            modal
+        ) {
+
             closeSignup();
+
         }
 
     };
 
 
-/* ---------------------------------
-   START
----------------------------------- */
+/* ======================================================
+   START PAGE
+====================================================== */
 
-loadGames();
+loadSchedule();
 
 </script>
 
 </body>
+
 </html>
