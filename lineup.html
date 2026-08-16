@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FC Wolfpack | Weekly Lineup
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                🐺
+            </div>
+
+            FC WOLFPACK
+
+        </div>
+
+        <div class="tagline">
+            Patient. Fast. Fierce. Together.
+        </div>
+
+        <nav class="nav">
+
+            <a href="index.html">
+                Pack HQ
+            </a>
+
+            <a href="schedule.html">
+                Schedule
+            </a>
+
+            <a href="#">
+                The Pack
+            </a>
+
+            <a href="#">
+                Playbook
+            </a>
+
+            <a href="practice.html">
+                Practice
+            </a>
+
+            <a
+                class="active"
+                href="lineup.html"
+            >
+                Weekly Lineup
+            </a>
+
+            <a href="parents.html">
+                Parents
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main>
+
+        <div class="topbar">
+
+            <div class="page-label">
+                Coach Game Plan
+            </div>
+
+            <div class="topbar-note">
+                FC Wolfpack
+            </div>
+
+        </div>
+
+
+        <section class="hero lineup-hero">
+
+            <div class="hero-content">
+
+                <small>
+                    Game Day
+                </small>
+
+                <h1>
+                    Weekly Lineup
+                </h1>
+
+                <p>
+                    Quarter-by-quarter positions
+                    for the Pack.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- GAME SELECTOR -->
+
+        <section class="card card-full lineup-controls">
+
+            <div>
+
+                <div class="eyebrow">
+                    Game
+                </div>
+
+                <select
+                    id="gameSelector"
+                    class="lineup-select"
+                >
+                </select>
+
+            </div>
+
+
+            <div
+                id="gameDetails"
+                class="lineup-game-details"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- QUARTER SELECTOR -->
+
+        <div
+            id="quarterTabs"
+            class="quarter-tabs"
+        >
+
+            <button
+                class="quarter-tab active"
+                data-quarter="1"
+            >
+                Q1
+            </button>
+
+            <button
+                class="quarter-tab"
+                data-quarter="2"
+            >
+                Q2
+            </button>
+
+            <button
+                class="quarter-tab"
+                data-quarter="3"
+            >
+                Q3
+            </button>
+
+            <button
+                class="quarter-tab"
+                data-quarter="4"
+            >
+                Q4
+            </button>
+
+        </div>
+
+
+        <!-- LOADING -->
+
+        <div
+            id="loadingMessage"
+            class="card card-full muted"
+        >
+            Loading game plan...
+        </div>
+
+
+        <div
+            id="errorMessage"
+            class="card card-full muted"
+            style="display:none;"
+        >
+        </div>
+
+
+        <!-- FIELD / BENCH -->
+
+        <section
+            id="lineupBoard"
+            class="lineup-board"
+            style="display:none;"
+        >
+
+
+<div class="soccer-field">
+
+    <div class="field-label-top">
+        ATTACK
+    </div>
+
+    <!-- GOALS -->
+
+<div class="goal goal-top">
+    <div class="goal-net"></div>
+</div>
+
+<div class="goal goal-bottom">
+    <div class="goal-net"></div>
+</div>
+
+
+    <!-- HUNTER -->
+
+    <div class="field-position hunter-position">
+
+        <div class="position-symbol">
+            🐺
+        </div>
+
+        <div class="position-role">
+            HUNTER
+        </div>
+
+        <div
+            id="hunterPlayers"
+            class="position-name"
+        >
+        </div>
+
+    </div>
+
+
+    <!-- LEFT SCOUT -->
+
+    <div class="field-position scout-left">
+
+        <div class="position-symbol">
+            🔭
+        </div>
+
+        <div class="position-role">
+            SCOUT
+        </div>
+
+        <div
+            id="scoutLeft"
+            class="position-name"
+        >
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SCOUT -->
+
+    <div class="field-position scout-right">
+
+        <div class="position-symbol">
+            🔭
+        </div>
+
+        <div class="position-role">
+            SCOUT
+        </div>
+
+        <div
+            id="scoutRight"
+            class="position-name"
+        >
+        </div>
+
+    </div>
+
+
+    <!-- LEFT GUARDIAN -->
+
+    <div class="field-position guardian-left">
+
+        <div class="position-symbol">
+            🛡️
+        </div>
+
+        <div class="position-role">
+            GUARDIAN
+        </div>
+
+        <div
+            id="guardianLeft"
+            class="position-name"
+        >
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT GUARDIAN -->
+
+    <div class="field-position guardian-right">
+
+        <div class="position-symbol">
+            🛡️
+        </div>
+
+        <div class="position-role">
+            GUARDIAN
+        </div>
+
+        <div
+            id="guardianRight"
+            class="position-name"
+        >
+        </div>
+
+    </div>
+
+
+    <!-- PACK LEADER -->
+
+    <div class="field-position leader-position">
+
+        <div class="position-symbol">
+            👑
+        </div>
+
+        <div class="position-role">
+            PACK LEADER
+        </div>
+
+        <div
+            id="leaderPlayers"
+            class="position-name"
+        >
+        </div>
+
+    </div>
+
+
+    <div class="field-label-bottom">
+        PROTECT THE DEN
+    </div>
+
+</div>
+
+
+            <!-- BENCH -->
+
+            <aside class="bench-panel">
+
+                <div class="eyebrow">
+                    Rotation
+                </div>
+
+                <h2>
+                    Bench
+                </h2>
+
+                <div
+                    id="benchPlayers"
+                    class="bench-players"
+                >
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- NO LINEUP -->
+
+        <section
+            id="missingLineup"
+            class="card card-full lineup-empty"
+            style="display:none;"
+        >
+
+            <div class="lineup-empty-icon">
+                🐺
+            </div>
+
+            <h2>
+                No lineup entered
+            </h2>
+
+            <p class="muted">
+                Add this quarter to the
+                Weekly Lineup tab in Google Sheets.
+            </p>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbx5Fl8Ua7z60fT1d5VsT87W-hCGosv0m5AbIdpRUIsTQjrkjAInCySOYi7WyTxFyz8c/exec";
+
+
+let games = [];
+
+let players = [];
+
+let lineupRows = [];
+
+let playerMap = {};
+
+let selectedGameId = "";
+
+let selectedQuarter = "1";
+
+
+/* ======================================================
+   LOAD LINEUP DATA
+====================================================== */
+
+async function loadLineup() {
+
+    const loading =
+        document.getElementById(
+            "loadingMessage"
+        );
+
+    const error =
+        document.getElementById(
+            "errorMessage"
+        );
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL +
+                "?action=lineup"
+            );
+
+        const data =
+            await response.json();
+
+        console.log(
+            "LINEUP DATA:",
+            data
+        );
+
+        if (!data.ok) {
+
+            throw new Error(
+                data.error ||
+                "Unable to load lineup."
+            );
+
+        }
+
+
+        games =
+            data.games || [];
+
+        players =
+            data.players || [];
+
+        lineupRows =
+            data.lineup || [];
+
+
+        buildPlayerMap();
+
+        populateGameSelector();
+
+
+        loading.style.display =
+            "none";
+
+
+        if (selectedGameId) {
+
+            renderGame();
+
+        }
+
+    } catch (err) {
+
+        console.error(err);
+
+        loading.style.display =
+            "none";
+
+        error.style.display =
+            "block";
+
+        error.textContent =
+            "The Weekly Lineup could not be loaded.";
+
+    }
+
+}
+
+
+/* ======================================================
+   PLAYER LOOKUP
+====================================================== */
+
+function buildPlayerMap() {
+
+    playerMap = {};
+
+    players.forEach(
+        player => {
+
+            playerMap[
+                player.playerId
+            ] =
+                player.firstName ||
+                player.playerId;
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+   GAME SELECTOR
+====================================================== */
+
+function populateGameSelector() {
+
+    const selector =
+        document.getElementById(
+            "gameSelector"
+        );
+
+    selector.innerHTML = "";
+
+
+    if (games.length === 0) {
+
+        selector.innerHTML = `
+
+            <option>
+                No games available
+            </option>
+
+        `;
+
+        return;
+
+    }
+
+
+    games.forEach(
+        game => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                game.gameId;
+
+            option.textContent =
+                buildGameLabel(
+                    game
+                );
+
+            selector.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    selectedGameId =
+        findBestGame();
+
+
+    selector.value =
+        selectedGameId;
+
+
+    selector.addEventListener(
+        "change",
+        event => {
+
+            selectedGameId =
+                event.target.value;
+
+            selectedQuarter =
+                "1";
+
+            setActiveQuarter(
+                "1"
+            );
+
+            renderGame();
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+   PICK NEXT GAME AUTOMATICALLY
+====================================================== */
+
+function findBestGame() {
+
+    const today =
+        new Date();
+
+    today.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    const upcoming =
+        games.find(
+            game => {
+
+                const date =
+                    parseDate(
+                        game.date
+                    );
+
+                return date >= today;
+
+            }
+        );
+
+
+    return upcoming
+        ? upcoming.gameId
+        : games[
+            games.length - 1
+        ].gameId;
+
+}
+
+
+/* ======================================================
+   RENDER SELECTED GAME
+====================================================== */
+
+function renderGame() {
+
+    const game =
+        games.find(
+            item =>
+                item.gameId ===
+                selectedGameId
+        );
+
+
+    if (!game) {
+        return;
+    }
+
+
+    renderGameDetails(
+        game
+    );
+
+    renderQuarter();
+
+}
+
+
+/* ======================================================
+   GAME DETAILS
+====================================================== */
+
+function renderGameDetails(
+    game
+) {
+
+    const date =
+        parseDate(
+            game.date
+        );
+
+
+    const formatted =
+        date.toLocaleDateString(
+            "en-US",
+            {
+                weekday:
+                    "long",
+
+                month:
+                    "long",
+
+                day:
+                    "numeric",
+
+                year:
+                    "numeric"
+            }
+        );
+
+
+    const status =
+        String(
+            game.homeAway || ""
+        )
+            .trim()
+            .toLowerCase() ===
+        "home"
+            ? "HOME"
+            : "AWAY";
+
+
+    document
+        .getElementById(
+            "gameDetails"
+        )
+        .innerHTML = `
+
+            <strong>
+                ${formatted}
+            </strong>
+
+            <span>
+                ${escapeHTML(
+                    game.field ||
+                    "Field TBD"
+                )}
+            </span>
+
+            <span
+                class="lineup-game-status ${status.toLowerCase()}"
+            >
+                ${status}
+            </span>
+
+        `;
+
+}
+
+
+/* ======================================================
+   RENDER QUARTER
+====================================================== */
+
+function renderQuarter() {
+
+    const board =
+        document.getElementById(
+            "lineupBoard"
+        );
+
+    const missing =
+        document.getElementById(
+            "missingLineup"
+        );
+
+
+    const row =
+        lineupRows.find(
+            item =>
+
+                item.gameId ===
+                selectedGameId
+
+                &&
+
+                String(
+                    item.quarter
+                ) ===
+                String(
+                    selectedQuarter
+                )
+        );
+
+
+    if (!row) {
+
+        board.style.display =
+            "none";
+
+        missing.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    missing.style.display =
+        "none";
+
+    board.style.display =
+        "grid";
+
+
+    const scouts =
+        splitPlayers(
+            row.scouts
+        );
+
+    const guardians =
+        splitPlayers(
+            row.guardians
+        );
+
+
+    renderSinglePlayer(
+        "hunterPlayers",
+        firstPlayer(
+            row.hunter
+        )
+    );
+
+
+    renderSinglePlayer(
+        "scoutLeft",
+        scouts[0]
+    );
+
+
+    renderSinglePlayer(
+        "scoutRight",
+        scouts[1]
+    );
+
+
+    renderSinglePlayer(
+        "guardianLeft",
+        guardians[0]
+    );
+
+
+    renderSinglePlayer(
+        "guardianRight",
+        guardians[1]
+    );
+
+
+    renderSinglePlayer(
+        "leaderPlayers",
+        firstPlayer(
+            row.packLeader
+        )
+    );
+
+
+    renderBench(
+        row.bench
+    );
+
+}
+
+
+/* ======================================================
+   SINGLE FIELD PLAYER
+====================================================== */
+
+function renderSinglePlayer(
+    elementId,
+    playerId
+) {
+
+    const element =
+        document.getElementById(
+            elementId
+        );
+
+
+    if (!playerId) {
+
+        element.textContent =
+            "Open";
+
+        element.classList.add(
+            "position-open"
+        );
+
+        return;
+
+    }
+
+
+    element.classList.remove(
+        "position-open"
+    );
+
+
+    const id =
+        String(
+            playerId
+        ).trim();
+
+
+    element.textContent =
+        playerMap[id] ||
+        id;
+
+}
+
+
+/* ======================================================
+   BENCH
+====================================================== */
+
+function renderBench(
+    value
+) {
+
+    const container =
+        document.getElementById(
+            "benchPlayers"
+        );
+
+    container.innerHTML = "";
+
+
+    const playerIds =
+        splitPlayers(
+            value
+        );
+
+
+    if (
+        playerIds.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div class="bench-player">
+                No players on bench
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    playerIds.forEach(
+        playerId => {
+
+            const player =
+                document.createElement(
+                    "div"
+                );
+
+            player.className =
+                "bench-player";
+
+
+            player.textContent =
+                playerMap[playerId] ||
+                playerId;
+
+
+            container.appendChild(
+                player
+            );
+
+        }
+    );
+
+}
+
+
+/* ======================================================
+   SPLIT MULTIPLE PLAYER IDS
+====================================================== */
+
+function splitPlayers(
+    value
+) {
+
+    if (!value) {
+        return [];
+    }
+
+
+    return String(value)
+        .split(",")
+        .map(
+            player =>
+                player.trim()
+        )
+        .filter(Boolean);
+
+}
+
+
+/* ======================================================
+   FIRST PLAYER
+====================================================== */
+
+function firstPlayer(
+    value
+) {
+
+    const players =
+        splitPlayers(
+            value
+        );
+
+    return players[0] || "";
+
+}
+
+
+/* ======================================================
+   QUARTER BUTTONS
+====================================================== */
+
+document
+    .querySelectorAll(
+        ".quarter-tab"
+    )
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    selectedQuarter =
+                        button.dataset.quarter;
+
+                    setActiveQuarter(
+                        selectedQuarter
+                    );
+
+                    renderQuarter();
+
+                }
+            );
+
+        }
+    );
+
+
+function setActiveQuarter(
+    quarter
+) {
+
+    document
+        .querySelectorAll(
+            ".quarter-tab"
+        )
+        .forEach(
+            button => {
+
+                button.classList.toggle(
+
+                    "active",
+
+                    button.dataset.quarter ===
+                    String(
+                        quarter
+                    )
+
+                );
+
+            }
+        );
+
+}
+
+
+/* ======================================================
+   GAME LABEL
+====================================================== */
+
+function buildGameLabel(
+    game
+) {
+
+    const date =
+        parseDate(
+            game.date
+        );
+
+
+    const formatted =
+        date.toLocaleDateString(
+            "en-US",
+            {
+                month:
+                    "short",
+
+                day:
+                    "numeric"
+            }
+        );
+
+
+    return (
+        formatted +
+        " • " +
+        (
+            game.field ||
+            "Field TBD"
+        )
+    );
+
+}
+
+
+/* ======================================================
+   DATE
+====================================================== */
+
+function parseDate(
+    value
+) {
+
+    return new Date(
+        value +
+        "T12:00:00"
+    );
+
+}
+
+
+/* ======================================================
+   SAFE HTML
+====================================================== */
+
+function escapeHTML(
+    value
+) {
+
+    return String(
+        value || ""
+    )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* ======================================================
+   START
+====================================================== */
+
+loadLineup();
+
+</script>
+
+</body>
+
+</html>
