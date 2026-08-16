@@ -1,221 +1,483 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC Wolfpack | Pack HQ</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FC Wolfpack | Pack HQ
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
+
 
 <body>
 
 <div class="layout">
 
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
     <aside class="sidebar">
 
         <div class="brand">
-            <div class="brand-mark">🐺</div>
+
+            <div class="brand-mark">
+                🐺
+            </div>
+
             FC WOLFPACK
+
         </div>
+
 
         <div class="tagline">
             Patient. Fast. Fierce. Together.
         </div>
 
+
         <nav class="nav">
-            <a class="active" href="index.html">Pack HQ</a>
-            <a href="schedule.html">Schedule</a>
-            <a href="#">The Pack</a>
-            <a href="#">Playbook</a>
-            <a href="practice.html">Practice</a>
-            <a href="parents.html">Parents</a>
+
+            <a
+                class="active"
+                href="index.html"
+            >
+                Pack HQ
+            </a>
+
+            <a href="schedule.html">
+                Schedule
+            </a>
+
+            <a href="#">
+                The Pack
+            </a>
+
+            <a href="#">
+                Playbook
+            </a>
+
+            <a href="practice.html">
+                Practice
+            </a>
+
+            <a href="lineup.html">
+                Weekly Lineup
+            </a>
+
+            <a href="parents.html">
+                Parents
+            </a>
+
         </nav>
 
     </aside>
 
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
     <main>
 
+
+        <!-- TOP BAR -->
+
         <div class="topbar">
-            <div class="page-label">FC Wolfpack Team Hub</div>
-            <div class="topbar-note">2026 Season</div>
+
+            <div class="page-label">
+                FC Wolfpack Team Hub
+            </div>
+
+            <div class="topbar-note">
+                2026 Season
+            </div>
+
         </div>
+
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
 
         <section class="hero">
 
             <div class="hero-content">
-                <small>Welcome to</small>
-                <h1>Pack HQ</h1>
+
+                <small>
+                    Welcome to
+                </small>
+
+                <h1>
+                    Pack HQ
+                </h1>
 
                 <p>
-                    One place for the Pack to stay ready, stay connected,
-                    and know what we're working toward.
+                    One place for the Pack to stay ready,
+                    stay connected, and know what we're
+                    working toward.
                 </p>
+
             </div>
 
         </section>
 
-        <div class="grid">
+
+
+        <!-- LOADING -->
+
+        <div
+            id="homeLoading"
+            class="card card-full muted"
+        >
+            Loading Pack HQ...
+        </div>
+
+
+        <div
+            id="homeError"
+            class="card card-full muted"
+            style="display:none;"
+        >
+            Pack HQ data could not be loaded.
+        </div>
+
+
+
+        <!-- =================================================
+             LIVE DASHBOARD
+        ================================================== -->
+
+        <div
+            id="homeDashboard"
+            class="grid"
+            style="display:none;"
+        >
+
+
+            <!-- =============================================
+                 NEXT PRACTICE
+            ============================================== -->
 
             <section class="card card-half">
 
-                <div class="eyebrow">Up Next</div>
-                <h2>Tuesday Practice</h2>
-
-                <div class="event-row">
-
-                    <div class="event-date">
-                        <div class="month">AUG</div>
-                        <div class="day">18</div>
-                    </div>
-
-                    <div class="event-details">
-                        <strong>5:30 PM</strong>
-                        <span class="muted">Practice field</span>
-
-                        <p class="muted">
-                            Bring a ball, water, shin guards,
-                            and your Pack mentality.
-                        </p>
-                    </div>
-
+                <div class="eyebrow">
+                    Up Next
                 </div>
 
+                <h2>
+                    Practice
+                </h2>
+
+
+                <div
+                    id="nextPracticeContent"
+                >
+                </div>
+
+
+                <a
+                    class="text-link"
+                    href="practice.html"
+                >
+                    View practice week →
+                </a>
+
             </section>
+
+
+
+            <!-- =============================================
+                 CURRENT MISSION
+            ============================================== -->
 
             <section class="card card-half mission">
 
-                <div class="eyebrow">Today's Mission</div>
-                <h2>Protect the Den</h2>
+                <div class="eyebrow">
+                    Pack Focus
+                </div>
 
-                <p class="muted">
-                    When we lose the ball, how quickly can the Pack
-                    get back together and protect the middle?
+                <h2
+                    id="missionTitle"
+                >
+                    Pack Development
+                </h2>
+
+                <p
+                    id="missionDescription"
+                    class="muted"
+                >
+                    Loading this week's focus...
                 </p>
 
+
                 <div class="mission-word">
-                    TOGETHER
+                    PATIENT • FAST • FIERCE • TOGETHER
                 </div>
 
             </section>
+
+
+
+            <!-- =============================================
+                 PACK ROLES
+            ============================================== -->
 
             <section class="card card-wide">
 
-                <div class="eyebrow">The Pack</div>
-                <h2>Know Your Role</h2>
+                <div class="eyebrow">
+                    The Pack
+                </div>
+
+                <h2>
+                    Know Your Role
+                </h2>
+
 
                 <div class="roles">
 
-                    <div class="role">
-                        <div class="role-icon">🐺</div>
-                        <strong>Hunter</strong>
-                        <span>Attack the goal</span>
-                    </div>
 
                     <div class="role">
-                        <div class="role-icon">🔭</div>
-                        <strong>Scout</strong>
-                        <span>Find space</span>
+
+                        <div class="role-icon">
+                            🐺
+                        </div>
+
+                        <strong>
+                            Hunter
+                        </strong>
+
+                        <span>
+                            Attack the goal
+                        </span>
+
                     </div>
 
-                    <div class="role">
-                        <div class="role-icon">🛡️</div>
-                        <strong>Guardian</strong>
-                        <span>Protect the den</span>
-                    </div>
 
                     <div class="role">
-                        <div class="role-icon">👑</div>
-                        <strong>Pack Leader</strong>
-                        <span>See and lead</span>
+
+                        <div class="role-icon">
+                            🔭
+                        </div>
+
+                        <strong>
+                            Scout
+                        </strong>
+
+                        <span>
+                            Find space
+                        </span>
+
                     </div>
+
+
+                    <div class="role">
+
+                        <div class="role-icon">
+                            🛡️
+                        </div>
+
+                        <strong>
+                            Guardian
+                        </strong>
+
+                        <span>
+                            Protect the den
+                        </span>
+
+                    </div>
+
+
+                    <div class="role">
+
+                        <div class="role-icon">
+                            👑
+                        </div>
+
+                        <strong>
+                            Pack Leader
+                        </strong>
+
+                        <span>
+                            See and lead
+                        </span>
+
+                    </div>
+
 
                 </div>
 
             </section>
+
+
+
+            <!-- =============================================
+                 PACK CHALLENGE
+            ============================================== -->
 
             <section class="card card-small">
 
-                <div class="eyebrow">Pack Challenge</div>
-                <h2>The Hunt</h2>
-
-                <div class="challenge-number">
-                    12
-                    <span>Pack Tokens Remaining</span>
+                <div class="eyebrow">
+                    Pack Challenge
                 </div>
 
-                <div class="token-row">
-                    <div class="token"></div>
-                    <div class="token"></div>
-                    <div class="token"></div>
-                    <div class="token"></div>
-                    <div class="token"></div>
-                    <div class="token"></div>
-                    <div class="token"></div>
-                    <div class="token"></div>
-                    <div class="token"></div>
-                    <div class="token"></div>
-                    <div class="token"></div>
-                    <div class="token"></div>
+                <h2>
+                    The Hunt
+                </h2>
+
+
+                <div
+                    id="challengeNumber"
+                    class="challenge-number"
+                >
+                    —
+
+                    <span>
+                        Tokens Earned
+                    </span>
+
                 </div>
 
-                <div class="challenge-reward">
-                    🍦 Reward: Ice Cream
+
+                <div
+                    id="challengeTokens"
+                    class="token-row"
+                >
+                </div>
+
+
+                <div
+                    id="challengeMessage"
+                    class="challenge-reward"
+                >
+                    The reward remains a mystery...
                 </div>
 
             </section>
+
+
+
+            <!-- =============================================
+                 THIS WEEK
+            ============================================== -->
 
             <section class="card card-half">
 
-                <div class="eyebrow">Pack News</div>
-                <h2>Announcements</h2>
-
-                <div class="announcement">
-                    <strong>Welcome to Pack HQ</strong>
-                    <span class="muted">
-                        This will be the home for team updates,
-                        schedule changes, and reminders.
-                    </span>
+                <div class="eyebrow">
+                    This Week
                 </div>
 
-                <div class="announcement">
-                    <strong>Next practice</strong>
-                    <span class="muted">
-                        Tuesday at 5:30 PM.
-                    </span>
+                <h2>
+                    Pack Activity
+                </h2>
+
+
+                <div
+                    id="weekSummary"
+                >
                 </div>
 
             </section>
+
+
+
+            <!-- =============================================
+                 NEXT GAME
+            ============================================== -->
 
             <section class="card card-half">
 
-                <div class="eyebrow">Coming Up</div>
-                <h2>Next Game</h2>
+                <div class="eyebrow">
+                    Coming Up
+                </div>
 
-                <div class="event-row">
+                <h2>
+                    Next Game
+                </h2>
 
-                    <div class="event-date">
-                        <div class="month">AUG</div>
-                        <div class="day">22</div>
-                    </div>
 
-                    <div class="event-details">
+                <div
+                    id="nextGameContent"
+                >
+                </div>
 
-                        <strong>FC Wolfpack vs Opponent</strong>
-                        <span class="muted">
-                            10:00 AM • Arrive 9:30 AM
-                        </span>
 
-                        <br>
+                <a
+                    class="button"
+                    href="schedule.html"
+                >
+                    View Schedule →
+                </a>
 
-                        <a class="button" href="schedule.html">
-                            View Schedule →
-                        </a>
+            </section>
 
-                    </div>
 
+
+            <!-- =============================================
+                 GAME PLAN
+            ============================================== -->
+
+            <section class="card card-half">
+
+                <div class="eyebrow">
+                    Coach Game Plan
+                </div>
+
+                <h2>
+                    Weekly Lineup
+                </h2>
+
+                <p class="muted">
+                    See the Pack's quarter-by-quarter
+                    formation for the next game.
+                </p>
+
+                <a
+                    class="button"
+                    href="lineup.html"
+                >
+                    View Lineup →
+                </a>
+
+            </section>
+
+
+
+            <!-- =============================================
+                 PACK STATUS
+            ============================================== -->
+
+            <section class="card card-half">
+
+                <div class="eyebrow">
+                    Pack Status
+                </div>
+
+                <h2>
+                    Ready for the Week
+                </h2>
+
+
+                <div
+                    id="packStatus"
+                >
                 </div>
 
             </section>
+
 
         </div>
 
@@ -223,5 +485,1165 @@
 
 </div>
 
+
+
+<script>
+
+
+/* =========================================================
+   API
+========================================================= */
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbx5Fl8Ua7z60fT1d5VsT87W-hCGosv0m5AbIdpRUIsTQjrkjAInCySOYi7WyTxFyz8c/exec";
+
+
+let games = [];
+let practices = [];
+let challenge = null;
+
+
+
+/* =========================================================
+   LOAD PACK HQ
+========================================================= */
+
+async function loadPackHQ() {
+
+    const loading =
+        document.getElementById(
+            "homeLoading"
+        );
+
+    const error =
+        document.getElementById(
+            "homeError"
+        );
+
+    const dashboard =
+        document.getElementById(
+            "homeDashboard"
+        );
+
+
+    try {
+
+
+        /*
+         * Load schedule and Pack Challenge
+         * at the same time.
+         */
+
+        const [
+            scheduleResponse,
+            challengeResponse
+        ] =
+            await Promise.all([
+
+                fetch(
+                    API_URL +
+                    "?action=schedule"
+                ),
+
+                fetch(
+                    API_URL +
+                    "?action=challenge"
+                )
+
+            ]);
+
+
+        const scheduleData =
+            await scheduleResponse.json();
+
+
+        const challengeData =
+            await challengeResponse.json();
+
+
+
+        if (!scheduleData.ok) {
+
+            throw new Error(
+                scheduleData.error ||
+                "Schedule could not be loaded."
+            );
+
+        }
+
+
+        games =
+            scheduleData.games || [];
+
+
+        practices =
+            scheduleData.practices || [];
+
+
+        if (
+            challengeData.ok &&
+            challengeData.challenge
+        ) {
+
+            challenge =
+                challengeData.challenge;
+
+        }
+
+
+        renderHomepage();
+
+
+        loading.style.display =
+            "none";
+
+
+        dashboard.style.display =
+            "grid";
+
+
+    } catch (err) {
+
+
+        console.error(
+            "PACK HQ ERROR:",
+            err
+        );
+
+
+        loading.style.display =
+            "none";
+
+
+        error.style.display =
+            "block";
+
+
+    }
+
+}
+
+
+
+/* =========================================================
+   RENDER HOMEPAGE
+========================================================= */
+
+function renderHomepage() {
+
+    renderNextPractice();
+
+    renderMission();
+
+    renderChallenge();
+
+    renderNextGame();
+
+    renderWeekSummary();
+
+    renderPackStatus();
+
+}
+
+
+
+/* =========================================================
+   NEXT PRACTICE
+========================================================= */
+
+function renderNextPractice() {
+
+    const container =
+        document.getElementById(
+            "nextPracticeContent"
+        );
+
+
+    const nextPractice =
+        getNextEvent(
+            practices
+        );
+
+
+    if (!nextPractice) {
+
+        container.innerHTML = `
+
+            <p class="muted">
+                No upcoming practice scheduled.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    const date =
+        parseDate(
+            nextPractice.date
+        );
+
+
+    const month =
+        date
+            .toLocaleDateString(
+                "en-US",
+                {
+                    month:
+                        "short"
+                }
+            )
+            .toUpperCase();
+
+
+    const day =
+        date
+            .toLocaleDateString(
+                "en-US",
+                {
+                    day:
+                        "numeric"
+                }
+            );
+
+
+    const weekday =
+        date
+            .toLocaleDateString(
+                "en-US",
+                {
+                    weekday:
+                        "long"
+                }
+            );
+
+
+    container.innerHTML = `
+
+        <div class="event-row">
+
+            <div class="event-date">
+
+                <div class="month">
+                    ${month}
+                </div>
+
+                <div class="day">
+                    ${day}
+                </div>
+
+            </div>
+
+
+            <div class="event-details">
+
+                <strong>
+                    ${weekday}
+                    ${
+                        nextPractice.time
+                        ? " • " +
+                          escapeHTML(
+                              nextPractice.time
+                          )
+                        : ""
+                    }
+                </strong>
+
+
+                <span class="muted">
+                    ${
+                        escapeHTML(
+                            nextPractice.field ||
+                            "Field TBD"
+                        )
+                    }
+                </span>
+
+
+                ${
+                    nextPractice.focus
+                    ? `
+
+                        <p class="muted">
+                            Focus:
+                            <strong>
+                                ${
+                                    escapeHTML(
+                                        nextPractice.focus
+                                    )
+                                }
+                            </strong>
+                        </p>
+
+                    `
+                    : ""
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   PACK MISSION
+========================================================= */
+
+function renderMission() {
+
+    const title =
+        document.getElementById(
+            "missionTitle"
+        );
+
+
+    const description =
+        document.getElementById(
+            "missionDescription"
+        );
+
+
+    /*
+     * Prefer a practice during the current
+     * Sunday-Saturday week.
+     */
+
+    const week =
+        getCurrentWeek();
+
+
+    const thisWeek =
+        practices
+            .filter(
+                practice => {
+
+                    const date =
+                        parseDate(
+                            practice.date
+                        );
+
+                    return (
+                        date >= week.start &&
+                        date <= week.end
+                    );
+
+                }
+            )
+            .sort(
+                (a, b) =>
+                    parseDate(a.date) -
+                    parseDate(b.date)
+            );
+
+
+    let focusPractice =
+        null;
+
+
+    if (
+        thisWeek.length > 0
+    ) {
+
+        focusPractice =
+            thisWeek.find(
+                practice =>
+                    practice.focus
+            ) ||
+            thisWeek[0];
+
+    } else {
+
+        focusPractice =
+            getNextEvent(
+                practices
+            );
+
+    }
+
+
+    if (
+        focusPractice &&
+        focusPractice.focus
+    ) {
+
+        title.textContent =
+            focusPractice.focus;
+
+
+        description.textContent =
+            "This is what the Pack is working on right now.";
+
+    } else {
+
+        title.textContent =
+            "Pack Development";
+
+
+        description.textContent =
+            "Patient. Fast. Fierce. Together.";
+
+    }
+
+}
+
+
+
+/* =========================================================
+   PACK CHALLENGE
+========================================================= */
+
+function renderChallenge() {
+
+    const number =
+        document.getElementById(
+            "challengeNumber"
+        );
+
+
+    const tokenContainer =
+        document.getElementById(
+            "challengeTokens"
+        );
+
+
+    const message =
+        document.getElementById(
+            "challengeMessage"
+        );
+
+
+    tokenContainer.innerHTML =
+        "";
+
+
+    if (!challenge) {
+
+        number.innerHTML = `
+
+            —
+
+            <span>
+                Tokens Earned
+            </span>
+
+        `;
+
+
+        message.textContent =
+            "The reward remains a mystery...";
+
+
+        return;
+
+    }
+
+
+    const total =
+        Number(
+            challenge.total || 0
+        );
+
+
+    const earned =
+        Math.min(
+            Number(
+                challenge.earned || 0
+            ),
+            total
+        );
+
+
+    const remaining =
+        Math.max(
+            total - earned,
+            0
+        );
+
+
+    number.innerHTML = `
+
+        ${earned}
+
+        <span>
+            of ${total} Pack Tokens Earned
+        </span>
+
+    `;
+
+
+    /*
+     * Draw one ring for every token.
+     *
+     * Earned tokens become darker/fuller.
+     * Remaining tokens stay gray.
+     */
+
+    for (
+        let i = 1;
+        i <= total;
+        i++
+    ) {
+
+        const token =
+            document.createElement(
+                "div"
+            );
+
+
+        token.className =
+            "token";
+
+
+        if (i <= earned) {
+
+            token.style.borderColor =
+                "#1f6f46";
+
+            token.style.background =
+                "#1f6f46";
+
+        } else {
+
+            token.style.borderColor =
+                "#7b837d";
+
+            token.style.background =
+                "transparent";
+
+        }
+
+
+        tokenContainer.appendChild(
+            token
+        );
+
+    }
+
+
+    if (remaining === 0) {
+
+        message.textContent =
+            "🐺 Challenge complete!";
+
+    } else {
+
+        message.textContent =
+            `${remaining} tokens remain • Reward: ???`;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   NEXT GAME
+========================================================= */
+
+function renderNextGame() {
+
+    const container =
+        document.getElementById(
+            "nextGameContent"
+        );
+
+
+    const nextGame =
+        getNextEvent(
+            games
+        );
+
+
+    if (!nextGame) {
+
+        container.innerHTML = `
+
+            <p class="muted">
+                No upcoming game scheduled.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    const date =
+        parseDate(
+            nextGame.date
+        );
+
+
+    const month =
+        date
+            .toLocaleDateString(
+                "en-US",
+                {
+                    month:
+                        "short"
+                }
+            )
+            .toUpperCase();
+
+
+    const day =
+        date
+            .toLocaleDateString(
+                "en-US",
+                {
+                    day:
+                        "numeric"
+                }
+            );
+
+
+    const weekday =
+        date
+            .toLocaleDateString(
+                "en-US",
+                {
+                    weekday:
+                        "long"
+                }
+            );
+
+
+    const isHome =
+        String(
+            nextGame.homeAway || ""
+        )
+            .trim()
+            .toLowerCase() ===
+        "home";
+
+
+    const snackCovered =
+        nextGame.snack &&
+        nextGame.snack.familyName;
+
+
+    container.innerHTML = `
+
+        <div class="event-row">
+
+            <div class="event-date">
+
+                <div class="month">
+                    ${month}
+                </div>
+
+                <div class="day">
+                    ${day}
+                </div>
+
+            </div>
+
+
+            <div class="event-details">
+
+                <strong>
+                    ${weekday}
+                </strong>
+
+
+                <span class="muted">
+                    ${
+                        escapeHTML(
+                            nextGame.field ||
+                            "Field TBD"
+                        )
+                    }
+                </span>
+
+
+                <p>
+
+                    <strong>
+                        ${
+                            isHome
+                            ? "HOME"
+                            : "AWAY"
+                        }
+                    </strong>
+
+                    •
+
+                    ${
+                        isHome
+                        ? "Hunter Green"
+                        : "White"
+                    }
+
+                </p>
+
+
+                <p class="muted">
+
+                    Snacks:
+
+                    ${
+                        snackCovered
+                        ? escapeHTML(
+                            nextGame.snack.familyName
+                          ) +
+                          " ✓"
+
+                        : "Volunteer needed"
+                    }
+
+                </p>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   THIS WEEK SUMMARY
+========================================================= */
+
+function renderWeekSummary() {
+
+    const container =
+        document.getElementById(
+            "weekSummary"
+        );
+
+
+    const week =
+        getCurrentWeek();
+
+
+    const weeklyPractices =
+        practices.filter(
+            practice => {
+
+                const date =
+                    parseDate(
+                        practice.date
+                    );
+
+                return (
+                    date >= week.start &&
+                    date <= week.end
+                );
+
+            }
+        );
+
+
+    const weeklyGames =
+        games.filter(
+            game => {
+
+                const date =
+                    parseDate(
+                        game.date
+                    );
+
+                return (
+                    date >= week.start &&
+                    date <= week.end
+                );
+
+            }
+        );
+
+
+    const start =
+        week.start
+            .toLocaleDateString(
+                "en-US",
+                {
+                    month:
+                        "short",
+
+                    day:
+                        "numeric"
+                }
+            );
+
+
+    const end =
+        week.end
+            .toLocaleDateString(
+                "en-US",
+                {
+                    month:
+                        "short",
+
+                    day:
+                        "numeric"
+                }
+            );
+
+
+    container.innerHTML = `
+
+        <p>
+            <strong>
+                ${start} – ${end}
+            </strong>
+        </p>
+
+        <p class="muted">
+            ⚽ ${weeklyPractices.length}
+            ${
+                weeklyPractices.length === 1
+                ? "practice"
+                : "practices"
+            }
+        </p>
+
+        <p class="muted">
+            🐺 ${weeklyGames.length}
+            ${
+                weeklyGames.length === 1
+                ? "game"
+                : "games"
+            }
+        </p>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   PACK STATUS
+========================================================= */
+
+function renderPackStatus() {
+
+    const container =
+        document.getElementById(
+            "packStatus"
+        );
+
+
+    const nextGame =
+        getNextEvent(
+            games
+        );
+
+
+    const nextPractice =
+        getNextEvent(
+            practices
+        );
+
+
+    let statusHTML =
+        "";
+
+
+    if (nextPractice) {
+
+        const date =
+            parseDate(
+                nextPractice.date
+            );
+
+
+        statusHTML += `
+
+            <div class="announcement">
+
+                <strong>
+                    Next Practice
+                </strong>
+
+                <span class="muted">
+
+                    ${
+                        date.toLocaleDateString(
+                            "en-US",
+                            {
+                                weekday:
+                                    "long",
+
+                                month:
+                                    "short",
+
+                                day:
+                                    "numeric"
+                            }
+                        )
+                    }
+
+                    ${
+                        nextPractice.time
+                        ? " • " +
+                          escapeHTML(
+                              nextPractice.time
+                          )
+                        : ""
+                    }
+
+                </span>
+
+            </div>
+
+        `;
+
+    }
+
+
+    if (nextGame) {
+
+        const snackCovered =
+            nextGame.snack &&
+            nextGame.snack.familyName;
+
+
+        statusHTML += `
+
+            <div class="announcement">
+
+                <strong>
+                    Next Game Snacks
+                </strong>
+
+                <span class="muted">
+
+                    ${
+                        snackCovered
+                        ? "✓ Covered by " +
+                          escapeHTML(
+                              nextGame.snack.familyName
+                          )
+
+                        : "⚠ Volunteer still needed"
+                    }
+
+                </span>
+
+            </div>
+
+        `;
+
+    }
+
+
+    if (!statusHTML) {
+
+        statusHTML = `
+
+            <p class="muted">
+                Nothing upcoming right now.
+            </p>
+
+        `;
+
+    }
+
+
+    container.innerHTML =
+        statusHTML;
+
+}
+
+
+
+/* =========================================================
+   NEXT EVENT HELPER
+========================================================= */
+
+function getNextEvent(
+    events
+) {
+
+    const today =
+        new Date();
+
+
+    today.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    const upcoming =
+        events
+            .filter(
+                event => {
+
+                    if (!event.date) {
+                        return false;
+                    }
+
+
+                    return (
+                        parseDate(
+                            event.date
+                        ) >= today
+                    );
+
+                }
+            )
+            .sort(
+                (a, b) =>
+                    parseDate(a.date) -
+                    parseDate(b.date)
+            );
+
+
+    return upcoming[0] || null;
+
+}
+
+
+
+/* =========================================================
+   CURRENT WEEK
+   Sunday through Saturday
+========================================================= */
+
+function getCurrentWeek() {
+
+    const now =
+        new Date();
+
+
+    const sunday =
+        new Date(
+            now
+        );
+
+
+    sunday.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    sunday.setDate(
+        now.getDate() -
+        now.getDay()
+    );
+
+
+    const saturday =
+        new Date(
+            sunday
+        );
+
+
+    saturday.setDate(
+        sunday.getDate() + 6
+    );
+
+
+    saturday.setHours(
+        23,
+        59,
+        59,
+        999
+    );
+
+
+    return {
+
+        start:
+            sunday,
+
+        end:
+            saturday
+
+    };
+
+}
+
+
+
+/* =========================================================
+   DATE HELPER
+========================================================= */
+
+function parseDate(
+    value
+) {
+
+    if (!value) {
+
+        return new Date(
+            "1900-01-01T12:00:00"
+        );
+
+    }
+
+
+    return new Date(
+        value +
+        "T12:00:00"
+    );
+
+}
+
+
+
+/* =========================================================
+   SAFE HTML
+========================================================= */
+
+function escapeHTML(
+    value
+) {
+
+    return String(
+        value || ""
+    )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+
+/* =========================================================
+   START PACK HQ
+========================================================= */
+
+loadPackHQ();
+
+</script>
+
+
 </body>
+
 </html>

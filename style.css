@@ -1436,3 +1436,277 @@ main {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* =========================================================
+   THE PACK PAGE
+========================================================= */
+
+.pack-hero {
+    min-height: 260px;
+}
+
+
+/* VALUES */
+
+.pack-values-section {
+    margin-bottom: 28px;
+}
+
+.pack-values {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.pack-value {
+    padding: 20px;
+    border-radius: 14px;
+    background: #f1f5f2;
+    border-top: 4px solid var(--green);
+}
+
+.pack-value strong {
+    display: block;
+    color: var(--green-dark);
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+}
+
+.pack-value span {
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.5;
+}
+
+
+/* SECTIONS */
+
+.pack-section {
+    margin: 34px 0;
+}
+
+.pack-section-title {
+    margin: 6px 0 18px;
+}
+
+
+/* ROLE CARDS */
+
+.pack-role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.pack-role-card {
+    position: relative;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px;
+    overflow: hidden;
+}
+
+.pack-role-card::after {
+    content: "";
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    right: -60px;
+    bottom: -60px;
+    background: var(--green-soft);
+}
+
+.pack-role-symbol {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    background: var(--green-soft);
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+}
+
+.pack-role-name {
+    font-size: 1.3rem;
+    font-weight: 900;
+}
+
+.pack-role-job {
+    margin-top: 3px;
+    color: var(--green);
+    font-weight: 800;
+    font-size: 0.82rem;
+}
+
+.pack-role-card p {
+    position: relative;
+    z-index: 2;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 450px;
+}
+
+.pack-role-cue {
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    margin-top: 5px;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: var(--hunter-green);
+    color: white;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+}
+
+
+/* LANGUAGE */
+
+.pack-language-section {
+    margin: 34px 0;
+}
+
+.pack-language-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.pack-language-card {
+    padding: 22px 16px;
+    border-radius: 14px;
+    background: #f4f7f5;
+    text-align: center;
+}
+
+.pack-language-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.pack-language-card strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.pack-language-card span {
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+
+/* GAME MOMENTS */
+
+.pack-moments {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.pack-moment {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.pack-moment-number {
+    min-width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--green);
+    color: white;
+    font-weight: 900;
+    font-size: 0.8rem;
+}
+
+.pack-moment strong {
+    font-size: 1rem;
+}
+
+.pack-moment p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+
+/* PROMISE */
+
+.pack-promise {
+    margin-top: 34px;
+    padding: 44px 28px;
+    border-radius: 22px;
+    text-align: center;
+    background:
+        linear-gradient(
+            135deg,
+            #10291d,
+            #1d5b3b
+        );
+    color: white;
+}
+
+.pack-promise-wolf {
+    font-size: 2.8rem;
+    margin-bottom: 12px;
+}
+
+.pack-promise .eyebrow {
+    color: #a9ceb7;
+}
+
+.pack-promise h2 {
+    margin: 8px 0;
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+}
+
+.pack-promise p {
+    margin: 0 auto;
+    max-width: 520px;
+    color: #d3e5d9;
+    line-height: 1.6;
+}
+
+
+/* PACK PAGE RESPONSIVE */
+
+@media (max-width: 850px) {
+
+    .pack-values {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pack-role-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pack-language-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 560px) {
+
+    .pack-values,
+    .pack-language-grid,
+    .pack-moments {
+        grid-template-columns: 1fr;
+    }
+
+}
