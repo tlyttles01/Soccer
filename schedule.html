@@ -57,17 +57,17 @@
         <div class="schedule-summary">
 
             <div class="summary-card">
-                <span class="summary-number">6</span>
+                <span id="gameCount" class="summary-number">—</span>
                 <span class="summary-label">Games Scheduled</span>
             </div>
 
             <div class="summary-card">
-                <span class="summary-number">2</span>
+                <span id="coveredCount" class="summary-number">—</span>
                 <span class="summary-label">Snack Days Covered</span>
             </div>
 
             <div class="summary-card alert">
-                <span class="summary-number">4</span>
+                <span id="openCount" class="summary-number">—</span>
                 <span class="summary-label">Need Snack Volunteers</span>
             </div>
 
@@ -90,183 +90,24 @@
 
             </div>
 
-            <div class="game-list">
-
-                <article class="game-card">
-
-                    <div class="game-date">
-                        <span class="game-month">SEP</span>
-                        <span class="game-day">12</span>
-                    </div>
-
-                    <div class="game-info">
-                        <h3>Field 3</h3>
-                        <div class="field-label">September 12, 2026</div>
-                    </div>
-
-                    <div class="game-status home">
-                        HOME
-                    </div>
-
-                    <div class="snack-box covered">
-                        <div class="snack-label">🍊 SNACK VOLUNTEER</div>
-                        <strong>Johnson Family</strong>
-                        <span>Covered ✓</span>
-                    </div>
-
-                </article>
-
-                <article class="game-card">
-
-                    <div class="game-date">
-                        <span class="game-month">SEP</span>
-                        <span class="game-day">19</span>
-                    </div>
-
-                    <div class="game-info">
-                        <h3>Field 2</h3>
-                        <div class="field-label">September 19, 2026</div>
-                    </div>
-
-                    <div class="game-status away">
-                        AWAY
-                    </div>
-
-                    <div class="snack-box open">
-                        <div class="snack-label">🍊 SNACK VOLUNTEER</div>
-                        <strong>Open</strong>
-
-                        <button
-                            class="signup-button"
-                            onclick="openSignup('September 19 - Field 2')"
-                        >
-                            Sign Up
-                        </button>
-                    </div>
-
-                </article>
-
-                <article class="game-card">
-
-                    <div class="game-date">
-                        <span class="game-month">SEP</span>
-                        <span class="game-day">26</span>
-                    </div>
-
-                    <div class="game-info">
-                        <h3>Field 1</h3>
-                        <div class="field-label">September 26, 2026</div>
-                    </div>
-
-                    <div class="game-status home">
-                        HOME
-                    </div>
-
-                    <div class="snack-box open">
-                        <div class="snack-label">🍊 SNACK VOLUNTEER</div>
-                        <strong>Open</strong>
-
-                        <button
-                            class="signup-button"
-                            onclick="openSignup('September 26 - Field 1')"
-                        >
-                            Sign Up
-                        </button>
-                    </div>
-
-                </article>
-
-                <article class="game-card">
-
-                    <div class="game-date">
-                        <span class="game-month">OCT</span>
-                        <span class="game-day">03</span>
-                    </div>
-
-                    <div class="game-info">
-                        <h3>Field 4</h3>
-                        <div class="field-label">October 3, 2026</div>
-                    </div>
-
-                    <div class="game-status away">
-                        AWAY
-                    </div>
-
-                    <div class="snack-box covered">
-                        <div class="snack-label">🍊 SNACK VOLUNTEER</div>
-                        <strong>Smith Family</strong>
-                        <span>Covered ✓</span>
-                    </div>
-
-                </article>
-
-                <article class="game-card">
-
-                    <div class="game-date">
-                        <span class="game-month">OCT</span>
-                        <span class="game-day">10</span>
-                    </div>
-
-                    <div class="game-info">
-                        <h3>Field 2</h3>
-                        <div class="field-label">October 10, 2026</div>
-                    </div>
-
-                    <div class="game-status home">
-                        HOME
-                    </div>
-
-                    <div class="snack-box open">
-                        <div class="snack-label">🍊 SNACK VOLUNTEER</div>
-                        <strong>Open</strong>
-
-                        <button
-                            class="signup-button"
-                            onclick="openSignup('October 10 - Field 2')"
-                        >
-                            Sign Up
-                        </button>
-                    </div>
-
-                </article>
-
-                <article class="game-card">
-
-                    <div class="game-date">
-                        <span class="game-month">OCT</span>
-                        <span class="game-day">17</span>
-                    </div>
-
-                    <div class="game-info">
-                        <h3>Field 5</h3>
-                        <div class="field-label">October 17, 2026</div>
-                    </div>
-
-                    <div class="game-status away">
-                        AWAY
-                    </div>
-
-                    <div class="snack-box open">
-                        <div class="snack-label">🍊 SNACK VOLUNTEER</div>
-                        <strong>Open</strong>
-
-                        <button
-                            class="signup-button"
-                            onclick="openSignup('October 17 - Field 5')"
-                        >
-                            Sign Up
-                        </button>
-                    </div>
-
-                </article>
-
+            <div id="loadingMessage" class="muted">
+                Loading Pack schedule...
             </div>
+
+            <div id="errorMessage" class="muted" style="display:none;">
+                The schedule could not be loaded.
+            </div>
+
+            <div id="gameList" class="game-list"></div>
 
         </section>
 
     </main>
 
 </div>
+
+
+<!-- SNACK SIGNUP MODAL -->
 
 <div id="signupModal" class="modal">
 
@@ -297,85 +138,532 @@
             placeholder="Example: Lyttles Family"
         >
 
-        <label for="parentEmail">
-            Email
-        </label>
-
-        <input
-            id="parentEmail"
-            type="email"
-            placeholder="parent@example.com"
-        >
-
         <button
+            id="signupSubmit"
             class="button signup-submit"
             onclick="submitSignup()"
         >
             Claim This Snack Day
         </button>
 
-        <p class="form-note">
-            Demo only for now. Real signups will be saved soon.
-        </p>
+        <p id="signupMessage" class="form-note"></p>
 
     </div>
 
 </div>
 
+
 <script>
 
-let selectedGame = "";
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbx5Fl8Ua7z60fT1d5VsT87W-hCGosv0m5AbIdpRUIsTQjrkjAInCySOYi7WyTxFyz8c/exec";
 
-function openSignup(game) {
-    selectedGame = game;
+let selectedGameId = "";
+let selectedGameLabel = "";
+
+
+/* ---------------------------------
+   LOAD GAMES
+---------------------------------- */
+
+async function loadGames() {
+
+    const loading =
+        document.getElementById("loadingMessage");
+
+    const error =
+        document.getElementById("errorMessage");
+
+    const gameList =
+        document.getElementById("gameList");
+
+    loading.style.display = "block";
+    error.style.display = "none";
+    gameList.innerHTML = "";
+
+    try {
+
+        const response =
+            await fetch(API_URL + "?action=games");
+
+        const data =
+            await response.json();
+
+        if (!data.ok) {
+            throw new Error(
+                data.error || "Unable to load schedule."
+            );
+        }
+
+        renderGames(data.games || []);
+
+        loading.style.display = "none";
+
+    } catch (err) {
+
+        console.error(err);
+
+        loading.style.display = "none";
+        error.style.display = "block";
+
+        error.textContent =
+            "The Pack schedule could not be loaded. Please try again.";
+
+    }
+
+}
+
+
+/* ---------------------------------
+   DISPLAY GAMES
+---------------------------------- */
+
+function renderGames(games) {
+
+    const gameList =
+        document.getElementById("gameList");
+
+    gameList.innerHTML = "";
+
+    let covered = 0;
+
+    games.forEach(game => {
+
+        const hasSnack =
+            game.snack &&
+            game.snack.familyName;
+
+        if (hasSnack) {
+            covered++;
+        }
+
+        const date =
+            parseGameDate(game.date);
+
+        const month =
+            date.month;
+
+        const day =
+            date.day;
+
+        const fullDate =
+            date.fullDate;
+
+        const homeAway =
+            String(game.homeAway || "")
+                .trim()
+                .toLowerCase();
+
+        const isHome =
+            homeAway === "home";
+
+        const statusClass =
+            isHome ? "home" : "away";
+
+        const statusText =
+            isHome ? "HOME" : "AWAY";
+
+        const snackHTML =
+            hasSnack
+                ? `
+                    <div class="snack-box covered">
+                        <div class="snack-label">
+                            🍊 SNACK VOLUNTEER
+                        </div>
+
+                        <strong>
+                            ${escapeHTML(game.snack.familyName)}
+                        </strong>
+
+                        <span>
+                            Covered ✓
+                        </span>
+                    </div>
+                `
+                : `
+                    <div class="snack-box open">
+                        <div class="snack-label">
+                            🍊 SNACK VOLUNTEER
+                        </div>
+
+                        <strong>
+                            Open
+                        </strong>
+
+                        <button
+                            class="signup-button"
+                            onclick="openSignup(
+                                '${escapeJS(game.gameId)}',
+                                '${escapeJS(fullDate)}'
+                            )"
+                        >
+                            Sign Up
+                        </button>
+                    </div>
+                `;
+
+        const article =
+            document.createElement("article");
+
+        article.className =
+            "game-card";
+
+        article.innerHTML = `
+
+            <div class="game-date">
+
+                <span class="game-month">
+                    ${month}
+                </span>
+
+                <span class="game-day">
+                    ${day}
+                </span>
+
+            </div>
+
+            <div class="game-info">
+
+                <h3>
+                    ${escapeHTML(game.field || "Field TBD")}
+                </h3>
+
+                <div class="field-label">
+                    ${fullDate}
+                </div>
+
+            </div>
+
+            <div class="game-status ${statusClass}">
+                ${statusText}
+            </div>
+
+            ${snackHTML}
+        `;
+
+        gameList.appendChild(article);
+
+    });
+
+
+    document
+        .getElementById("gameCount")
+        .textContent = games.length;
+
+    document
+        .getElementById("coveredCount")
+        .textContent = covered;
+
+    document
+        .getElementById("openCount")
+        .textContent = games.length - covered;
+
+
+    if (games.length === 0) {
+
+        gameList.innerHTML = `
+            <p class="muted">
+                No games have been added yet.
+            </p>
+        `;
+
+    }
+
+}
+
+
+/* ---------------------------------
+   DATE FORMATTING
+---------------------------------- */
+
+function parseGameDate(dateString) {
+
+    if (!dateString) {
+
+        return {
+            month: "TBD",
+            day: "--",
+            fullDate: "Date TBD"
+        };
+
+    }
+
+    /*
+     * Add noon so timezone conversion
+     * does not accidentally shift the date.
+     */
+    const date =
+        new Date(dateString + "T12:00:00");
+
+    if (isNaN(date.getTime())) {
+
+        return {
+            month: "",
+            day: "",
+            fullDate: dateString
+        };
+
+    }
+
+    const month =
+        date
+            .toLocaleDateString(
+                "en-US",
+                { month: "short" }
+            )
+            .toUpperCase();
+
+    const day =
+        date
+            .toLocaleDateString(
+                "en-US",
+                { day: "2-digit" }
+            );
+
+    const fullDate =
+        date
+            .toLocaleDateString(
+                "en-US",
+                {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric"
+                }
+            );
+
+    return {
+        month,
+        day,
+        fullDate
+    };
+
+}
+
+
+/* ---------------------------------
+   SIGNUP MODAL
+---------------------------------- */
+
+function openSignup(gameId, gameLabel) {
+
+    selectedGameId =
+        gameId;
+
+    selectedGameLabel =
+        gameLabel;
 
     document
         .getElementById("signupGame")
-        .textContent = game;
+        .textContent =
+        gameLabel;
+
+    document
+        .getElementById("familyName")
+        .value = "";
+
+    document
+        .getElementById("signupMessage")
+        .textContent = "";
 
     document
         .getElementById("signupModal")
         .classList
         .add("show");
+
 }
 
+
 function closeSignup() {
+
     document
         .getElementById("signupModal")
         .classList
         .remove("show");
+
 }
 
-function submitSignup() {
-    const family =
-        document
-            .getElementById("familyName")
-            .value
-            .trim();
 
-    if (!family) {
-        alert("Please enter your family name.");
+/* ---------------------------------
+   SUBMIT SNACK SIGNUP
+---------------------------------- */
+
+async function submitSignup() {
+
+    const familyInput =
+        document.getElementById("familyName");
+
+    const submitButton =
+        document.getElementById("signupSubmit");
+
+    const message =
+        document.getElementById("signupMessage");
+
+    const familyName =
+        familyInput.value.trim();
+
+
+    if (!familyName) {
+
+        message.textContent =
+            "Please enter your family name.";
+
         return;
+
     }
 
-    alert(
-        family +
-        " signed up for snacks for " +
-        selectedGame +
-        ".\n\nThis is still demo data."
-    );
 
-    closeSignup();
+    submitButton.disabled = true;
+
+    submitButton.textContent =
+        "Claiming...";
+
+    message.textContent =
+        "";
+
+
+    try {
+
+        const formData =
+            new URLSearchParams();
+
+        formData.append(
+            "action",
+            "signup"
+        );
+
+        formData.append(
+            "gameId",
+            selectedGameId
+        );
+
+        formData.append(
+            "familyName",
+            familyName
+        );
+
+
+        const response =
+            await fetch(
+                API_URL,
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.ok) {
+
+            if (
+                data.code ===
+                "already_taken"
+            ) {
+
+                message.textContent =
+                    data.familyName
+                        ? `${data.familyName} already claimed this snack day.`
+                        : "This snack day has already been claimed.";
+
+                await loadGames();
+
+                return;
+
+            }
+
+            throw new Error(
+                data.error ||
+                "Unable to save signup."
+            );
+
+        }
+
+
+        message.textContent =
+            "Snack day claimed!";
+
+
+        await loadGames();
+
+
+        setTimeout(
+            closeSignup,
+            800
+        );
+
+
+    } catch (err) {
+
+        console.error(err);
+
+        message.textContent =
+            "The signup could not be saved. Please try again.";
+
+    } finally {
+
+        submitButton.disabled = false;
+
+        submitButton.textContent =
+            "Claim This Snack Day";
+
+    }
+
 }
 
-window.onclick = function(event) {
-    const modal =
-        document.getElementById("signupModal");
 
-    if (event.target === modal) {
-        closeSignup();
-    }
-};
+/* ---------------------------------
+   SAFETY HELPERS
+---------------------------------- */
+
+function escapeHTML(value) {
+
+    return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+function escapeJS(value) {
+
+    return String(value || "")
+        .replaceAll("\\", "\\\\")
+        .replaceAll("'", "\\'")
+        .replaceAll("\n", " ");
+
+}
+
+
+/* ---------------------------------
+   CLOSE MODAL WHEN BACKDROP CLICKED
+---------------------------------- */
+
+window.onclick =
+    function(event) {
+
+        const modal =
+            document.getElementById(
+                "signupModal"
+            );
+
+        if (event.target === modal) {
+            closeSignup();
+        }
+
+    };
+
+
+/* ---------------------------------
+   START
+---------------------------------- */
+
+loadGames();
 
 </script>
 
