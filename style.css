@@ -191,7 +191,7 @@ main {
     line-height: 1.6;
 }
 
-/* GRID + CARDS */
+/* SHARED CARDS */
 
 .grid {
     display: grid;
@@ -247,7 +247,7 @@ main {
     line-height: 1.55;
 }
 
-/* NEXT EVENT */
+/* HOME PAGE ELEMENTS */
 
 .event-row {
     display: flex;
@@ -284,11 +284,8 @@ main {
     margin-bottom: 4px;
 }
 
-/* MISSION */
-
 .mission {
-    background:
-        linear-gradient(135deg, #ffffff, #f3f7f4);
+    background: linear-gradient(135deg, #ffffff, #f3f7f4);
     border-left: 5px solid var(--green);
 }
 
@@ -302,8 +299,6 @@ main {
     font-weight: 800;
     font-size: 0.82rem;
 }
-
-/* ROLES */
 
 .roles {
     display: grid;
@@ -335,8 +330,6 @@ main {
     color: var(--muted);
     font-size: 0.74rem;
 }
-
-/* PACK CHALLENGE */
 
 .challenge-number {
     font-size: 3rem;
@@ -375,8 +368,6 @@ main {
     font-weight: 800;
 }
 
-/* ANNOUNCEMENTS */
-
 .announcement {
     padding: 16px 0;
     border-bottom: 1px solid var(--border);
@@ -390,8 +381,6 @@ main {
     display: block;
     margin-bottom: 4px;
 }
-
-/* BUTTONS */
 
 .button {
     display: inline-flex;
@@ -415,114 +404,6 @@ main {
     color: var(--green);
     font-weight: 800;
     text-decoration: none;
-}
-
-/* SCHEDULE */
-
-.schedule-item {
-    display: grid;
-    grid-template-columns: 120px 1fr auto;
-    gap: 20px;
-    align-items: center;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border);
-}
-
-.schedule-item:last-child {
-    border-bottom: 0;
-}
-
-.date-block {
-    font-weight: 900;
-    line-height: 1.45;
-}
-
-.status {
-    padding: 8px 12px;
-    border-radius: 999px;
-    background: var(--green-soft);
-    color: var(--green-dark);
-    font-size: 0.78rem;
-    font-weight: 800;
-}
-
-.status.open {
-    background: #fff3d7;
-    color: #865900;
-}
-
-/* MOBILE */
-
-@media (max-width: 950px) {
-    .layout {
-        grid-template-columns: 1fr;
-    }
-
-    .sidebar {
-        position: static;
-        min-height: auto;
-    }
-
-    .tagline {
-        margin-left: 0;
-        margin-bottom: 20px;
-    }
-
-    .nav {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    main {
-        padding: 20px;
-    }
-
-    .hero {
-        min-height: 220px;
-        padding: 28px;
-    }
-
-    .card-half,
-    .card-wide,
-    .card-small {
-        grid-column: 1 / -1;
-    }
-
-    .roles {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .schedule-item {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 560px) {
-    .sidebar {
-        padding: 22px 16px;
-    }
-
-    .nav a {
-        font-size: 0.82rem;
-        padding: 9px 10px;
-    }
-
-    main {
-        padding: 14px;
-    }
-
-    .hero {
-        border-radius: 16px;
-    }
-
-    .card {
-        border-radius: 14px;
-        padding: 18px;
-    }
-
-    .roles {
-        grid-template-columns: 1fr 1fr;
-    }
 }
 
 /* SCHEDULE PAGE */
@@ -562,35 +443,49 @@ main {
     border-left: 4px solid #c58b27;
 }
 
+.schedule-card {
+    overflow: hidden;
+}
+
 .schedule-header {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     gap: 20px;
-    align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
 }
 
 .schedule-key {
     display: flex;
     gap: 14px;
+    flex-wrap: wrap;
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 800;
 }
 
-.key-covered {
-    color: var(--green);
+.key-home {
+    color: #173f2c;
+}
+
+.key-away {
+    color: #6a716c;
 }
 
 .key-open {
-    color: #a36a08;
+    color: #9a690f;
+}
+
+.game-list {
+    display: flex;
+    flex-direction: column;
 }
 
 .game-card {
     display: grid;
-    grid-template-columns: 110px 1fr 220px;
-    gap: 24px;
+    grid-template-columns: 105px minmax(180px, 1fr) 180px 220px;
+    gap: 20px;
     align-items: center;
-    padding: 24px 0;
+    padding: 22px 0;
     border-bottom: 1px solid var(--border);
 }
 
@@ -598,11 +493,14 @@ main {
     border-bottom: 0;
 }
 
+/* DATE */
+
 .game-date {
     text-align: center;
     border: 1px solid var(--border);
     border-radius: 14px;
     overflow: hidden;
+    background: white;
 }
 
 .game-month {
@@ -610,39 +508,61 @@ main {
     background: var(--green);
     color: white;
     padding: 6px;
+    font-size: 0.7rem;
     font-weight: 900;
-    font-size: 0.72rem;
+    letter-spacing: 0.08em;
 }
 
 .game-day {
     display: block;
+    padding: 8px 6px 10px;
     font-size: 2rem;
     font-weight: 900;
-    padding-top: 8px;
 }
 
-.game-time {
-    display: block;
-    padding: 4px 8px 10px;
-    color: var(--muted);
-    font-size: 0.72rem;
-}
+/* FIELD INFO */
 
-.game-main h3 {
-    margin: 5px 0;
+.game-info h3 {
+    margin: 4px 0;
     font-size: 1.1rem;
 }
 
-.game-type {
-    color: var(--green);
-    font-size: 0.7rem;
+.game-info .field-label {
+    color: var(--muted);
+    font-size: 0.86rem;
+}
+
+/* HOME / AWAY - COLOR IS THE JERSEY COLOR */
+
+.game-status {
+    min-height: 62px;
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.85rem;
     font-weight: 900;
     letter-spacing: 0.1em;
 }
 
+.game-status.home {
+    background: #173f2c;
+    color: white;
+}
+
+.game-status.away {
+    background: white;
+    color: #202722;
+    border: 2px solid #d9dfdb;
+}
+
+/* SNACKS */
+
 .snack-box {
-    padding: 16px;
     border-radius: 14px;
+    padding: 14px 16px;
 }
 
 .snack-box.covered {
@@ -651,12 +571,12 @@ main {
 }
 
 .snack-box.open {
-    background: #fff5df;
-    color: #77520d;
+    background: #fff4dc;
+    color: #75500d;
 }
 
 .snack-label {
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     font-weight: 900;
     letter-spacing: 0.07em;
     margin-bottom: 5px;
@@ -664,16 +584,16 @@ main {
 
 .snack-box strong {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 .snack-box span {
-    font-size: 0.78rem;
+    font-size: 0.76rem;
 }
 
 .signup-button {
     border: 0;
-    background: #9a690f;
+    background: #95620c;
     color: white;
     border-radius: 8px;
     padding: 8px 12px;
@@ -682,7 +602,7 @@ main {
 }
 
 .signup-button:hover {
-    background: #77520d;
+    background: #704906;
 }
 
 /* SIGNUP MODAL */
@@ -691,7 +611,7 @@ main {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(4, 10, 7, 0.7);
+    background: rgba(4, 10, 7, 0.72);
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -757,22 +677,108 @@ main {
     margin-top: 12px;
 }
 
-@media (max-width: 850px) {
+/* MOBILE */
 
+@media (max-width: 950px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+        min-height: auto;
+    }
+
+    .tagline {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+
+    .nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    .hero {
+        min-height: 220px;
+        padding: 28px;
+    }
+
+    .card-half,
+    .card-wide,
+    .card-small {
+        grid-column: 1 / -1;
+    }
+
+    .roles {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 850px) {
     .schedule-summary {
         grid-template-columns: 1fr;
+    }
+
+    .schedule-header {
+        align-items: flex-start;
+        flex-direction: column;
     }
 
     .game-card {
         grid-template-columns: 85px 1fr;
     }
 
+    .game-status,
     .snack-box {
-        grid-column: 1 / -1;
+        grid-column: 2;
+    }
+}
+
+@media (max-width: 560px) {
+    .sidebar {
+        padding: 22px 16px;
     }
 
-    .schedule-header {
-        align-items: flex-start;
-        flex-direction: column;
+    .nav a {
+        font-size: 0.82rem;
+        padding: 9px 10px;
+    }
+
+    main {
+        padding: 14px;
+    }
+
+    .hero {
+        border-radius: 16px;
+    }
+
+    .card {
+        border-radius: 14px;
+        padding: 18px;
+    }
+
+    .roles {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-card {
+        grid-template-columns: 1fr;
+    }
+
+    .game-date,
+    .game-status,
+    .snack-box {
+        grid-column: 1;
+    }
+
+    .game-date {
+        width: 90px;
     }
 }

@@ -41,31 +41,34 @@
         </div>
 
         <section class="hero schedule-hero">
+
             <div class="hero-content">
                 <small>Game Day Central</small>
                 <h1>Schedule</h1>
+
                 <p>
-                    Games, arrival times, locations, and snack volunteers
-                    all in one place.
+                    Dates, fields, jersey colors, and snack volunteers
+                    for the Pack.
                 </p>
             </div>
+
         </section>
 
         <div class="schedule-summary">
 
             <div class="summary-card">
-                <span class="summary-number">8</span>
-                <span class="summary-label">Games</span>
+                <span class="summary-number">6</span>
+                <span class="summary-label">Games Scheduled</span>
             </div>
 
             <div class="summary-card">
-                <span class="summary-number">3</span>
+                <span class="summary-number">2</span>
                 <span class="summary-label">Snack Days Covered</span>
             </div>
 
             <div class="summary-card alert">
-                <span class="summary-number">5</span>
-                <span class="summary-label">Need Volunteers</span>
+                <span class="summary-number">4</span>
+                <span class="summary-label">Need Snack Volunteers</span>
             </div>
 
         </div>
@@ -73,116 +76,191 @@
         <section class="card card-full schedule-card">
 
             <div class="schedule-header">
+
                 <div>
-                    <div class="eyebrow">Upcoming</div>
-                    <h2>Game Schedule</h2>
+                    <div class="eyebrow">Season Schedule</div>
+                    <h2>Game Days</h2>
                 </div>
 
                 <div class="schedule-key">
-                    <span class="key-covered">● Covered</span>
-                    <span class="key-open">● Needs Volunteer</span>
+                    <span class="key-home">● HOME = Hunter Green</span>
+                    <span class="key-away">● AWAY = White</span>
+                    <span class="key-open">● Snacks Needed</span>
                 </div>
+
             </div>
 
-            <article class="game-card">
+            <div class="game-list">
 
-                <div class="game-date">
-                    <span class="game-month">SEP</span>
-                    <span class="game-day">12</span>
-                    <span class="game-time">10:00 AM</span>
-                </div>
+                <article class="game-card">
 
-                <div class="game-main">
-                    <div class="game-type">HOME GAME</div>
-                    <h3>FC Wolfpack vs Tigers</h3>
-                    <p class="muted">
-                        Field 3 • Arrive by 9:30 AM
-                    </p>
-                </div>
+                    <div class="game-date">
+                        <span class="game-month">SEP</span>
+                        <span class="game-day">12</span>
+                    </div>
 
-                <div class="snack-box covered">
-                    <div class="snack-label">🍊 SNACK VOLUNTEER</div>
-                    <strong>Johnson Family</strong>
-                    <span>Covered ✓</span>
-                </div>
+                    <div class="game-info">
+                        <h3>Field 3</h3>
+                        <div class="field-label">September 12, 2026</div>
+                    </div>
 
-            </article>
+                    <div class="game-status home">
+                        HOME
+                    </div>
 
-            <article class="game-card">
+                    <div class="snack-box covered">
+                        <div class="snack-label">🍊 SNACK VOLUNTEER</div>
+                        <strong>Johnson Family</strong>
+                        <span>Covered ✓</span>
+                    </div>
 
-                <div class="game-date">
-                    <span class="game-month">SEP</span>
-                    <span class="game-day">19</span>
-                    <span class="game-time">11:30 AM</span>
-                </div>
+                </article>
 
-                <div class="game-main">
-                    <div class="game-type">AWAY GAME</div>
-                    <h3>FC Wolfpack vs Thunder</h3>
-                    <p class="muted">
-                        Field 2 • Arrive by 11:00 AM
-                    </p>
-                </div>
+                <article class="game-card">
 
-                <div class="snack-box open">
-                    <div class="snack-label">🍊 SNACK VOLUNTEER</div>
-                    <strong>Open</strong>
-                    <button class="signup-button" onclick="openSignup('September 19 vs Thunder')">
-                        Sign Up
-                    </button>
-                </div>
+                    <div class="game-date">
+                        <span class="game-month">SEP</span>
+                        <span class="game-day">19</span>
+                    </div>
 
-            </article>
+                    <div class="game-info">
+                        <h3>Field 2</h3>
+                        <div class="field-label">September 19, 2026</div>
+                    </div>
 
-            <article class="game-card">
+                    <div class="game-status away">
+                        AWAY
+                    </div>
 
-                <div class="game-date">
-                    <span class="game-month">SEP</span>
-                    <span class="game-day">26</span>
-                    <span class="game-time">9:00 AM</span>
-                </div>
+                    <div class="snack-box open">
+                        <div class="snack-label">🍊 SNACK VOLUNTEER</div>
+                        <strong>Open</strong>
 
-                <div class="game-main">
-                    <div class="game-type">HOME GAME</div>
-                    <h3>FC Wolfpack vs Rockets</h3>
-                    <p class="muted">
-                        Field 1 • Arrive by 8:30 AM
-                    </p>
-                </div>
+                        <button
+                            class="signup-button"
+                            onclick="openSignup('September 19 - Field 2')"
+                        >
+                            Sign Up
+                        </button>
+                    </div>
 
-                <div class="snack-box open">
-                    <div class="snack-label">🍊 SNACK VOLUNTEER</div>
-                    <strong>Open</strong>
-                    <button class="signup-button" onclick="openSignup('September 26 vs Rockets')">
-                        Sign Up
-                    </button>
-                </div>
+                </article>
 
-            </article>
+                <article class="game-card">
 
-            <article class="game-card">
+                    <div class="game-date">
+                        <span class="game-month">SEP</span>
+                        <span class="game-day">26</span>
+                    </div>
 
-                <div class="game-date">
-                    <span class="game-month">OCT</span>
-                    <span class="game-day">03</span>
-                    <span class="game-time">10:30 AM</span>
-                </div>
+                    <div class="game-info">
+                        <h3>Field 1</h3>
+                        <div class="field-label">September 26, 2026</div>
+                    </div>
 
-                <div class="game-main">
-                    <div class="game-type">AWAY GAME</div>
-                    <h3>FC Wolfpack vs Falcons</h3>
-                    <p class="muted">
-                        Field 4 • Arrive by 10:00 AM
-                    </p>
-                </div>
+                    <div class="game-status home">
+                        HOME
+                    </div>
 
-                <div class="snack-box covered">
-                    <div class="snack-label">🍊 SNACK VOLUNTEER</div>
-                    <strong>Smith Family</strong>
-                    <span>Covered ✓</span>
-                </div>
+                    <div class="snack-box open">
+                        <div class="snack-label">🍊 SNACK VOLUNTEER</div>
+                        <strong>Open</strong>
 
-            </article>
+                        <button
+                            class="signup-button"
+                            onclick="openSignup('September 26 - Field 1')"
+                        >
+                            Sign Up
+                        </button>
+                    </div>
+
+                </article>
+
+                <article class="game-card">
+
+                    <div class="game-date">
+                        <span class="game-month">OCT</span>
+                        <span class="game-day">03</span>
+                    </div>
+
+                    <div class="game-info">
+                        <h3>Field 4</h3>
+                        <div class="field-label">October 3, 2026</div>
+                    </div>
+
+                    <div class="game-status away">
+                        AWAY
+                    </div>
+
+                    <div class="snack-box covered">
+                        <div class="snack-label">🍊 SNACK VOLUNTEER</div>
+                        <strong>Smith Family</strong>
+                        <span>Covered ✓</span>
+                    </div>
+
+                </article>
+
+                <article class="game-card">
+
+                    <div class="game-date">
+                        <span class="game-month">OCT</span>
+                        <span class="game-day">10</span>
+                    </div>
+
+                    <div class="game-info">
+                        <h3>Field 2</h3>
+                        <div class="field-label">October 10, 2026</div>
+                    </div>
+
+                    <div class="game-status home">
+                        HOME
+                    </div>
+
+                    <div class="snack-box open">
+                        <div class="snack-label">🍊 SNACK VOLUNTEER</div>
+                        <strong>Open</strong>
+
+                        <button
+                            class="signup-button"
+                            onclick="openSignup('October 10 - Field 2')"
+                        >
+                            Sign Up
+                        </button>
+                    </div>
+
+                </article>
+
+                <article class="game-card">
+
+                    <div class="game-date">
+                        <span class="game-month">OCT</span>
+                        <span class="game-day">17</span>
+                    </div>
+
+                    <div class="game-info">
+                        <h3>Field 5</h3>
+                        <div class="field-label">October 17, 2026</div>
+                    </div>
+
+                    <div class="game-status away">
+                        AWAY
+                    </div>
+
+                    <div class="snack-box open">
+                        <div class="snack-label">🍊 SNACK VOLUNTEER</div>
+                        <strong>Open</strong>
+
+                        <button
+                            class="signup-button"
+                            onclick="openSignup('October 17 - Field 5')"
+                        >
+                            Sign Up
+                        </button>
+                    </div>
+
+                </article>
+
+            </div>
 
         </section>
 
@@ -194,33 +272,50 @@
 
     <div class="modal-content">
 
-        <button class="modal-close" onclick="closeSignup()">×</button>
+        <button
+            class="modal-close"
+            onclick="closeSignup()"
+        >
+            ×
+        </button>
 
-        <div class="eyebrow">Snack Signup</div>
+        <div class="eyebrow">
+            Snack Signup
+        </div>
+
         <h2>Help Feed the Pack</h2>
 
         <p id="signupGame" class="muted"></p>
 
-        <label for="familyName">Family Name</label>
+        <label for="familyName">
+            Family Name
+        </label>
+
         <input
             id="familyName"
             type="text"
             placeholder="Example: Lyttles Family"
         >
 
-        <label for="parentEmail">Email</label>
+        <label for="parentEmail">
+            Email
+        </label>
+
         <input
             id="parentEmail"
             type="email"
             placeholder="parent@example.com"
         >
 
-        <button class="button signup-submit" onclick="submitSignup()">
+        <button
+            class="button signup-submit"
+            onclick="submitSignup()"
+        >
             Claim This Snack Day
         </button>
 
         <p class="form-note">
-            This is a demo right now. We'll connect it to real storage next.
+            Demo only for now. Real signups will be saved soon.
         </p>
 
     </div>
@@ -234,17 +329,29 @@ let selectedGame = "";
 function openSignup(game) {
     selectedGame = game;
 
-    document.getElementById("signupGame").textContent = game;
-    document.getElementById("signupModal").classList.add("show");
+    document
+        .getElementById("signupGame")
+        .textContent = game;
+
+    document
+        .getElementById("signupModal")
+        .classList
+        .add("show");
 }
 
 function closeSignup() {
-    document.getElementById("signupModal").classList.remove("show");
+    document
+        .getElementById("signupModal")
+        .classList
+        .remove("show");
 }
 
 function submitSignup() {
-
-    const family = document.getElementById("familyName").value.trim();
+    const family =
+        document
+            .getElementById("familyName")
+            .value
+            .trim();
 
     if (!family) {
         alert("Please enter your family name.");
@@ -255,20 +362,19 @@ function submitSignup() {
         family +
         " signed up for snacks for " +
         selectedGame +
-        ".\n\nThis is only a demo for now."
+        ".\n\nThis is still demo data."
     );
 
     closeSignup();
 }
 
 window.onclick = function(event) {
-
-    const modal = document.getElementById("signupModal");
+    const modal =
+        document.getElementById("signupModal");
 
     if (event.target === modal) {
         closeSignup();
     }
-
 };
 
 </script>
