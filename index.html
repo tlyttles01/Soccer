@@ -4,300 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FC Wolfpack | Pack HQ</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f6f4;
-            color: #17201a;
-        }
-
-        .layout {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 240px 1fr;
-        }
-
-        .sidebar {
-            background: #101814;
-            color: white;
-            padding: 28px 22px;
-        }
-
-        .brand {
-            font-size: 1.4rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .tagline {
-            color: #9db1a4;
-            font-size: 0.85rem;
-            margin-bottom: 40px;
-        }
-
-        .nav a {
-            display: block;
-            color: #d8e2db;
-            text-decoration: none;
-            padding: 12px 14px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-        }
-
-        .nav a:hover,
-        .nav a.active {
-            background: #1f6f46;
-            color: white;
-        }
-
-        main {
-            padding: 32px;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #173f2c, #08130e);
-            color: white;
-            padding: 42px;
-            border-radius: 18px;
-            margin-bottom: 24px;
-        }
-
-        .hero small {
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #a7c9b2;
-        }
-
-        .hero h1 {
-            margin: 10px 0 8px;
-            font-size: 2.6rem;
-        }
-
-        .hero p {
-            margin: 0;
-            color: #d9e5dd;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 22px;
-            box-shadow: 0 4px 18px rgba(0,0,0,0.06);
-        }
-
-        .card h2 {
-            margin-top: 0;
-            font-size: 1.1rem;
-        }
-
-        .eyebrow {
-            color: #1f6f46;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-
-        .big {
-            font-size: 1.5rem;
-            font-weight: 800;
-        }
-
-        .muted {
-            color: #6c776f;
-        }
-
-        .mission {
-            border-left: 5px solid #1f6f46;
-        }
-
-        .roles {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 14px;
-        }
-
-        .role {
-            background: #eef3ef;
-            border-radius: 10px;
-            padding: 12px;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 700;
-        }
-
-        .token-row {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin: 18px 0;
-        }
-
-        .token {
-            width: 28px;
-            height: 28px;
-            border: 6px solid #7b837d;
-            border-radius: 50%;
-            background: transparent;
-        }
-
-        .token.earned {
-            opacity: 0.18;
-        }
-
-        .progress {
-            height: 10px;
-            background: #e2e8e3;
-            border-radius: 999px;
-            overflow: hidden;
-        }
-
-        .progress span {
-            display: block;
-            width: 76%;
-            height: 100%;
-            background: #1f6f46;
-        }
-
-        @media (max-width: 850px) {
-            .layout {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                display: none;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .roles {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            main {
-                padding: 18px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="layout">
+<div class="layout">
 
-        <aside class="sidebar">
-            <div class="brand">🐺 FC WOLFPACK</div>
-            <div class="tagline">Patient. Fast. Fierce. Together.</div>
+    <aside class="sidebar">
+        <div class="brand">🐺 FC WOLFPACK</div>
+        <div class="tagline">Patient. Fast. Fierce. Together.</div>
 
-            <nav class="nav">
-                <a class="active" href="#">Pack HQ</a>
-                <a href="#">Schedule</a>
-                <a href="#">The Pack</a>
-                <a href="#">Playbook</a>
-                <a href="#">Practice</a>
-                <a href="#">Parents</a>
-            </nav>
-        </aside>
+        <nav class="nav">
+            <a class="active" href="index.html">Pack HQ</a>
+            <a href="schedule.html">Schedule</a>
+            <a href="#">The Pack</a>
+            <a href="#">Playbook</a>
+            <a href="#">Practice</a>
+            <a href="parents.html">Parents</a>
+        </nav>
+    </aside>
 
-        <main>
+    <main>
 
-            <section class="hero">
-                <small>Welcome to</small>
-                <h1>Pack HQ</h1>
-                <p>Everything the Pack needs for the week ahead.</p>
+        <section class="hero">
+            <small>Welcome to</small>
+            <h1>Pack HQ</h1>
+            <p>Everything players and parents need for the week ahead.</p>
+        </section>
+
+        <div class="grid">
+
+            <section class="card">
+                <div class="eyebrow">Up Next</div>
+                <h2>Practice</h2>
+                <div class="big">Tuesday • 5:30 PM</div>
+                <p class="muted">Field location coming soon</p>
+                <p>Ball • Water • Shin guards • Pack mentality</p>
             </section>
 
-            <div class="grid">
+            <section class="card mission">
+                <div class="eyebrow">Today's Mission</div>
+                <h2>Protect the Den</h2>
+                <p>
+                    When the Pack loses the ball, get back together quickly
+                    and protect the middle.
+                </p>
+                <strong>Patient • Fast • Fierce • Together</strong>
+            </section>
 
-                <section class="card">
-                    <div class="eyebrow">Up Next</div>
-                    <h2>Practice</h2>
-                    <div class="big">Tuesday • 5:30 PM</div>
-                    <p class="muted">Field location coming soon</p>
-                    <p>Bring your ball, water, shin guards, and your Pack mentality.</p>
-                </section>
+            <section class="card">
+                <div class="eyebrow">Pack Challenge</div>
+                <h2>The Hunt</h2>
+                <div class="big">12 Pack Tokens Remaining</div>
 
-                <section class="card mission">
-                    <div class="eyebrow">Today's Mission</div>
-                    <h2>Protect the Den</h2>
-                    <p>When the Pack loses the ball, get back together quickly and protect the middle.</p>
-                    <strong>Patient • Fast • Fierce • Together</strong>
-                </section>
+                <div class="token-row">
+                    <div class="token"></div>
+                    <div class="token"></div>
+                    <div class="token"></div>
+                    <div class="token"></div>
+                    <div class="token"></div>
+                    <div class="token"></div>
+                    <div class="token"></div>
+                    <div class="token"></div>
+                    <div class="token"></div>
+                    <div class="token"></div>
+                    <div class="token"></div>
+                    <div class="token"></div>
+                </div>
 
-                <section class="card">
-                    <div class="eyebrow">Pack Challenge</div>
-                    <h2>The Hunt</h2>
-                    <div class="big">12 Pack Tokens Remaining</div>
+                <p class="muted">
+                    Empty Coach's bucket and unlock the Pack reward.
+                </p>
 
-                    <div class="token-row">
-                        <div class="token"></div>
-                        <div class="token"></div>
-                        <div class="token"></div>
-                        <div class="token"></div>
-                        <div class="token"></div>
-                        <div class="token"></div>
-                        <div class="token"></div>
-                        <div class="token"></div>
-                        <div class="token"></div>
-                        <div class="token"></div>
-                        <div class="token"></div>
-                        <div class="token"></div>
-                    </div>
+                <strong>🍦 Ice Cream</strong>
+            </section>
 
-                    <p class="muted">Empty Coach's bucket and unlock the Pack reward.</p>
-                    <strong>🍦 Ice Cream</strong>
-                </section>
+            <section class="card">
+                <div class="eyebrow">Announcements</div>
+                <h2>Pack News</h2>
+                <p><strong>Welcome to Pack HQ.</strong></p>
+                <p class="muted">
+                    Schedule changes and team announcements will appear here.
+                </p>
+            </section>
 
-                <section class="card">
-                    <div class="eyebrow">Announcements</div>
-                    <h2>Pack News</h2>
-                    <p><strong>Welcome to Pack HQ.</strong></p>
-                    <p class="muted">
-                        Team announcements, schedule changes, and parent information will appear here.
-                    </p>
-                </section>
+            <section class="card">
+                <div class="eyebrow">The Pack</div>
+                <h2>Our Roles</h2>
 
-                <section class="card">
-                    <div class="eyebrow">The Pack</div>
-                    <h2>Our Roles</h2>
+                <div class="roles">
+                    <div class="role">🐺 Hunter</div>
+                    <div class="role">🔭 Scout</div>
+                    <div class="role">🛡 Guardian</div>
+                    <div class="role">👑 Pack Leader</div>
+                </div>
+            </section>
 
-                    <div class="roles">
-                        <div class="role">🐺 Hunter</div>
-                        <div class="role">🔭 Scout</div>
-                        <div class="role">🛡 Guardian</div>
-                        <div class="role">👑 Pack Leader</div>
-                    </div>
-                </section>
+            <section class="card">
+                <div class="eyebrow">Coming Up</div>
+                <h2>Next Game</h2>
+                <div class="big">Saturday • 10:00 AM</div>
+                <p class="muted">Opponent and field coming soon</p>
+                <p><a href="schedule.html">View full schedule →</a></p>
+            </section>
 
-                <section class="card">
-                    <div class="eyebrow">Season Goal</div>
-                    <h2>Pack Progress</h2>
-                    <div class="big">38 / 50</div>
+        </div>
 
-                    <div class="progress">
-                        <span></span>
-                    </div>
-
-                    <p class="muted">The Pack is 76% of the way to completing the challenge.</p>
-                </section>
-
-            </div>
-
-        </main>
-    </div>
+    </main>
+</div>
 </body>
 </html>
