@@ -533,7 +533,6 @@ function createDrillCard(
             "article"
         );
 
-
     card.className =
         "playbook-card";
 
@@ -585,18 +584,13 @@ function createDrillCard(
 
     card.innerHTML = `
 
-        ${imageHTML}
-
-
-        <div class="playbook-card-body">
-
+        <div class="playbook-card-header">
 
             <div class="playbook-card-top">
 
                 <div class="playbook-number">
                     ${String(number).padStart(2, "0")}
                 </div>
-
 
                 ${
                     drill.focus
@@ -615,7 +609,7 @@ function createDrillCard(
             </div>
 
 
-            <h2>
+            <h2 class="playbook-drill-title">
                 ${
                     escapeHTML(
                         drill.title ||
@@ -624,23 +618,29 @@ function createDrillCard(
                 }
             </h2>
 
+        </div>
+
+
+        ${imageHTML}
+
+
+        <div class="playbook-card-body">
 
             ${
                 drill.description
-                ? `
+                    ? `
 
-                    <p class="muted">
-                        ${
-                            escapeHTML(
-                                drill.description
-                            )
-                        }
-                    </p>
+                        <p class="muted">
+                            ${
+                                escapeHTML(
+                                    drill.description
+                                )
+                            }
+                        </p>
 
-                `
-                : ""
+                    `
+                    : ""
             }
-
 
         </div>
 
@@ -650,7 +650,6 @@ function createDrillCard(
     return card;
 
 }
-
 
 /* =========================================================
    IMAGE FALLBACK

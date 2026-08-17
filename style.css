@@ -2171,3 +2171,47 @@ main {
     }
 
 }
+
+/* =========================================================
+   PLAYBOOK DRILL HEADERS
+========================================================= */
+
+.playbook-card-header {
+    padding:
+        22px 22px 16px;
+}
+
+
+.playbook-card-header .playbook-card-top {
+    margin-bottom: 12px;
+}
+
+
+.playbook-drill-title {
+    margin: 0;
+
+    font-size:
+        clamp(
+            1.65rem,
+            3vw,
+            2.2rem
+        );
+
+    line-height: 1.05;
+
+    font-weight: 900;
+
+    letter-spacing:
+        -0.03em;
+
+    color:
+        var(--text);
+}
+
+
+/* Description now lives below the diagram */
+
+.playbook-card-body {
+    padding:
+        18px 22px 22px;
+}
