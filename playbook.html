@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,33 +10,45 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>FC Wolfpack | Playbook</title>
+    <title>
+        FC Wolfpack | Playbook
+    </title>
 
     <link
         rel="stylesheet"
         href="style.css"
     >
+
 </head>
+
 
 <body>
 
+
 <div class="layout">
 
-    <!-- SIDEBAR -->
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
 
     <aside class="sidebar">
 
         <div class="brand">
+
             <div class="brand-mark">
                 🐺
             </div>
 
             FC WOLFPACK
+
         </div>
+
 
         <div class="tagline">
             Patient. Fast. Fierce. Together.
         </div>
+
 
         <nav class="nav">
 
@@ -75,14 +88,17 @@
     </aside>
 
 
-    <!-- MAIN -->
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
     <main>
+
 
         <div class="topbar">
 
             <div class="page-label">
-                Pack Tactics
+                Weekly Training
             </div>
 
             <div class="topbar-note">
@@ -92,24 +108,24 @@
         </div>
 
 
-        <!-- HERO -->
+        <!-- =================================================
+             HERO
+        ================================================== -->
 
         <section class="hero playbook-hero">
 
             <div class="hero-content">
 
                 <small>
-                    Learn The Hunt
+                    This Week's Work
                 </small>
 
                 <h1>
                     Playbook
                 </h1>
 
-                <p>
-                    Simple ideas that help every wolf know
-                    where to go, what to look for, and how
-                    to move together.
+                <p id="playbookWeekRange">
+                    Loading this week's drills...
                 </p>
 
             </div>
@@ -117,117 +133,617 @@
         </section>
 
 
-        <!-- COMING SOON -->
+        <!-- =================================================
+             INTRO
+        ================================================== -->
 
-        <section class="card card-full">
+        <section class="card card-full playbook-intro">
 
-            <div class="playbook-placeholder">
-
-                <div class="playbook-placeholder-icon">
-                    📖
-                </div>
+            <div>
 
                 <div class="eyebrow">
-                    Pack Tactics
+                    Pack Training
                 </div>
 
                 <h2>
-                    The Playbook Is Being Built
+                    What We're Working On
                 </h2>
 
                 <p class="muted">
-                    Soon the Pack will be able to see our
-                    game ideas drawn directly on the field.
+                    These are the drills and concepts the Pack
+                    is working on this week.
                 </p>
-
-
-                <!-- UPCOMING PLAYS -->
-
-                <div class="playbook-preview-grid">
-
-
-                    <div class="playbook-preview-card">
-
-                        <div class="playbook-preview-symbol">
-                            🐺
-                        </div>
-
-                        <strong>
-                            Start the Hunt
-                        </strong>
-
-                        <span>
-                            Kickoff
-                        </span>
-
-                    </div>
-
-
-                    <div class="playbook-preview-card">
-
-                        <div class="playbook-preview-symbol">
-                            🏠
-                        </div>
-
-                        <strong>
-                            Leave the Den
-                        </strong>
-
-                        <span>
-                            Goal Kick
-                        </span>
-
-                    </div>
-
-
-                    <div class="playbook-preview-card">
-
-                        <div class="playbook-preview-symbol">
-                            🛡️
-                        </div>
-
-                        <strong>
-                            Protect the Den
-                        </strong>
-
-                        <span>
-                            Defending
-                        </span>
-
-                    </div>
-
-
-                    <div class="playbook-preview-card">
-
-                        <div class="playbook-preview-symbol">
-                            ⚡
-                        </div>
-
-                        <strong>
-                            Join the Hunt
-                        </strong>
-
-                        <span>
-                            Win the Ball
-                        </span>
-
-                    </div>
-
-
-                </div>
-
-
-                <div class="playbook-coming-soon">
-                    🐺 Visual plays coming soon
-                </div>
 
             </div>
 
         </section>
 
+
+        <!-- LOADING -->
+
+        <div
+            id="playbookLoading"
+            class="card card-full muted"
+        >
+            Loading the Playbook...
+        </div>
+
+
+        <!-- ERROR -->
+
+        <div
+            id="playbookError"
+            class="card card-full muted"
+            style="display:none;"
+        >
+            The Playbook could not be loaded.
+        </div>
+
+
+        <!-- =================================================
+             DRILLS
+        ================================================== -->
+
+        <section
+            id="playbookContent"
+            class="playbook-grid"
+            style="display:none;"
+        >
+        </section>
+
+
+        <!-- =================================================
+             EMPTY WEEK
+        ================================================== -->
+
+        <section
+            id="playbookEmpty"
+            class="card card-full playbook-empty"
+            style="display:none;"
+        >
+
+            <div class="playbook-empty-icon">
+                ⚽
+            </div>
+
+            <h2>
+                No drills added this week
+            </h2>
+
+            <p class="muted">
+                Check back once this week's Playbook is ready.
+            </p>
+
+        </section>
+
+
     </main>
 
+
 </div>
+
+
+<script>
+
+
+/* =========================================================
+   API
+========================================================= */
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbx5Fl8Ua7z60fT1d5VsT87W-hCGosv0m5AbIdpRUIsTQjrkjAInCySOYi7WyTxFyz8c/exec";
+
+
+/* =========================================================
+   LOAD PLAYBOOK
+========================================================= */
+
+async function loadPlaybook() {
+
+    const loading =
+        document.getElementById(
+            "playbookLoading"
+        );
+
+    const error =
+        document.getElementById(
+            "playbookError"
+        );
+
+    const content =
+        document.getElementById(
+            "playbookContent"
+        );
+
+    const empty =
+        document.getElementById(
+            "playbookEmpty"
+        );
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                API_URL +
+                "?action=playbook"
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.ok) {
+
+            throw new Error(
+                data.error ||
+                "Unable to load Playbook."
+            );
+
+        }
+
+
+        const playbook =
+            data.playbook || [];
+
+
+        const week =
+            getCurrentWeek();
+
+
+        updateWeekHeader(
+            week.start,
+            week.end
+        );
+
+
+        const thisWeeksDrills =
+            playbook
+                .filter(
+                    drill => {
+
+                        if (!drill.week) {
+                            return false;
+                        }
+
+
+                        const drillDate =
+                            parseDate(
+                                drill.week
+                            );
+
+
+                        return (
+                            drillDate >= week.start &&
+                            drillDate <= week.end
+                        );
+
+                    }
+                );
+
+
+        if (
+            thisWeeksDrills.length === 0
+        ) {
+
+            loading.style.display =
+                "none";
+
+            empty.style.display =
+                "block";
+
+            return;
+
+        }
+
+
+        renderPlaybook(
+            thisWeeksDrills
+        );
+
+
+        loading.style.display =
+            "none";
+
+        content.style.display =
+            "grid";
+
+
+    } catch (err) {
+
+
+        console.error(
+            "PLAYBOOK ERROR:",
+            err
+        );
+
+
+        loading.style.display =
+            "none";
+
+
+        error.style.display =
+            "block";
+
+
+        error.textContent =
+            "The Playbook could not be loaded. Please try again.";
+
+
+    }
+
+}
+
+
+/* =========================================================
+   CURRENT WEEK
+   Sunday through Saturday
+========================================================= */
+
+function getCurrentWeek() {
+
+    const now =
+        new Date();
+
+
+    const sunday =
+        new Date(
+            now
+        );
+
+
+    sunday.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    sunday.setDate(
+        now.getDate() -
+        now.getDay()
+    );
+
+
+    const saturday =
+        new Date(
+            sunday
+        );
+
+
+    saturday.setDate(
+        sunday.getDate() + 6
+    );
+
+
+    saturday.setHours(
+        23,
+        59,
+        59,
+        999
+    );
+
+
+    return {
+
+        start:
+            sunday,
+
+        end:
+            saturday
+
+    };
+
+}
+
+
+/* =========================================================
+   WEEK HEADER
+========================================================= */
+
+function updateWeekHeader(
+    start,
+    end
+) {
+
+    const startText =
+        start.toLocaleDateString(
+            "en-US",
+            {
+                month:
+                    "long",
+
+                day:
+                    "numeric"
+            }
+        );
+
+
+    const endText =
+        end.toLocaleDateString(
+            "en-US",
+            {
+                month:
+                    "long",
+
+                day:
+                    "numeric"
+            }
+        );
+
+
+    document
+        .getElementById(
+            "playbookWeekRange"
+        )
+        .textContent =
+        `${startText} – ${endText}`;
+
+}
+
+
+/* =========================================================
+   RENDER PLAYBOOK
+========================================================= */
+
+function renderPlaybook(
+    drills
+) {
+
+    const container =
+        document.getElementById(
+            "playbookContent"
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    drills.forEach(
+        (drill, index) => {
+
+            container.appendChild(
+                createDrillCard(
+                    drill,
+                    index + 1
+                )
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   DRILL CARD
+========================================================= */
+
+function createDrillCard(
+    drill,
+    number
+) {
+
+    const card =
+        document.createElement(
+            "article"
+        );
+
+
+    card.className =
+        "playbook-card";
+
+
+    const imagePath =
+        drill.asset
+            ? "assets/playbook/" +
+              encodeURIComponent(
+                  drill.asset
+              )
+            : "";
+
+
+    const imageHTML =
+        imagePath
+        ? `
+
+            <div class="playbook-image-wrap">
+
+                <img
+                    class="playbook-image"
+                    src="${imagePath}"
+                    alt="${escapeHTML(
+                        drill.title ||
+                        "Wolfpack drill"
+                    )}"
+                    onerror="handleImageError(this)"
+                >
+
+            </div>
+
+        `
+        : `
+
+            <div class="playbook-image-wrap playbook-image-missing">
+
+                <div>
+                    ⚽
+                </div>
+
+                <span>
+                    Diagram coming soon
+                </span>
+
+            </div>
+
+        `;
+
+
+    card.innerHTML = `
+
+        ${imageHTML}
+
+
+        <div class="playbook-card-body">
+
+
+            <div class="playbook-card-top">
+
+                <div class="playbook-number">
+                    ${String(number).padStart(2, "0")}
+                </div>
+
+
+                ${
+                    drill.focus
+                    ? `
+
+                        <div class="playbook-focus">
+                            ${escapeHTML(
+                                drill.focus
+                            )}
+                        </div>
+
+                    `
+                    : ""
+                }
+
+            </div>
+
+
+            <h2>
+                ${
+                    escapeHTML(
+                        drill.title ||
+                        "Untitled Drill"
+                    )
+                }
+            </h2>
+
+
+            ${
+                drill.description
+                ? `
+
+                    <p class="muted">
+                        ${
+                            escapeHTML(
+                                drill.description
+                            )
+                        }
+                    </p>
+
+                `
+                : ""
+            }
+
+
+        </div>
+
+    `;
+
+
+    return card;
+
+}
+
+
+/* =========================================================
+   IMAGE FALLBACK
+========================================================= */
+
+function handleImageError(
+    image
+) {
+
+    const wrapper =
+        image.parentElement;
+
+
+    wrapper.classList.add(
+        "playbook-image-missing"
+    );
+
+
+    wrapper.innerHTML = `
+
+        <div>
+            ⚽
+        </div>
+
+        <span>
+            Diagram not found
+        </span>
+
+    `;
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function parseDate(
+    value
+) {
+
+    return new Date(
+        value +
+        "T12:00:00"
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(
+    value
+) {
+
+    return String(
+        value || ""
+    )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadPlaybook();
+
+
+</script>
+
 
 </body>
 
