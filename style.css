@@ -2058,3 +2058,116 @@ main {
     }
 
 }
+
+/* =========================================================
+   FULL WIDTH PACK CHALLENGE
+========================================================= */
+
+.pack-challenge-card {
+    margin-top: 4px;
+}
+
+
+.pack-challenge-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+
+.pack-challenge-header h2 {
+    margin-bottom: 6px;
+}
+
+
+.pack-challenge-header p {
+    margin-top: 0;
+    max-width: 520px;
+}
+
+
+.pack-challenge-card .challenge-number {
+    min-width: 150px;
+    margin: 0;
+    text-align: right;
+}
+
+
+.pack-challenge-card .challenge-number span {
+    max-width: 150px;
+}
+
+
+/* TOKEN GRID */
+
+.pack-token-grid {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    gap: 12px;
+    margin: 26px 0 22px;
+}
+
+
+.pack-token-grid .token {
+    width: 100%;
+    max-width: 34px;
+    aspect-ratio: 1;
+    height: auto;
+    justify-self: center;
+    border-width: 6px;
+}
+
+
+.pack-challenge-card .challenge-reward {
+    text-align: center;
+    padding: 15px 18px;
+}
+
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+    .pack-token-grid {
+        grid-template-columns:
+            repeat(10, 1fr);
+    }
+
+}
+
+
+/* PHONE */
+
+@media (max-width: 560px) {
+
+    .pack-challenge-header {
+        align-items: flex-start;
+    }
+
+
+    .pack-challenge-card .challenge-number {
+        min-width: 90px;
+    }
+
+
+    .pack-challenge-card .challenge-number span {
+        font-size: 0.72rem;
+    }
+
+
+    .pack-token-grid {
+        grid-template-columns:
+            repeat(6, 1fr);
+
+        gap: 10px;
+    }
+
+
+    .pack-token-grid .token {
+        max-width: 32px;
+
+        border-width: 5px;
+    }
+
+}
