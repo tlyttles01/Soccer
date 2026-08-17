@@ -2116,3 +2116,183 @@ main {
     }
 
 }
+
+/* =========================================================
+   PLAYBOOK MOBILE FIX
+========================================================= */
+
+@media (max-width: 850px) {
+
+    /* Force the grid and cards to actually shrink */
+    .playbook-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+
+        width: 100%;
+        max-width: 100%;
+
+        overflow: hidden;
+    }
+
+
+    .playbook-card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        overflow: hidden;
+    }
+
+
+    /* Header */
+
+    .playbook-card-header {
+        width: 100%;
+
+        padding:
+            20px 18px 16px;
+    }
+
+
+    .playbook-number-text {
+        margin-bottom: 5px;
+
+        color: var(--green);
+
+        font-size: 0.7rem;
+        font-weight: 900;
+
+        letter-spacing: 0.08em;
+    }
+
+
+    .playbook-drill-title {
+        margin: 0;
+
+        font-size: 2rem;
+        line-height: 1.05;
+
+        font-weight: 900;
+
+        letter-spacing: -0.035em;
+    }
+
+
+    /* Focus must remain a label on mobile */
+
+    .playbook-focus-label {
+        display: inline-block;
+
+        width: auto;
+
+        margin-top: 9px;
+
+        padding:
+            6px 10px;
+
+        border-radius: 999px;
+
+        background: var(--green-soft);
+
+        color: var(--green-dark);
+
+        font-size: 0.66rem;
+        font-weight: 900;
+
+        line-height: 1;
+
+        text-transform: uppercase;
+
+        letter-spacing: 0.07em;
+    }
+
+
+    /* =====================================================
+       DIAGRAM
+    ====================================================== */
+
+    .playbook-image-wrap {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        aspect-ratio: auto;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        overflow: hidden;
+
+        background: #ffffff;
+    }
+
+
+    .playbook-image {
+        display: block;
+
+        width: 100%;
+        max-width: 100%;
+
+        height: auto;
+        max-height: none;
+
+        object-fit: contain;
+
+        margin: 0 auto;
+    }
+
+
+    /* Description */
+
+    .playbook-card-body {
+        width: 100%;
+
+        padding:
+            16px 18px 20px;
+    }
+
+
+    .playbook-card-body p {
+        margin: 0;
+
+        font-size: 0.9rem;
+
+        line-height: 1.55;
+
+        overflow-wrap: anywhere;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONE
+========================================================= */
+
+@media (max-width: 560px) {
+
+    .playbook-drill-title {
+        font-size: 1.85rem;
+    }
+
+
+    .playbook-card-header {
+        padding:
+            18px 16px 15px;
+    }
+
+
+    .playbook-card-body {
+        padding:
+            15px 16px 18px;
+    }
+
+
+    .playbook-image {
+        width: 100%;
+        height: auto;
+    }
+
+}
