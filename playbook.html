@@ -150,8 +150,8 @@
                 </h2>
 
                 <p class="muted">
-                    These are the drills and concepts the Pack
-                    is working on this week.
+                    These are the drills and concepts
+                    the Pack is working on this week.
                 </p>
 
             </div>
@@ -533,6 +533,7 @@ function createDrillCard(
             "article"
         );
 
+
     card.className =
         "playbook-card";
 
@@ -586,37 +587,42 @@ function createDrillCard(
 
         <div class="playbook-card-header">
 
-            <div class="playbook-card-top">
 
-                <div class="playbook-number">
-                    ${String(number).padStart(2, "0")}
-                </div>
-
-                ${
-                    drill.focus
-                    ? `
-
-                        <div class="playbook-focus">
-                            ${escapeHTML(
-                                drill.focus
-                            )}
-                        </div>
-
-                    `
-                    : ""
-                }
-
+            <div class="playbook-number-text">
+                ${String(number).padStart(2, "0")}
             </div>
 
 
             <h2 class="playbook-drill-title">
+
                 ${
                     escapeHTML(
                         drill.title ||
                         "Untitled Drill"
                     )
                 }
+
             </h2>
+
+
+            ${
+                drill.focus
+                    ? `
+
+                        <div class="playbook-focus-label">
+
+                            ${
+                                escapeHTML(
+                                    drill.focus
+                                )
+                            }
+
+                        </div>
+
+                    `
+                    : ""
+            }
+
 
         </div>
 
@@ -631,11 +637,13 @@ function createDrillCard(
                     ? `
 
                         <p class="muted">
+
                             ${
                                 escapeHTML(
                                     drill.description
                                 )
                             }
+
                         </p>
 
                     `
@@ -650,6 +658,7 @@ function createDrillCard(
     return card;
 
 }
+
 
 /* =========================================================
    IMAGE FALLBACK

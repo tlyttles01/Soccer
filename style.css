@@ -1887,7 +1887,7 @@ main {
 }
 
 /* =========================================================
-   PLAYBOOK PLACEHOLDER
+   PLAYBOOK PAGE
 ========================================================= */
 
 .playbook-hero {
@@ -1895,295 +1895,68 @@ main {
 }
 
 
-.playbook-placeholder {
-    max-width: 900px;
-
-    margin: 0 auto;
-
-    padding:
-        50px 20px;
-
-    text-align: center;
+.playbook-intro {
+    margin-bottom: 20px;
 }
 
 
-.playbook-placeholder-icon {
-    width: 76px;
-    height: 76px;
+/* =========================================================
+   PLAYBOOK GRID
+========================================================= */
 
-    margin:
-        0 auto 20px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 22px;
-
-    background:
-        var(--green-soft);
-
-    font-size: 2.3rem;
-}
-
-
-.playbook-placeholder h2 {
-    margin:
-        8px 0 10px;
-
-    font-size:
-        clamp(
-            1.6rem,
-            4vw,
-            2.3rem
-        );
-}
-
-
-.playbook-placeholder > p {
-    max-width: 580px;
-
-    margin:
-        0 auto 32px;
-}
-
-
-/* PLAY PREVIEWS */
-
-.playbook-preview-grid {
+.playbook-grid {
     display: grid;
 
     grid-template-columns:
-        repeat(4, 1fr);
+        repeat(2, minmax(0, 1fr));
 
-    gap: 14px;
-
-    margin:
-        34px 0;
+    gap: 20px;
 }
 
 
-.playbook-preview-card {
-    padding:
-        24px 14px;
+/* =========================================================
+   PLAYBOOK CARD
+========================================================= */
 
-    border-radius: 16px;
-
-    background:
-        #f2f5f3;
+.playbook-card {
+    background: white;
 
     border:
         1px solid
         var(--border);
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 6px 20px
+        rgba(20, 35, 25, 0.05);
 }
 
-
-.playbook-preview-symbol {
-    width: 52px;
-    height: 52px;
-
-    margin:
-        0 auto 12px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 50%;
-
-    background: white;
-
-    font-size: 1.6rem;
-}
-
-
-.playbook-preview-card strong {
-    display: block;
-
-    color:
-        var(--green-dark);
-
-    font-size: 0.9rem;
-}
-
-
-.playbook-preview-card span {
-    display: block;
-
-    margin-top: 5px;
-
-    color:
-        var(--muted);
-
-    font-size: 0.75rem;
-}
-
-
-.playbook-coming-soon {
-    display: inline-block;
-
-    padding:
-        12px 18px;
-
-    border-radius: 999px;
-
-    background:
-        var(--hunter-green);
-
-    color: white;
-
-    font-size: 0.8rem;
-
-    font-weight: 900;
-}
-
-
-/* RESPONSIVE */
-
-@media (max-width: 850px) {
-
-    .playbook-preview-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-}
-
-
-@media (max-width: 500px) {
-
-    .playbook-preview-grid {
-        grid-template-columns:
-            1fr;
-    }
-
-}
 
 /* =========================================================
-   FULL WIDTH PACK CHALLENGE
-========================================================= */
-
-.pack-challenge-card {
-    margin-top: 4px;
-}
-
-
-.pack-challenge-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 30px;
-}
-
-
-.pack-challenge-header h2 {
-    margin-bottom: 6px;
-}
-
-
-.pack-challenge-header p {
-    margin-top: 0;
-    max-width: 520px;
-}
-
-
-.pack-challenge-card .challenge-number {
-    min-width: 150px;
-    margin: 0;
-    text-align: right;
-}
-
-
-.pack-challenge-card .challenge-number span {
-    max-width: 150px;
-}
-
-
-/* TOKEN GRID */
-
-.pack-token-grid {
-    display: grid;
-    grid-template-columns: repeat(15, 1fr);
-    gap: 12px;
-    margin: 26px 0 22px;
-}
-
-
-.pack-token-grid .token {
-    width: 100%;
-    max-width: 34px;
-    aspect-ratio: 1;
-    height: auto;
-    justify-self: center;
-    border-width: 6px;
-}
-
-
-.pack-challenge-card .challenge-reward {
-    text-align: center;
-    padding: 15px 18px;
-}
-
-
-/* TABLET */
-
-@media (max-width: 900px) {
-
-    .pack-token-grid {
-        grid-template-columns:
-            repeat(10, 1fr);
-    }
-
-}
-
-
-/* PHONE */
-
-@media (max-width: 560px) {
-
-    .pack-challenge-header {
-        align-items: flex-start;
-    }
-
-
-    .pack-challenge-card .challenge-number {
-        min-width: 90px;
-    }
-
-
-    .pack-challenge-card .challenge-number span {
-        font-size: 0.72rem;
-    }
-
-
-    .pack-token-grid {
-        grid-template-columns:
-            repeat(6, 1fr);
-
-        gap: 10px;
-    }
-
-
-    .pack-token-grid .token {
-        max-width: 32px;
-
-        border-width: 5px;
-    }
-
-}
-
-/* =========================================================
-   PLAYBOOK DRILL HEADERS
+   PLAYBOOK HEADER
 ========================================================= */
 
 .playbook-card-header {
     padding:
-        22px 22px 16px;
+        22px 24px 20px;
 }
 
 
-.playbook-card-header .playbook-card-top {
-    margin-bottom: 12px;
+.playbook-number-text {
+    margin-bottom: 5px;
+
+    color:
+        var(--green);
+
+    font-size: 0.72rem;
+
+    font-weight: 900;
+
+    letter-spacing:
+        0.08em;
 }
 
 
@@ -2192,26 +1965,154 @@ main {
 
     font-size:
         clamp(
-            1.65rem,
+            1.9rem,
             3vw,
-            2.2rem
+            2.5rem
         );
 
-    line-height: 1.05;
+    line-height: 1;
 
     font-weight: 900;
 
     letter-spacing:
-        -0.03em;
+        -0.035em;
 
     color:
         var(--text);
 }
 
 
-/* Description now lives below the diagram */
+/* =========================================================
+   FOCUS LABEL
+========================================================= */
+
+.playbook-focus-label {
+    display: inline-block;
+
+    margin-top: 10px;
+
+    padding:
+        6px 10px;
+
+    border-radius: 999px;
+
+    background:
+        var(--green-soft);
+
+    color:
+        var(--green-dark);
+
+    font-size: 0.68rem;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    letter-spacing:
+        0.08em;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.playbook-image-wrap {
+    width: 100%;
+
+    aspect-ratio:
+        16 / 10;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        #e8eee9;
+
+    overflow: hidden;
+}
+
+
+.playbook-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+.playbook-image-missing {
+    flex-direction: column;
+
+    gap: 8px;
+
+    color:
+        var(--muted);
+
+    font-weight: 800;
+}
+
+
+.playbook-image-missing div {
+    font-size: 2rem;
+}
+
+
+.playbook-image-missing span {
+    font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
 
 .playbook-card-body {
     padding:
-        18px 22px 22px;
+        18px 24px 24px;
+}
+
+
+.playbook-card-body p {
+    margin: 0;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.playbook-empty {
+    text-align: center;
+
+    padding:
+        50px 20px;
+}
+
+
+.playbook-empty-icon {
+    font-size: 2.5rem;
+
+    margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .playbook-grid {
+        grid-template-columns:
+            1fr;
+    }
+
 }
