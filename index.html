@@ -64,9 +64,9 @@
                 The Pack
             </a>
 
-<a href="playbook.html">
-    Playbook
-</a>
+            <a href="#">
+                Playbook
+            </a>
 
             <a href="practice.html">
                 Practice
@@ -83,7 +83,6 @@
         </nav>
 
     </aside>
-
 
 
     <!-- =====================================================
@@ -106,7 +105,6 @@
             </div>
 
         </div>
-
 
 
         <!-- =================================================
@@ -136,7 +134,6 @@
         </section>
 
 
-
         <!-- LOADING -->
 
         <div
@@ -154,7 +151,6 @@
         >
             Pack HQ data could not be loaded.
         </div>
-
 
 
         <!-- =================================================
@@ -199,7 +195,6 @@
             </section>
 
 
-
             <!-- =============================================
                  CURRENT MISSION
             ============================================== -->
@@ -229,7 +224,6 @@
                 </div>
 
             </section>
-
 
 
             <!-- =============================================
@@ -323,58 +317,11 @@
             </section>
 
 
-
-            <!-- =============================================
-                 PACK CHALLENGE
-            ============================================== -->
-
-            <section class="card card-small">
-
-                <div class="eyebrow">
-                    Pack Challenge
-                </div>
-
-                <h2>
-                    The Hunt
-                </h2>
-
-
-                <div
-                    id="challengeNumber"
-                    class="challenge-number"
-                >
-                    —
-
-                    <span>
-                        Tokens Earned
-                    </span>
-
-                </div>
-
-
-                <div
-                    id="challengeTokens"
-                    class="token-row"
-                >
-                </div>
-
-
-                <div
-                    id="challengeMessage"
-                    class="challenge-reward"
-                >
-                    The reward remains a mystery...
-                </div>
-
-            </section>
-
-
-
             <!-- =============================================
                  THIS WEEK
             ============================================== -->
 
-            <section class="card card-half">
+            <section class="card card-small">
 
                 <div class="eyebrow">
                     This Week
@@ -391,7 +338,6 @@
                 </div>
 
             </section>
-
 
 
             <!-- =============================================
@@ -425,7 +371,6 @@
             </section>
 
 
-
             <!-- =============================================
                  GAME PLAN
             ============================================== -->
@@ -455,12 +400,11 @@
             </section>
 
 
-
             <!-- =============================================
                  PACK STATUS
             ============================================== -->
 
-            <section class="card card-half">
+            <section class="card card-full">
 
                 <div class="eyebrow">
                     Pack Status
@@ -479,12 +423,68 @@
             </section>
 
 
+            <!-- =============================================
+                 PACK CHALLENGE - FULL WIDTH
+            ============================================== -->
+
+            <section class="card card-full pack-challenge-card">
+
+                <div class="pack-challenge-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            Pack Challenge
+                        </div>
+
+                        <h2>
+                            The Hunt
+                        </h2>
+
+                        <p class="muted">
+                            Every act of teamwork moves the Pack
+                            closer to the mystery reward.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        id="challengeNumber"
+                        class="challenge-number"
+                    >
+                        —
+
+                        <span>
+                            Tokens Earned
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="challengeTokens"
+                    class="token-row pack-token-grid"
+                >
+                </div>
+
+
+                <div
+                    id="challengeMessage"
+                    class="challenge-reward"
+                >
+                    The reward remains a mystery...
+                </div>
+
+            </section>
+
+
         </div>
 
     </main>
 
 </div>
-
 
 
 <script>
@@ -501,7 +501,6 @@ const API_URL =
 let games = [];
 let practices = [];
 let challenge = null;
-
 
 
 /* =========================================================
@@ -529,11 +528,6 @@ async function loadPackHQ() {
     try {
 
 
-        /*
-         * Load schedule and Pack Challenge
-         * at the same time.
-         */
-
         const [
             scheduleResponse,
             challengeResponse
@@ -559,7 +553,6 @@ async function loadPackHQ() {
 
         const challengeData =
             await challengeResponse.json();
-
 
 
         if (!scheduleData.ok) {
@@ -624,7 +617,6 @@ async function loadPackHQ() {
 }
 
 
-
 /* =========================================================
    RENDER HOMEPAGE
 ========================================================= */
@@ -644,7 +636,6 @@ function renderHomepage() {
     renderPackStatus();
 
 }
-
 
 
 /* =========================================================
@@ -790,7 +781,6 @@ function renderNextPractice() {
 }
 
 
-
 /* =========================================================
    PACK MISSION
 ========================================================= */
@@ -808,11 +798,6 @@ function renderMission() {
             "missionDescription"
         );
 
-
-    /*
-     * Prefer a practice during the current
-     * Sunday-Saturday week.
-     */
 
     const week =
         getCurrentWeek();
@@ -891,7 +876,6 @@ function renderMission() {
     }
 
 }
-
 
 
 /* =========================================================
@@ -977,13 +961,6 @@ function renderChallenge() {
     `;
 
 
-    /*
-     * Draw one ring for every token.
-     *
-     * Earned tokens become darker/fuller.
-     * Remaining tokens stay gray.
-     */
-
     for (
         let i = 1;
         i <= total;
@@ -1039,7 +1016,6 @@ function renderChallenge() {
     }
 
 }
-
 
 
 /* =========================================================
@@ -1209,7 +1185,6 @@ function renderNextGame() {
 }
 
 
-
 /* =========================================================
    THIS WEEK SUMMARY
 ========================================================= */
@@ -1319,7 +1294,6 @@ function renderWeekSummary() {
     `;
 
 }
-
 
 
 /* =========================================================
@@ -1457,7 +1431,6 @@ function renderPackStatus() {
 }
 
 
-
 /* =========================================================
    NEXT EVENT HELPER
 ========================================================= */
@@ -1506,7 +1479,6 @@ function getNextEvent(
     return upcoming[0] || null;
 
 }
-
 
 
 /* =========================================================
@@ -1572,7 +1544,6 @@ function getCurrentWeek() {
 }
 
 
-
 /* =========================================================
    DATE HELPER
 ========================================================= */
@@ -1596,7 +1567,6 @@ function parseDate(
     );
 
 }
-
 
 
 /* =========================================================
@@ -1634,9 +1604,8 @@ function escapeHTML(
 }
 
 
-
 /* =========================================================
-   START PACK HQ
+   START
 ========================================================= */
 
 loadPackHQ();
