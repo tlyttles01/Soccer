@@ -9,9 +9,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        FC Wolfpack | Schedule
-    </title>
+    <title>FC Wolfpack | Schedule</title>
 
     <link
         rel="stylesheet"
@@ -26,10 +24,7 @@
     <aside class="sidebar">
 
         <div class="brand">
-            <div class="brand-mark">
-                🐺
-            </div>
-
+            <div class="brand-mark">🐺</div>
             FC WOLFPACK
         </div>
 
@@ -54,9 +49,9 @@
                 The Pack
             </a>
 
-<a href="playbook.html">
-    Playbook
-</a>
+            <a href="playbook.html">
+                Playbook
+            </a>
 
             <a href="practice.html">
                 Practice
@@ -65,7 +60,7 @@
             <a href="lineup.html">
                 Weekly Lineup
             </a>
-            
+
             <a href="parents.html">
                 Parents
             </a>
@@ -111,8 +106,6 @@
 
         </section>
 
-
-        <!-- SUMMARY -->
 
         <div class="schedule-summary">
 
@@ -166,8 +159,6 @@
         </div>
 
 
-        <!-- SCHEDULE -->
-
         <section class="card card-full schedule-card">
 
             <div class="schedule-header">
@@ -188,11 +179,11 @@
                 <div class="schedule-key">
 
                     <span class="key-home">
-                        ● HOME = Green
+                        ● HOME = White
                     </span>
 
                     <span class="key-away">
-                        ● AWAY = White
+                        ● AWAY = Green
                     </span>
 
                     <span class="key-open">
@@ -234,8 +225,6 @@
 </div>
 
 
-<!-- SNACK SIGNUP MODAL -->
-
 <div
     id="signupModal"
     class="modal"
@@ -250,16 +239,13 @@
             ×
         </button>
 
-
         <div class="eyebrow">
             Snack Signup
         </div>
 
-
         <h2>
             Help Feed the Pack
         </h2>
-
 
         <p
             id="signupGame"
@@ -267,18 +253,15 @@
         >
         </p>
 
-
         <label for="familyName">
             Family Name
         </label>
 
-
         <input
             id="familyName"
             type="text"
-            placeholder="Example: Lyttles Family"
+            placeholder="Example: Smith Family"
         >
-
 
         <button
             id="signupSubmit"
@@ -287,7 +270,6 @@
         >
             Claim This Snack Day
         </button>
-
 
         <p
             id="signupMessage"
@@ -308,37 +290,20 @@ const API_URL =
 let selectedGameId = "";
 
 
-/* ======================================================
-   LOAD SCHEDULE
-====================================================== */
-
 async function loadSchedule() {
 
     const loading =
-        document.getElementById(
-            "loadingMessage"
-        );
+        document.getElementById("loadingMessage");
 
     const error =
-        document.getElementById(
-            "errorMessage"
-        );
+        document.getElementById("errorMessage");
 
     const list =
-        document.getElementById(
-            "scheduleList"
-        );
+        document.getElementById("scheduleList");
 
-
-    loading.style.display =
-        "block";
-
-    error.style.display =
-        "none";
-
-    list.innerHTML =
-        "";
-
+    loading.style.display = "block";
+    error.style.display = "none";
+    list.innerHTML = "";
 
     try {
 
@@ -351,23 +316,6 @@ async function loadSchedule() {
         const data =
             await response.json();
 
-
-        console.log(
-            "FULL API RESPONSE:",
-            data
-        );
-
-        console.log(
-            "GAMES:",
-            data.games
-        );
-
-        console.log(
-            "PRACTICES:",
-            data.practices
-        );
-
-
         if (!data.ok) {
 
             throw new Error(
@@ -377,26 +325,19 @@ async function loadSchedule() {
 
         }
 
-
         renderSchedule(
             data.games || [],
             data.practices || []
         );
 
-
-        loading.style.display =
-            "none";
-
+        loading.style.display = "none";
 
     } catch (err) {
 
         console.error(err);
 
-        loading.style.display =
-            "none";
-
-        error.style.display =
-            "block";
+        loading.style.display = "none";
+        error.style.display = "block";
 
         error.textContent =
             "The Pack schedule could not be loaded. Please try again.";
@@ -405,10 +346,6 @@ async function loadSchedule() {
 
 }
 
-
-/* ======================================================
-   RENDER SCHEDULE
-====================================================== */
 
 function renderSchedule(
     games,
@@ -420,13 +357,9 @@ function renderSchedule(
             "scheduleList"
         );
 
-    list.innerHTML =
-        "";
+    list.innerHTML = "";
 
-
-    let covered =
-        0;
-
+    let covered = 0;
 
     games.forEach(game => {
 
@@ -434,96 +367,60 @@ function renderSchedule(
             game.snack &&
             game.snack.familyName
         ) {
-
             covered++;
-
         }
 
     });
 
-
     document
-        .getElementById(
-            "practiceCount"
-        )
+        .getElementById("practiceCount")
         .textContent =
         practices.length;
 
-
     document
-        .getElementById(
-            "gameCount"
-        )
+        .getElementById("gameCount")
         .textContent =
         games.length;
 
-
     document
-        .getElementById(
-            "openCount"
-        )
+        .getElementById("openCount")
         .textContent =
         games.length - covered;
 
 
-    const items =
-        [];
+    const items = [];
 
 
     games.forEach(game => {
 
         items.push({
-
-            type:
-                "game",
-
-            date:
-                game.date,
-
-            data:
-                game
-
+            type: "game",
+            date: game.date,
+            data: game
         });
 
     });
 
 
-    practices.forEach(
-        practice => {
+    practices.forEach(practice => {
 
-            items.push({
+        items.push({
+            type: "practice",
+            date: practice.date,
+            data: practice
+        });
 
-                type:
-                    "practice",
-
-                date:
-                    practice.date,
-
-                data:
-                    practice
-
-            });
-
-        }
-    );
+    });
 
 
     items.sort(
         (a, b) =>
-            new Date(a.date) -
-            new Date(b.date)
+            parseDate(a.date) -
+            parseDate(b.date)
     );
 
 
-    console.log(
-        "MERGED ITEMS:",
-        items
-    );
-
-
-    if (
-        items.length === 0
-    ) {
+    if (items.length === 0) {
 
         list.innerHTML = `
 
@@ -538,43 +435,32 @@ function renderSchedule(
     }
 
 
-    items.forEach(
-        item => {
+    items.forEach(item => {
 
-            if (
-                item.type ===
-                "practice"
-            ) {
+        if (item.type === "practice") {
 
-                list.appendChild(
-                    createPracticeRow(
-                        item.data
-                    )
-                );
+            list.appendChild(
+                createPracticeRow(
+                    item.data
+                )
+            );
 
-            } else {
+        } else {
 
-                list.appendChild(
-                    createGameRow(
-                        item.data
-                    )
-                );
-
-            }
+            list.appendChild(
+                createGameRow(
+                    item.data
+                )
+            );
 
         }
-    );
+
+    });
 
 }
 
 
-/* ======================================================
-   GAME ROW
-====================================================== */
-
-function createGameRow(
-    game
-) {
+function createGameRow(game) {
 
     const date =
         formatDate(
@@ -600,7 +486,6 @@ function createGameRow(
         document.createElement(
             "article"
         );
-
 
     article.className =
         "game-card";
@@ -686,20 +571,30 @@ function createGameRow(
 
 
         <div
-            class="game-status ${
-                isHome
-                ? "home"
-                : "away"
-            }"
-        >
+    class="game-status ${
+        isHome
+        ? "home"
+        : "away"
+    }"
+>
 
-            ${
-                isHome
-                ? "HOME"
-                : "AWAY"
-            }
+    <span class="game-status-main">
+        ${
+            isHome
+            ? "HOME"
+            : "AWAY"
+        }
+    </span>
 
-        </div>
+    <span class="game-status-color">
+        ${
+            isHome
+            ? "White"
+            : "Green"
+        }
+    </span>
+
+</div>
 
 
         ${snackHTML}
@@ -734,10 +629,6 @@ function createGameRow(
 
 }
 
-
-/* ======================================================
-   PRACTICE ROW
-====================================================== */
 
 function createPracticeRow(
     practice
@@ -795,7 +686,7 @@ function createPracticeRow(
                     practice.time
                     ? " • " +
                       escapeHTML(
-                        practice.time
+                          practice.time
                       )
                     : ""
                 }
@@ -833,38 +724,10 @@ function createPracticeRow(
 }
 
 
-/* ======================================================
-   DATE FORMATTER
-====================================================== */
-
-function formatDate(
-    value
-) {
-
-    if (!value) {
-
-        return {
-
-            month:
-                "TBD",
-
-            day:
-                "--",
-
-            fullDate:
-                "Date TBD"
-
-        };
-
-    }
-
+function formatDate(value) {
 
     const date =
-        new Date(
-            value +
-            "T12:00:00"
-        );
-
+        parseDate(value);
 
     if (
         isNaN(
@@ -873,16 +736,9 @@ function formatDate(
     ) {
 
         return {
-
-            month:
-                "",
-
-            day:
-                "",
-
-            fullDate:
-                value
-
+            month: "",
+            day: "",
+            fullDate: value
         };
 
     }
@@ -891,49 +747,33 @@ function formatDate(
     return {
 
         month:
-
             date
                 .toLocaleDateString(
                     "en-US",
                     {
-                        month:
-                            "short"
+                        month: "short"
                     }
                 )
                 .toUpperCase(),
 
-
         day:
-
             date
                 .toLocaleDateString(
                     "en-US",
                     {
-                        day:
-                            "2-digit"
+                        day: "2-digit"
                     }
                 ),
 
-
         fullDate:
-
             date
                 .toLocaleDateString(
                     "en-US",
                     {
-
-                        weekday:
-                            "long",
-
-                        month:
-                            "long",
-
-                        day:
-                            "numeric",
-
-                        year:
-                            "numeric"
-
+                        weekday: "long",
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric"
                     }
                 )
 
@@ -942,93 +782,68 @@ function formatDate(
 }
 
 
-/* ======================================================
-   OPEN SIGNUP MODAL
-====================================================== */
+function parseDate(value) {
+
+    return new Date(
+        value +
+        "T12:00:00"
+    );
+
+}
+
 
 function openSignup(
     gameId,
     label
 ) {
 
-    selectedGameId =
-        gameId;
-
+    selectedGameId = gameId;
 
     document
-        .getElementById(
-            "signupGame"
-        )
+        .getElementById("signupGame")
         .textContent =
         label;
 
-
     document
-        .getElementById(
-            "familyName"
-        )
+        .getElementById("familyName")
         .value =
         "";
 
-
     document
-        .getElementById(
-            "signupMessage"
-        )
+        .getElementById("signupMessage")
         .textContent =
         "";
 
-
     document
-        .getElementById(
-            "signupModal"
-        )
+        .getElementById("signupModal")
         .classList
-        .add(
-            "show"
-        );
+        .add("show");
 
 }
 
-
-/* ======================================================
-   CLOSE SIGNUP
-====================================================== */
 
 function closeSignup() {
 
     document
-        .getElementById(
-            "signupModal"
-        )
+        .getElementById("signupModal")
         .classList
-        .remove(
-            "show"
-        );
+        .remove("show");
 
 }
 
-
-/* ======================================================
-   SUBMIT SNACK SIGNUP
-====================================================== */
 
 async function submitSignup() {
 
     const familyName =
         document
-            .getElementById(
-                "familyName"
-            )
+            .getElementById("familyName")
             .value
             .trim();
-
 
     const button =
         document.getElementById(
             "signupSubmit"
         );
-
 
     const message =
         document.getElementById(
@@ -1046,16 +861,8 @@ async function submitSignup() {
     }
 
 
-    button.disabled =
-        true;
-
-
-    button.textContent =
-        "Claiming...";
-
-
-    message.textContent =
-        "";
+    button.disabled = true;
+    button.textContent = "Claiming...";
 
 
     try {
@@ -1063,18 +870,15 @@ async function submitSignup() {
         const formData =
             new URLSearchParams();
 
-
         formData.append(
             "action",
             "signup"
         );
 
-
         formData.append(
             "gameId",
             selectedGameId
         );
-
 
         formData.append(
             "familyName",
@@ -1086,13 +890,8 @@ async function submitSignup() {
             await fetch(
                 API_URL,
                 {
-
-                    method:
-                        "POST",
-
-                    body:
-                        formData
-
+                    method: "POST",
+                    body: formData
                 }
             );
 
@@ -1103,28 +902,19 @@ async function submitSignup() {
 
         if (!data.ok) {
 
-
             if (
                 data.code ===
                 "already_taken"
             ) {
 
                 message.textContent =
-
-                    data.familyName
-
-                    ? `${data.familyName} already claimed this snack day.`
-
-                    : "That snack day has already been claimed.";
-
+                    `${data.familyName || "Another family"} already claimed this snack day.`;
 
                 await loadSchedule();
-
 
                 return;
 
             }
-
 
             throw new Error(
                 data.error ||
@@ -1151,16 +941,12 @@ async function submitSignup() {
 
         console.error(err);
 
-
         message.textContent =
             "The signup could not be saved. Please try again.";
 
-
     } finally {
 
-        button.disabled =
-            false;
-
+        button.disabled = false;
 
         button.textContent =
             "Claim This Snack Day";
@@ -1170,44 +956,17 @@ async function submitSignup() {
 }
 
 
-/* ======================================================
-   ESCAPE HTML
-====================================================== */
+function escapeHTML(value) {
 
-function escapeHTML(
-    value
-) {
-
-    return String(
-        value || ""
-    )
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+    return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
 }
 
-
-/* ======================================================
-   MODAL BACKDROP CLICK
-====================================================== */
 
 window.onclick =
     function(event) {
@@ -1217,22 +976,12 @@ window.onclick =
                 "signupModal"
             );
 
-
-        if (
-            event.target ===
-            modal
-        ) {
-
+        if (event.target === modal) {
             closeSignup();
-
         }
 
     };
 
-
-/* ======================================================
-   START PAGE
-====================================================== */
 
 loadSchedule();
 

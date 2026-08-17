@@ -19,33 +19,23 @@
     >
 </head>
 
-
 <body>
 
 <div class="layout">
 
-
-    <!-- =====================================================
-         SIDEBAR
-    ====================================================== -->
-
     <aside class="sidebar">
 
         <div class="brand">
-
             <div class="brand-mark">
                 🐺
             </div>
 
             FC WOLFPACK
-
         </div>
-
 
         <div class="tagline">
             Patient. Fast. Fierce. Together.
         </div>
-
 
         <nav class="nav">
 
@@ -85,14 +75,7 @@
     </aside>
 
 
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
-
     <main>
-
-
-        <!-- TOP BAR -->
 
         <div class="topbar">
 
@@ -106,10 +89,6 @@
 
         </div>
 
-
-        <!-- =================================================
-             HERO
-        ================================================== -->
 
         <section class="hero">
 
@@ -134,8 +113,6 @@
         </section>
 
 
-        <!-- LOADING -->
-
         <div
             id="homeLoading"
             class="card card-full muted"
@@ -153,20 +130,12 @@
         </div>
 
 
-        <!-- =================================================
-             LIVE DASHBOARD
-        ================================================== -->
-
         <div
             id="homeDashboard"
             class="grid"
             style="display:none;"
         >
 
-
-            <!-- =============================================
-                 NEXT PRACTICE
-            ============================================== -->
 
             <section class="card card-half">
 
@@ -178,12 +147,10 @@
                     Practice
                 </h2>
 
-
                 <div
                     id="nextPracticeContent"
                 >
                 </div>
-
 
                 <a
                     class="text-link"
@@ -195,19 +162,13 @@
             </section>
 
 
-            <!-- =============================================
-                 CURRENT MISSION
-            ============================================== -->
-
             <section class="card card-half mission">
 
                 <div class="eyebrow">
                     Pack Focus
                 </div>
 
-                <h2
-                    id="missionTitle"
-                >
+                <h2 id="missionTitle">
                     Pack Development
                 </h2>
 
@@ -218,17 +179,12 @@
                     Loading this week's focus...
                 </p>
 
-
                 <div class="mission-word">
                     PATIENT • FAST • FIERCE • TOGETHER
                 </div>
 
             </section>
 
-
-            <!-- =============================================
-                 PACK ROLES
-            ============================================== -->
 
             <section class="card card-wide">
 
@@ -240,9 +196,7 @@
                     Know Your Role
                 </h2>
 
-
                 <div class="roles">
-
 
                     <div class="role">
 
@@ -311,15 +265,10 @@
 
                     </div>
 
-
                 </div>
 
             </section>
 
-
-            <!-- =============================================
-                 THIS WEEK
-            ============================================== -->
 
             <section class="card card-small">
 
@@ -331,18 +280,11 @@
                     Pack Activity
                 </h2>
 
-
-                <div
-                    id="weekSummary"
-                >
+                <div id="weekSummary">
                 </div>
 
             </section>
 
-
-            <!-- =============================================
-                 NEXT GAME
-            ============================================== -->
 
             <section class="card card-half">
 
@@ -354,12 +296,8 @@
                     Next Game
                 </h2>
 
-
-                <div
-                    id="nextGameContent"
-                >
+                <div id="nextGameContent">
                 </div>
-
 
                 <a
                     class="button"
@@ -370,10 +308,6 @@
 
             </section>
 
-
-            <!-- =============================================
-                 GAME PLAN
-            ============================================== -->
 
             <section class="card card-half">
 
@@ -400,10 +334,6 @@
             </section>
 
 
-            <!-- =============================================
-                 PACK STATUS
-            ============================================== -->
-
             <section class="card card-full">
 
                 <div class="eyebrow">
@@ -414,18 +344,11 @@
                     Ready for the Week
                 </h2>
 
-
-                <div
-                    id="packStatus"
-                >
+                <div id="packStatus">
                 </div>
 
             </section>
 
-
-            <!-- =============================================
-                 PACK CHALLENGE - FULL WIDTH
-            ============================================== -->
 
             <section class="card card-full pack-challenge-card">
 
@@ -458,6 +381,7 @@
                         <span>
                             Tokens Earned
                         </span>
+
                     </div>
 
                 </div>
@@ -479,7 +403,6 @@
 
             </section>
 
-
         </div>
 
     </main>
@@ -489,23 +412,13 @@
 
 <script>
 
-
-/* =========================================================
-   API
-========================================================= */
-
 const API_URL =
     "https://script.google.com/macros/s/AKfycbx5Fl8Ua7z60fT1d5VsT87W-hCGosv0m5AbIdpRUIsTQjrkjAInCySOYi7WyTxFyz8c/exec";
-
 
 let games = [];
 let practices = [];
 let challenge = null;
 
-
-/* =========================================================
-   LOAD PACK HQ
-========================================================= */
 
 async function loadPackHQ() {
 
@@ -526,7 +439,6 @@ async function loadPackHQ() {
 
 
     try {
-
 
         const [
             scheduleResponse,
@@ -550,7 +462,6 @@ async function loadPackHQ() {
         const scheduleData =
             await scheduleResponse.json();
 
-
         const challengeData =
             await challengeResponse.json();
 
@@ -567,7 +478,6 @@ async function loadPackHQ() {
 
         games =
             scheduleData.games || [];
-
 
         practices =
             scheduleData.practices || [];
@@ -590,57 +500,39 @@ async function loadPackHQ() {
         loading.style.display =
             "none";
 
-
         dashboard.style.display =
             "grid";
 
 
     } catch (err) {
 
-
         console.error(
             "PACK HQ ERROR:",
             err
         );
 
-
         loading.style.display =
             "none";
 
-
         error.style.display =
             "block";
-
 
     }
 
 }
 
 
-/* =========================================================
-   RENDER HOMEPAGE
-========================================================= */
-
 function renderHomepage() {
 
     renderNextPractice();
-
     renderMission();
-
     renderChallenge();
-
     renderNextGame();
-
     renderWeekSummary();
-
     renderPackStatus();
 
 }
 
-
-/* =========================================================
-   NEXT PRACTICE
-========================================================= */
 
 function renderNextPractice() {
 
@@ -682,8 +574,7 @@ function renderNextPractice() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    month:
-                        "short"
+                    month: "short"
                 }
             )
             .toUpperCase();
@@ -694,8 +585,7 @@ function renderNextPractice() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    day:
-                        "numeric"
+                    day: "numeric"
                 }
             );
 
@@ -705,8 +595,7 @@ function renderNextPractice() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    weekday:
-                        "long"
+                    weekday: "long"
                 }
             );
 
@@ -731,7 +620,9 @@ function renderNextPractice() {
             <div class="event-details">
 
                 <strong>
+
                     ${weekday}
+
                     ${
                         nextPractice.time
                         ? " • " +
@@ -740,16 +631,19 @@ function renderNextPractice() {
                           )
                         : ""
                     }
+
                 </strong>
 
 
                 <span class="muted">
+
                     ${
                         escapeHTML(
                             nextPractice.field ||
                             "Field TBD"
                         )
                     }
+
                 </span>
 
 
@@ -758,7 +652,9 @@ function renderNextPractice() {
                     ? `
 
                         <p class="muted">
+
                             Focus:
+
                             <strong>
                                 ${
                                     escapeHTML(
@@ -766,6 +662,7 @@ function renderNextPractice() {
                                     )
                                 }
                             </strong>
+
                         </p>
 
                     `
@@ -781,17 +678,12 @@ function renderNextPractice() {
 }
 
 
-/* =========================================================
-   PACK MISSION
-========================================================= */
-
 function renderMission() {
 
     const title =
         document.getElementById(
             "missionTitle"
         );
-
 
     const description =
         document.getElementById(
@@ -827,13 +719,10 @@ function renderMission() {
             );
 
 
-    let focusPractice =
-        null;
+    let focusPractice = null;
 
 
-    if (
-        thisWeek.length > 0
-    ) {
+    if (thisWeek.length > 0) {
 
         focusPractice =
             thisWeek.find(
@@ -860,7 +749,6 @@ function renderMission() {
         title.textContent =
             focusPractice.focus;
 
-
         description.textContent =
             "This is what the Pack is working on right now.";
 
@@ -868,7 +756,6 @@ function renderMission() {
 
         title.textContent =
             "Pack Development";
-
 
         description.textContent =
             "Patient. Fast. Fierce. Together.";
@@ -878,10 +765,6 @@ function renderMission() {
 }
 
 
-/* =========================================================
-   PACK CHALLENGE
-========================================================= */
-
 function renderChallenge() {
 
     const number =
@@ -889,12 +772,10 @@ function renderChallenge() {
             "challengeNumber"
         );
 
-
     const tokenContainer =
         document.getElementById(
             "challengeTokens"
         );
-
 
     const message =
         document.getElementById(
@@ -918,10 +799,8 @@ function renderChallenge() {
 
         `;
 
-
         message.textContent =
             "The reward remains a mystery...";
-
 
         return;
 
@@ -1018,10 +897,6 @@ function renderChallenge() {
 }
 
 
-/* =========================================================
-   NEXT GAME
-========================================================= */
-
 function renderNextGame() {
 
     const container =
@@ -1062,8 +937,7 @@ function renderNextGame() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    month:
-                        "short"
+                    month: "short"
                 }
             )
             .toUpperCase();
@@ -1074,8 +948,7 @@ function renderNextGame() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    day:
-                        "numeric"
+                    day: "numeric"
                 }
             );
 
@@ -1085,8 +958,7 @@ function renderNextGame() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    weekday:
-                        "long"
+                    weekday: "long"
                 }
             );
 
@@ -1130,12 +1002,14 @@ function renderNextGame() {
 
 
                 <span class="muted">
+
                     ${
                         escapeHTML(
                             nextGame.field ||
                             "Field TBD"
                         )
                     }
+
                 </span>
 
 
@@ -1153,8 +1027,8 @@ function renderNextGame() {
 
                     ${
                         isHome
-                        ? "Hunter Green"
-                        : "White"
+                        ? "White"
+                        : "Green"
                     }
 
                 </p>
@@ -1184,10 +1058,6 @@ function renderNextGame() {
 
 }
 
-
-/* =========================================================
-   THIS WEEK SUMMARY
-========================================================= */
 
 function renderWeekSummary() {
 
@@ -1242,11 +1112,8 @@ function renderWeekSummary() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    month:
-                        "short",
-
-                    day:
-                        "numeric"
+                    month: "short",
+                    day: "numeric"
                 }
             );
 
@@ -1256,11 +1123,8 @@ function renderWeekSummary() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    month:
-                        "short",
-
-                    day:
-                        "numeric"
+                    month: "short",
+                    day: "numeric"
                 }
             );
 
@@ -1296,10 +1160,6 @@ function renderWeekSummary() {
 }
 
 
-/* =========================================================
-   PACK STATUS
-========================================================= */
-
 function renderPackStatus() {
 
     const container =
@@ -1320,8 +1180,7 @@ function renderPackStatus() {
         );
 
 
-    let statusHTML =
-        "";
+    let statusHTML = "";
 
 
     if (nextPractice) {
@@ -1346,14 +1205,9 @@ function renderPackStatus() {
                         date.toLocaleDateString(
                             "en-US",
                             {
-                                weekday:
-                                    "long",
-
-                                month:
-                                    "short",
-
-                                day:
-                                    "numeric"
+                                weekday: "long",
+                                month: "short",
+                                day: "numeric"
                             }
                         )
                     }
@@ -1431,13 +1285,7 @@ function renderPackStatus() {
 }
 
 
-/* =========================================================
-   NEXT EVENT HELPER
-========================================================= */
-
-function getNextEvent(
-    events
-) {
+function getNextEvent(events) {
 
     const today =
         new Date();
@@ -1481,11 +1329,6 @@ function getNextEvent(
 }
 
 
-/* =========================================================
-   CURRENT WEEK
-   Sunday through Saturday
-========================================================= */
-
 function getCurrentWeek() {
 
     const now =
@@ -1493,9 +1336,7 @@ function getCurrentWeek() {
 
 
     const sunday =
-        new Date(
-            now
-        );
+        new Date(now);
 
 
     sunday.setHours(
@@ -1513,9 +1354,7 @@ function getCurrentWeek() {
 
 
     const saturday =
-        new Date(
-            sunday
-        );
+        new Date(sunday);
 
 
     saturday.setDate(
@@ -1532,34 +1371,14 @@ function getCurrentWeek() {
 
 
     return {
-
-        start:
-            sunday,
-
-        end:
-            saturday
-
+        start: sunday,
+        end: saturday
     };
 
 }
 
 
-/* =========================================================
-   DATE HELPER
-========================================================= */
-
-function parseDate(
-    value
-) {
-
-    if (!value) {
-
-        return new Date(
-            "1900-01-01T12:00:00"
-        );
-
-    }
-
+function parseDate(value) {
 
     return new Date(
         value +
@@ -1569,49 +1388,21 @@ function parseDate(
 }
 
 
-/* =========================================================
-   SAFE HTML
-========================================================= */
+function escapeHTML(value) {
 
-function escapeHTML(
-    value
-) {
-
-    return String(
-        value || ""
-    )
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+    return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
 }
 
 
-/* =========================================================
-   START
-========================================================= */
-
 loadPackHQ();
 
 </script>
-
 
 </body>
 

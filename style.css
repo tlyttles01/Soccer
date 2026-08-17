@@ -2296,3 +2296,137 @@ main {
     }
 
 }
+
+/* =========================================================
+   CORRECT HOME / AWAY JERSEY COLORS
+
+   HOME = WHITE
+   AWAY = HUNTER GREEN
+========================================================= */
+
+
+/* SCHEDULE + PARENT HUB */
+
+.game-status.home {
+    background: #ffffff;
+    color: #202722;
+
+    border:
+        2px solid
+        #cfd6d1;
+}
+
+
+.game-status.away {
+    background:
+        var(--hunter-green);
+
+    color: #ffffff;
+
+    border:
+        2px solid
+        var(--hunter-green);
+}
+
+
+/* SCHEDULE LEGEND */
+
+.key-home {
+    color:
+        #5f6862;
+}
+
+
+.key-away {
+    color:
+        var(--hunter-green);
+}
+
+
+/* WEEKLY LINEUP */
+
+.lineup-game-status.home {
+    background: #ffffff;
+    color: #202722;
+
+    border:
+        2px solid
+        #cfd6d1;
+}
+
+
+.lineup-game-status.away {
+    background:
+        var(--hunter-green);
+
+    color: #ffffff;
+
+    border:
+        2px solid
+        var(--hunter-green);
+}
+
+
+/* OPTIONAL JERSEY LABEL ON LINEUP PAGE */
+
+.lineup-jersey {
+    color:
+        var(--muted);
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        800;
+}
+
+/* =========================================================
+   HOME / AWAY LABEL WITH JERSEY COLOR
+========================================================= */
+
+.game-status {
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+.game-status-main {
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+}
+
+
+.game-status-color {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+
+/* HOME = WHITE */
+
+.game-status.home {
+    background: #ffffff;
+    color: #202722;
+
+    border:
+        2px solid
+        #cfd6d1;
+}
+
+
+/* AWAY = GREEN */
+
+.game-status.away {
+    background:
+        var(--hunter-green);
+
+    color: #ffffff;
+
+    border:
+        2px solid
+        var(--hunter-green);
+}
