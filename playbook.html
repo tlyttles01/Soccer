@@ -533,7 +533,6 @@ function createDrillCard(
             "article"
         );
 
-
     card.className =
         "playbook-card";
 
@@ -587,48 +586,52 @@ function createDrillCard(
 
         <div class="playbook-card-header">
 
+            <!-- NUMBER -->
 
             <div class="playbook-number-text">
                 ${String(number).padStart(2, "0")}
             </div>
 
 
-            <h2 class="playbook-drill-title">
+            <!-- TITLE -->
 
+            <h2 class="playbook-drill-title">
                 ${
                     escapeHTML(
                         drill.title ||
                         "Untitled Drill"
                     )
                 }
-
             </h2>
 
+
+            <!-- FOCUS LABEL -->
 
             ${
                 drill.focus
                     ? `
 
                         <div class="playbook-focus-label">
-
                             ${
                                 escapeHTML(
                                     drill.focus
                                 )
                             }
-
                         </div>
 
                     `
                     : ""
             }
 
-
         </div>
 
 
+        <!-- DIAGRAM -->
+
         ${imageHTML}
 
+
+        <!-- DESCRIPTION -->
 
         <div class="playbook-card-body">
 
@@ -637,13 +640,11 @@ function createDrillCard(
                     ? `
 
                         <p class="muted">
-
                             ${
                                 escapeHTML(
                                     drill.description
                                 )
                             }
-
                         </p>
 
                     `
@@ -658,7 +659,6 @@ function createDrillCard(
     return card;
 
 }
-
 
 /* =========================================================
    IMAGE FALLBACK
