@@ -2430,3 +2430,532 @@ main {
         2px solid
         var(--hunter-green);
 }
+
+/* =========================================================
+   GAME EVE / GAME DAY MODE
+   Pack HQ automatically changes the day before a game
+   and on game day.
+========================================================= */
+
+
+/* =========================================================
+   GAME HERO BASE
+========================================================= */
+
+.game-hero-content {
+    width: 100%;
+    max-width: 780px;
+}
+
+
+/* =========================================================
+   DAY BEFORE GAME
+   "THE HUNT APPROACHES"
+========================================================= */
+
+.hero.game-eve {
+    min-height: 330px;
+
+    background:
+        radial-gradient(
+            circle at 82% 22%,
+            rgba(205, 225, 211, 0.18),
+            transparent 28%
+        ),
+        linear-gradient(
+            115deg,
+            #07100b 0%,
+            #102c1e 48%,
+            #205d3d 100%
+        );
+
+    box-shadow:
+        0 12px 34px
+        rgba(10, 40, 25, 0.16);
+}
+
+
+/* =========================================================
+   GAME DAY
+   "THE HUNT IS ON"
+========================================================= */
+
+.hero.game-day {
+    min-height: 360px;
+
+    background:
+        radial-gradient(
+            circle at 82% 20%,
+            rgba(255, 255, 255, 0.16),
+            transparent 23%
+        ),
+        radial-gradient(
+            circle at 75% 70%,
+            rgba(44, 130, 81, 0.20),
+            transparent 34%
+        ),
+        linear-gradient(
+            120deg,
+            #050c08 0%,
+            #0d271a 43%,
+            #1f6f46 100%
+        );
+
+    box-shadow:
+        0 16px 42px
+        rgba(10, 41, 25, 0.24);
+}
+
+
+/* Slight visual emphasis around game day */
+
+.hero.game-day::after {
+    width: 430px;
+    height: 430px;
+
+    right: -110px;
+    top: -150px;
+
+    background:
+        rgba(255, 255, 255, 0.07);
+}
+
+
+/* =========================================================
+   TOMORROW / GAME DAY LABEL
+========================================================= */
+
+.game-hero-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 13px;
+
+    padding:
+        7px 12px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.13);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+    color:
+        #dcece1;
+
+    font-size: 0.72rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+}
+
+
+/* Make Game Day a little stronger */
+
+.hero.game-day .game-hero-eyebrow {
+    background:
+        rgba(255, 255, 255, 0.16);
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   GAME HERO TITLE
+========================================================= */
+
+.game-hero-content h1 {
+    margin:
+        0 0 22px;
+
+    font-size:
+        clamp(
+            2.8rem,
+            7vw,
+            5.4rem
+        );
+
+    line-height: 0.92;
+
+    letter-spacing: -0.055em;
+}
+
+
+/* =========================================================
+   GAME DETAILS ROW
+========================================================= */
+
+.game-hero-details {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   HOME / AWAY + JERSEY
+========================================================= */
+
+.game-hero-status {
+    min-width: 145px;
+
+    padding:
+        13px 18px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 14px
+        rgba(0, 0, 0, 0.14);
+}
+
+
+.game-hero-status span {
+    font-size: 0.72rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.14em;
+
+    text-transform: uppercase;
+}
+
+
+.game-hero-status strong {
+    margin-top: 4px;
+
+    font-size: 0.9rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.055em;
+}
+
+
+/* HOME = WHITE */
+
+.game-hero-status.home {
+    background: #ffffff;
+
+    color: #172019;
+
+    border:
+        2px solid
+        rgba(255, 255, 255, 0.9);
+}
+
+
+/* AWAY = GREEN */
+
+.game-hero-status.away {
+    background:
+        var(--green);
+
+    color: #ffffff;
+
+    border:
+        2px solid
+        rgba(255, 255, 255, 0.4);
+}
+
+
+/* =========================================================
+   GAME DATE + FIELD
+========================================================= */
+
+.game-hero-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.game-hero-info strong {
+    color: #ffffff;
+
+    font-size: 1.08rem;
+
+    font-weight: 900;
+}
+
+
+.game-hero-info span {
+    color: #bdd8c7;
+
+    font-size: 0.9rem;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   GAME DAY ACTION BUTTONS
+========================================================= */
+
+.game-hero-actions {
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-top: 22px;
+}
+
+
+.game-hero-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 43px;
+
+    padding:
+        11px 17px;
+
+    border-radius: 10px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.35);
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 0.82rem;
+
+    font-weight: 900;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+
+.game-hero-button:hover {
+    transform:
+        translateY(-1px);
+
+    background:
+        rgba(255, 255, 255, 0.14);
+}
+
+
+.game-hero-button.primary {
+    background: #ffffff;
+
+    border-color: #ffffff;
+
+    color:
+        var(--green-dark);
+}
+
+
+.game-hero-button.primary:hover {
+    background:
+        #f0f5f2;
+}
+
+
+/* =========================================================
+   SNACK STATUS
+========================================================= */
+
+.game-hero-snack {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 18px;
+
+    padding:
+        8px 11px;
+
+    border-radius: 9px;
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+}
+
+
+.game-hero-snack span {
+    opacity: 0.82;
+}
+
+
+.game-hero-snack strong {
+    font-weight: 900;
+}
+
+
+.game-hero-snack.covered {
+    background:
+        rgba(203, 235, 214, 0.14);
+
+    border:
+        1px solid
+        rgba(203, 235, 214, 0.18);
+
+    color: #d8eddf;
+}
+
+
+.game-hero-snack.needed {
+    background:
+        rgba(255, 215, 142, 0.16);
+
+    border:
+        1px solid
+        rgba(255, 215, 142, 0.18);
+
+    color: #ffe0a4;
+}
+
+
+/* =========================================================
+   GAME DAY MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .hero.game-eve,
+    .hero.game-day {
+        min-height: 410px;
+
+        padding:
+            28px 22px;
+    }
+
+
+    .game-hero-content {
+        width: 100%;
+    }
+
+
+    .game-hero-content h1 {
+        font-size:
+            clamp(
+                2.8rem,
+                13vw,
+                3.7rem
+            );
+
+        line-height: 0.94;
+    }
+
+
+    .game-hero-details {
+        align-items:
+            flex-start;
+
+        gap: 14px;
+    }
+
+
+    .game-hero-status {
+        min-width: 130px;
+
+        padding:
+            12px 14px;
+    }
+
+
+    .game-hero-info {
+        flex:
+            1;
+
+        min-width: 140px;
+    }
+
+
+    .game-hero-actions {
+        width: 100%;
+
+        margin-top: 20px;
+    }
+
+
+    .game-hero-button {
+        flex:
+            1 1 130px;
+    }
+
+
+    .game-hero-snack {
+        margin-top: 16px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL GAME DAY PHONE
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .hero.game-eve,
+    .hero.game-day {
+        min-height: 440px;
+    }
+
+
+    .game-hero-content h1 {
+        font-size: 2.8rem;
+    }
+
+
+    .game-hero-details {
+        flex-direction: column;
+    }
+
+
+    .game-hero-status {
+        width: 100%;
+
+        max-width: 180px;
+    }
+
+
+    .game-hero-info {
+        width: 100%;
+    }
+
+
+    .game-hero-button {
+        flex:
+            1 1 100%;
+    }
+
+}
+

@@ -19,23 +19,33 @@
     >
 </head>
 
+
 <body>
 
 <div class="layout">
 
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
     <aside class="sidebar">
 
         <div class="brand">
+
             <div class="brand-mark">
                 🐺
             </div>
 
             FC WOLFPACK
+
         </div>
+
 
         <div class="tagline">
             Patient. Fast. Fierce. Together.
         </div>
+
 
         <nav class="nav">
 
@@ -75,7 +85,14 @@
     </aside>
 
 
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
     <main>
+
+
+        <!-- TOP BAR -->
 
         <div class="topbar">
 
@@ -90,9 +107,22 @@
         </div>
 
 
-        <section class="hero">
+        <!-- =================================================
+             DYNAMIC HERO
+        ================================================== -->
 
-            <div class="hero-content">
+        <section
+            id="homeHero"
+            class="hero"
+        >
+
+
+            <!-- NORMAL WEEK -->
+
+            <div
+                id="normalHero"
+                class="hero-content"
+            >
 
                 <small>
                     Welcome to
@@ -110,8 +140,65 @@
 
             </div>
 
+
+            <!-- GAME EVE / GAME DAY -->
+
+            <div
+                id="gameHero"
+                class="hero-content game-hero-content"
+                style="display:none;"
+            >
+
+                <div
+                    id="gameHeroEyebrow"
+                    class="game-hero-eyebrow"
+                >
+                    GAME DAY
+                </div>
+
+
+                <h1 id="gameHeroTitle">
+                    The Hunt Is On
+                </h1>
+
+
+                <div class="game-hero-details">
+
+
+                    <!-- HOME / AWAY + JERSEY -->
+
+                    <div
+                        id="gameHeroStatus"
+                        class="game-hero-status"
+                    >
+                    </div>
+
+
+                    <!-- DATE + FIELD -->
+
+                    <div class="game-hero-info">
+
+                        <strong id="gameHeroDate">
+                        </strong>
+
+                        <span id="gameHeroField">
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
         </section>
 
+
+        <!-- =================================================
+             LOADING
+        ================================================== -->
 
         <div
             id="homeLoading"
@@ -120,6 +207,10 @@
             Loading Pack HQ...
         </div>
 
+
+        <!-- =================================================
+             ERROR
+        ================================================== -->
 
         <div
             id="homeError"
@@ -130,12 +221,20 @@
         </div>
 
 
+        <!-- =================================================
+             LIVE DASHBOARD
+        ================================================== -->
+
         <div
             id="homeDashboard"
             class="grid"
             style="display:none;"
         >
 
+
+            <!-- =============================================
+                 NEXT PRACTICE
+            ============================================== -->
 
             <section class="card card-half">
 
@@ -147,10 +246,12 @@
                     Practice
                 </h2>
 
+
                 <div
                     id="nextPracticeContent"
                 >
                 </div>
+
 
                 <a
                     class="text-link"
@@ -162,15 +263,23 @@
             </section>
 
 
+            <!-- =============================================
+                 PACK FOCUS
+            ============================================== -->
+
             <section class="card card-half mission">
 
                 <div class="eyebrow">
                     Pack Focus
                 </div>
 
-                <h2 id="missionTitle">
+
+                <h2
+                    id="missionTitle"
+                >
                     Pack Development
                 </h2>
+
 
                 <p
                     id="missionDescription"
@@ -179,12 +288,17 @@
                     Loading this week's focus...
                 </p>
 
+
                 <div class="mission-word">
                     PATIENT • FAST • FIERCE • TOGETHER
                 </div>
 
             </section>
 
+
+            <!-- =============================================
+                 PACK ROLES
+            ============================================== -->
 
             <section class="card card-wide">
 
@@ -196,7 +310,9 @@
                     Know Your Role
                 </h2>
 
+
                 <div class="roles">
+
 
                     <div class="role">
 
@@ -265,10 +381,15 @@
 
                     </div>
 
+
                 </div>
 
             </section>
 
+
+            <!-- =============================================
+                 THIS WEEK
+            ============================================== -->
 
             <section class="card card-small">
 
@@ -280,11 +401,18 @@
                     Pack Activity
                 </h2>
 
-                <div id="weekSummary">
+
+                <div
+                    id="weekSummary"
+                >
                 </div>
 
             </section>
 
+
+            <!-- =============================================
+                 NEXT GAME
+            ============================================== -->
 
             <section class="card card-half">
 
@@ -296,8 +424,12 @@
                     Next Game
                 </h2>
 
-                <div id="nextGameContent">
+
+                <div
+                    id="nextGameContent"
+                >
                 </div>
+
 
                 <a
                     class="button"
@@ -309,6 +441,10 @@
             </section>
 
 
+            <!-- =============================================
+                 WEEKLY LINEUP
+            ============================================== -->
+
             <section class="card card-half">
 
                 <div class="eyebrow">
@@ -319,10 +455,12 @@
                     Weekly Lineup
                 </h2>
 
+
                 <p class="muted">
                     See the Pack's quarter-by-quarter
                     formation for the next game.
                 </p>
+
 
                 <a
                     class="button"
@@ -334,6 +472,10 @@
             </section>
 
 
+            <!-- =============================================
+                 PACK STATUS
+            ============================================== -->
+
             <section class="card card-full">
 
                 <div class="eyebrow">
@@ -344,15 +486,24 @@
                     Ready for the Week
                 </h2>
 
-                <div id="packStatus">
+
+                <div
+                    id="packStatus"
+                >
                 </div>
 
             </section>
 
 
+            <!-- =============================================
+                 PACK CHALLENGE
+            ============================================== -->
+
             <section class="card card-full pack-challenge-card">
 
+
                 <div class="pack-challenge-header">
+
 
                     <div>
 
@@ -376,6 +527,7 @@
                         id="challengeNumber"
                         class="challenge-number"
                     >
+
                         —
 
                         <span>
@@ -383,6 +535,7 @@
                         </span>
 
                     </div>
+
 
                 </div>
 
@@ -401,36 +554,53 @@
                     The reward remains a mystery...
                 </div>
 
+
             </section>
+
 
         </div>
 
+
     </main>
+
 
 </div>
 
 
 <script>
 
+
+/* =========================================================
+   API
+========================================================= */
+
 const API_URL =
     "https://script.google.com/macros/s/AKfycbx5Fl8Ua7z60fT1d5VsT87W-hCGosv0m5AbIdpRUIsTQjrkjAInCySOYi7WyTxFyz8c/exec";
+
 
 let games = [];
 let practices = [];
 let challenge = null;
 
 
+/* =========================================================
+   LOAD PACK HQ
+========================================================= */
+
 async function loadPackHQ() {
+
 
     const loading =
         document.getElementById(
             "homeLoading"
         );
 
+
     const error =
         document.getElementById(
             "homeError"
         );
+
 
     const dashboard =
         document.getElementById(
@@ -439,6 +609,7 @@ async function loadPackHQ() {
 
 
     try {
+
 
         const [
             scheduleResponse,
@@ -462,22 +633,26 @@ async function loadPackHQ() {
         const scheduleData =
             await scheduleResponse.json();
 
+
         const challengeData =
             await challengeResponse.json();
 
 
         if (!scheduleData.ok) {
 
+
             throw new Error(
                 scheduleData.error ||
                 "Schedule could not be loaded."
             );
+
 
         }
 
 
         games =
             scheduleData.games || [];
+
 
         practices =
             scheduleData.practices || [];
@@ -488,8 +663,10 @@ async function loadPackHQ() {
             challengeData.challenge
         ) {
 
+
             challenge =
                 challengeData.challenge;
+
 
         }
 
@@ -500,41 +677,416 @@ async function loadPackHQ() {
         loading.style.display =
             "none";
 
+
         dashboard.style.display =
             "grid";
 
 
     } catch (err) {
 
+
         console.error(
             "PACK HQ ERROR:",
             err
         );
 
+
         loading.style.display =
             "none";
+
 
         error.style.display =
             "block";
 
+
     }
+
 
 }
 
+
+/* =========================================================
+   RENDER HOMEPAGE
+========================================================= */
 
 function renderHomepage() {
 
+
+    renderGameDayHero();
+
+
     renderNextPractice();
+
+
     renderMission();
+
+
     renderChallenge();
+
+
     renderNextGame();
+
+
     renderWeekSummary();
+
+
     renderPackStatus();
+
 
 }
 
 
+/* =========================================================
+   GAME EVE / GAME DAY HERO
+========================================================= */
+
+function renderGameDayHero() {
+
+
+    const hero =
+        document.getElementById(
+            "homeHero"
+        );
+
+
+    const normalHero =
+        document.getElementById(
+            "normalHero"
+        );
+
+
+    const gameHero =
+        document.getElementById(
+            "gameHero"
+        );
+
+
+    const nextGame =
+        getNextEvent(
+            games
+        );
+
+
+    /*
+     * No upcoming game.
+     */
+
+    if (!nextGame) {
+
+
+        showNormalHero();
+
+
+        return;
+
+
+    }
+
+
+    const today =
+        new Date();
+
+
+    today.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    const gameDate =
+        parseDate(
+            nextGame.date
+        );
+
+
+    gameDate.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    const millisecondsPerDay =
+        1000 *
+        60 *
+        60 *
+        24;
+
+
+    const daysUntilGame =
+        Math.round(
+
+            (
+                gameDate -
+                today
+            )
+
+            /
+
+            millisecondsPerDay
+
+        );
+
+
+    /*
+     * Normal mode when game is
+     * more than one day away.
+     */
+
+    if (
+        daysUntilGame > 1 ||
+        daysUntilGame < 0
+    ) {
+
+
+        showNormalHero();
+
+
+        return;
+
+
+    }
+
+
+    /*
+     * Activate special hero.
+     */
+
+    normalHero.style.display =
+        "none";
+
+
+    gameHero.style.display =
+        "block";
+
+
+    hero.classList.remove(
+        "game-eve",
+        "game-day"
+    );
+
+
+    /*
+     * HOME / AWAY
+     */
+
+    const isHome =
+        String(
+            nextGame.homeAway || ""
+        )
+            .trim()
+            .toLowerCase() ===
+        "home";
+
+
+    const status =
+        isHome
+            ? "HOME"
+            : "AWAY";
+
+
+    /*
+     * HOME = WHITE
+     * AWAY = GREEN
+     */
+
+    const jersey =
+        isHome
+            ? "WHITE"
+            : "GREEN";
+
+
+    /*
+     * GAME DATE
+     */
+
+    const formattedDate =
+        gameDate.toLocaleDateString(
+            "en-US",
+            {
+                weekday:
+                    "long",
+
+                month:
+                    "long",
+
+                day:
+                    "numeric"
+            }
+        );
+
+
+    /* =====================================================
+       DAY BEFORE GAME
+    ====================================================== */
+
+    if (daysUntilGame === 1) {
+
+
+        hero.classList.add(
+            "game-eve"
+        );
+
+
+        document
+            .getElementById(
+                "gameHeroEyebrow"
+            )
+            .textContent =
+            "TOMORROW";
+
+
+        document
+            .getElementById(
+                "gameHeroTitle"
+            )
+            .textContent =
+            "The Hunt Approaches";
+
+
+    }
+
+
+    /* =====================================================
+       GAME DAY
+    ====================================================== */
+
+    if (daysUntilGame === 0) {
+
+
+        hero.classList.add(
+            "game-day"
+        );
+
+
+        document
+            .getElementById(
+                "gameHeroEyebrow"
+            )
+            .textContent =
+            "GAME DAY";
+
+
+        document
+            .getElementById(
+                "gameHeroTitle"
+            )
+            .textContent =
+            "The Hunt Is On";
+
+
+    }
+
+
+    /* =====================================================
+       STATUS + JERSEY
+    ====================================================== */
+
+    const statusBox =
+        document.getElementById(
+            "gameHeroStatus"
+        );
+
+
+    statusBox.className =
+        "game-hero-status " +
+        (
+            isHome
+                ? "home"
+                : "away"
+        );
+
+
+    statusBox.innerHTML = `
+
+        <span>
+            ${status}
+        </span>
+
+        <strong>
+            WEAR ${jersey}
+        </strong>
+
+    `;
+
+
+    /* =====================================================
+       DATE
+    ====================================================== */
+
+    document
+        .getElementById(
+            "gameHeroDate"
+        )
+        .textContent =
+        formattedDate;
+
+
+    /* =====================================================
+       FIELD
+    ====================================================== */
+
+    document
+        .getElementById(
+            "gameHeroField"
+        )
+        .textContent =
+        nextGame.field ||
+        "Field TBD";
+
+
+}
+
+
+/* =========================================================
+   NORMAL HERO
+========================================================= */
+
+function showNormalHero() {
+
+
+    const hero =
+        document.getElementById(
+            "homeHero"
+        );
+
+
+    hero.classList.remove(
+        "game-eve",
+        "game-day"
+    );
+
+
+    document
+        .getElementById(
+            "normalHero"
+        )
+        .style
+        .display =
+        "block";
+
+
+    document
+        .getElementById(
+            "gameHero"
+        )
+        .style
+        .display =
+        "none";
+
+
+}
+
+
+/* =========================================================
+   NEXT PRACTICE
+========================================================= */
+
 function renderNextPractice() {
+
 
     const container =
         document.getElementById(
@@ -550,6 +1102,7 @@ function renderNextPractice() {
 
     if (!nextPractice) {
 
+
         container.innerHTML = `
 
             <p class="muted">
@@ -558,7 +1111,9 @@ function renderNextPractice() {
 
         `;
 
+
         return;
+
 
     }
 
@@ -574,7 +1129,8 @@ function renderNextPractice() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    month: "short"
+                    month:
+                        "short"
                 }
             )
             .toUpperCase();
@@ -585,7 +1141,8 @@ function renderNextPractice() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    day: "numeric"
+                    day:
+                        "numeric"
                 }
             );
 
@@ -595,7 +1152,8 @@ function renderNextPractice() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    weekday: "long"
+                    weekday:
+                        "long"
                 }
             );
 
@@ -603,6 +1161,7 @@ function renderNextPractice() {
     container.innerHTML = `
 
         <div class="event-row">
+
 
             <div class="event-date">
 
@@ -619,17 +1178,18 @@ function renderNextPractice() {
 
             <div class="event-details">
 
+
                 <strong>
 
                     ${weekday}
 
                     ${
                         nextPractice.time
-                        ? " • " +
-                          escapeHTML(
-                              nextPractice.time
-                          )
-                        : ""
+                            ? " • " +
+                              escapeHTML(
+                                  nextPractice.time
+                              )
+                            : ""
                     }
 
                 </strong>
@@ -649,41 +1209,50 @@ function renderNextPractice() {
 
                 ${
                     nextPractice.focus
-                    ? `
+                        ? `
 
-                        <p class="muted">
+                            <p class="muted">
 
-                            Focus:
+                                Focus:
 
-                            <strong>
-                                ${
-                                    escapeHTML(
-                                        nextPractice.focus
-                                    )
-                                }
-                            </strong>
+                                <strong>
+                                    ${
+                                        escapeHTML(
+                                            nextPractice.focus
+                                        )
+                                    }
+                                </strong>
 
-                        </p>
+                            </p>
 
-                    `
-                    : ""
+                        `
+                        : ""
                 }
 
+
             </div>
+
 
         </div>
 
     `;
 
+
 }
 
 
+/* =========================================================
+   PACK FOCUS
+========================================================= */
+
 function renderMission() {
+
 
     const title =
         document.getElementById(
             "missionTitle"
         );
+
 
     const description =
         document.getElementById(
@@ -700,15 +1269,18 @@ function renderMission() {
             .filter(
                 practice => {
 
+
                     const date =
                         parseDate(
                             practice.date
                         );
 
+
                     return (
                         date >= week.start &&
                         date <= week.end
                     );
+
 
                 }
             )
@@ -719,10 +1291,14 @@ function renderMission() {
             );
 
 
-    let focusPractice = null;
+    let focusPractice =
+        null;
 
 
-    if (thisWeek.length > 0) {
+    if (
+        thisWeek.length > 0
+    ) {
+
 
         focusPractice =
             thisWeek.find(
@@ -731,12 +1307,15 @@ function renderMission() {
             ) ||
             thisWeek[0];
 
+
     } else {
+
 
         focusPractice =
             getNextEvent(
                 practices
             );
+
 
     }
 
@@ -746,36 +1325,50 @@ function renderMission() {
         focusPractice.focus
     ) {
 
+
         title.textContent =
             focusPractice.focus;
+
 
         description.textContent =
             "This is what the Pack is working on right now.";
 
+
     } else {
+
 
         title.textContent =
             "Pack Development";
 
+
         description.textContent =
             "Patient. Fast. Fierce. Together.";
 
+
     }
+
 
 }
 
 
+/* =========================================================
+   PACK CHALLENGE
+========================================================= */
+
 function renderChallenge() {
+
 
     const number =
         document.getElementById(
             "challengeNumber"
         );
 
+
     const tokenContainer =
         document.getElementById(
             "challengeTokens"
         );
+
 
     const message =
         document.getElementById(
@@ -789,6 +1382,7 @@ function renderChallenge() {
 
     if (!challenge) {
 
+
         number.innerHTML = `
 
             —
@@ -799,10 +1393,13 @@ function renderChallenge() {
 
         `;
 
+
         message.textContent =
             "The reward remains a mystery...";
 
+
         return;
+
 
     }
 
@@ -846,6 +1443,7 @@ function renderChallenge() {
         i++
     ) {
 
+
         const token =
             document.createElement(
                 "div"
@@ -858,19 +1456,25 @@ function renderChallenge() {
 
         if (i <= earned) {
 
+
             token.style.borderColor =
                 "#1f6f46";
+
 
             token.style.background =
                 "#1f6f46";
 
+
         } else {
+
 
             token.style.borderColor =
                 "#7b837d";
 
+
             token.style.background =
                 "transparent";
+
 
         }
 
@@ -879,25 +1483,36 @@ function renderChallenge() {
             token
         );
 
+
     }
 
 
     if (remaining === 0) {
 
+
         message.textContent =
             "🐺 Challenge complete!";
 
+
     } else {
+
 
         message.textContent =
             `${remaining} tokens remain • Reward: ???`;
 
+
     }
+
 
 }
 
 
+/* =========================================================
+   NEXT GAME
+========================================================= */
+
 function renderNextGame() {
+
 
     const container =
         document.getElementById(
@@ -913,6 +1528,7 @@ function renderNextGame() {
 
     if (!nextGame) {
 
+
         container.innerHTML = `
 
             <p class="muted">
@@ -921,7 +1537,9 @@ function renderNextGame() {
 
         `;
 
+
         return;
+
 
     }
 
@@ -937,7 +1555,8 @@ function renderNextGame() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    month: "short"
+                    month:
+                        "short"
                 }
             )
             .toUpperCase();
@@ -948,7 +1567,8 @@ function renderNextGame() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    day: "numeric"
+                    day:
+                        "numeric"
                 }
             );
 
@@ -958,7 +1578,8 @@ function renderNextGame() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    weekday: "long"
+                    weekday:
+                        "long"
                 }
             );
 
@@ -981,6 +1602,7 @@ function renderNextGame() {
 
         <div class="event-row">
 
+
             <div class="event-date">
 
                 <div class="month">
@@ -995,6 +1617,7 @@ function renderNextGame() {
 
 
             <div class="event-details">
+
 
                 <strong>
                     ${weekday}
@@ -1018,8 +1641,8 @@ function renderNextGame() {
                     <strong>
                         ${
                             isHome
-                            ? "HOME"
-                            : "AWAY"
+                                ? "HOME"
+                                : "AWAY"
                         }
                     </strong>
 
@@ -1027,8 +1650,8 @@ function renderNextGame() {
 
                     ${
                         isHome
-                        ? "White"
-                        : "Green"
+                            ? "White"
+                            : "Green"
                     }
 
                 </p>
@@ -1040,26 +1663,34 @@ function renderNextGame() {
 
                     ${
                         snackCovered
-                        ? escapeHTML(
-                            nextGame.snack.familyName
-                          ) +
-                          " ✓"
+                            ? escapeHTML(
+                                nextGame.snack.familyName
+                              ) +
+                              " ✓"
 
-                        : "Volunteer needed"
+                            : "Volunteer needed"
                     }
 
                 </p>
 
+
             </div>
+
 
         </div>
 
     `;
 
+
 }
 
 
+/* =========================================================
+   THIS WEEK
+========================================================= */
+
 function renderWeekSummary() {
+
 
     const container =
         document.getElementById(
@@ -1075,15 +1706,18 @@ function renderWeekSummary() {
         practices.filter(
             practice => {
 
+
                 const date =
                     parseDate(
                         practice.date
                     );
 
+
                 return (
                     date >= week.start &&
                     date <= week.end
                 );
+
 
             }
         );
@@ -1093,15 +1727,18 @@ function renderWeekSummary() {
         games.filter(
             game => {
 
+
                 const date =
                     parseDate(
                         game.date
                     );
 
+
                 return (
                     date >= week.start &&
                     date <= week.end
                 );
+
 
             }
         );
@@ -1112,8 +1749,11 @@ function renderWeekSummary() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    month: "short",
-                    day: "numeric"
+                    month:
+                        "short",
+
+                    day:
+                        "numeric"
                 }
             );
 
@@ -1123,8 +1763,11 @@ function renderWeekSummary() {
             .toLocaleDateString(
                 "en-US",
                 {
-                    month: "short",
-                    day: "numeric"
+                    month:
+                        "short",
+
+                    day:
+                        "numeric"
                 }
             );
 
@@ -1132,35 +1775,51 @@ function renderWeekSummary() {
     container.innerHTML = `
 
         <p>
+
             <strong>
                 ${start} – ${end}
             </strong>
+
         </p>
 
+
         <p class="muted">
+
             ⚽ ${weeklyPractices.length}
+
             ${
                 weeklyPractices.length === 1
-                ? "practice"
-                : "practices"
+                    ? "practice"
+                    : "practices"
             }
+
         </p>
 
+
         <p class="muted">
+
             🐺 ${weeklyGames.length}
+
             ${
                 weeklyGames.length === 1
-                ? "game"
-                : "games"
+                    ? "game"
+                    : "games"
             }
+
         </p>
 
     `;
 
+
 }
 
 
+/* =========================================================
+   PACK STATUS
+========================================================= */
+
 function renderPackStatus() {
+
 
     const container =
         document.getElementById(
@@ -1180,10 +1839,12 @@ function renderPackStatus() {
         );
 
 
-    let statusHTML = "";
+    let statusHTML =
+        "";
 
 
     if (nextPractice) {
+
 
         const date =
             parseDate(
@@ -1205,20 +1866,25 @@ function renderPackStatus() {
                         date.toLocaleDateString(
                             "en-US",
                             {
-                                weekday: "long",
-                                month: "short",
-                                day: "numeric"
+                                weekday:
+                                    "long",
+
+                                month:
+                                    "short",
+
+                                day:
+                                    "numeric"
                             }
                         )
                     }
 
                     ${
                         nextPractice.time
-                        ? " • " +
-                          escapeHTML(
-                              nextPractice.time
-                          )
-                        : ""
+                            ? " • " +
+                              escapeHTML(
+                                  nextPractice.time
+                              )
+                            : ""
                     }
 
                 </span>
@@ -1227,10 +1893,12 @@ function renderPackStatus() {
 
         `;
 
+
     }
 
 
     if (nextGame) {
+
 
         const snackCovered =
             nextGame.snack &&
@@ -1249,12 +1917,12 @@ function renderPackStatus() {
 
                     ${
                         snackCovered
-                        ? "✓ Covered by " +
-                          escapeHTML(
-                              nextGame.snack.familyName
-                          )
+                            ? "✓ Covered by " +
+                              escapeHTML(
+                                  nextGame.snack.familyName
+                              )
 
-                        : "⚠ Volunteer still needed"
+                            : "⚠ Volunteer still needed"
                     }
 
                 </span>
@@ -1263,10 +1931,12 @@ function renderPackStatus() {
 
         `;
 
+
     }
 
 
     if (!statusHTML) {
+
 
         statusHTML = `
 
@@ -1276,16 +1946,25 @@ function renderPackStatus() {
 
         `;
 
+
     }
 
 
     container.innerHTML =
         statusHTML;
 
+
 }
 
 
-function getNextEvent(events) {
+/* =========================================================
+   NEXT EVENT
+========================================================= */
+
+function getNextEvent(
+    events
+) {
+
 
     const today =
         new Date();
@@ -1304,6 +1983,7 @@ function getNextEvent(events) {
             .filter(
                 event => {
 
+
                     if (!event.date) {
                         return false;
                     }
@@ -1314,6 +1994,7 @@ function getNextEvent(events) {
                             event.date
                         ) >= today
                     );
+
 
                 }
             )
@@ -1326,17 +2007,26 @@ function getNextEvent(events) {
 
     return upcoming[0] || null;
 
+
 }
 
 
+/* =========================================================
+   CURRENT WEEK
+   SUNDAY THROUGH SATURDAY
+========================================================= */
+
 function getCurrentWeek() {
+
 
     const now =
         new Date();
 
 
     const sunday =
-        new Date(now);
+        new Date(
+            now
+        );
 
 
     sunday.setHours(
@@ -1354,7 +2044,9 @@ function getCurrentWeek() {
 
 
     const saturday =
-        new Date(sunday);
+        new Date(
+            sunday
+        );
 
 
     saturday.setDate(
@@ -1371,38 +2063,94 @@ function getCurrentWeek() {
 
 
     return {
-        start: sunday,
-        end: saturday
+
+        start:
+            sunday,
+
+        end:
+            saturday
+
     };
+
 
 }
 
 
-function parseDate(value) {
+/* =========================================================
+   DATE HELPER
+========================================================= */
+
+function parseDate(
+    value
+) {
+
+
+    if (!value) {
+
+
+        return new Date(
+            "1900-01-01T12:00:00"
+        );
+
+
+    }
+
 
     return new Date(
         value +
         "T12:00:00"
     );
 
-}
-
-
-function escapeHTML(value) {
-
-    return String(value || "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
 
 }
 
+
+/* =========================================================
+   SAFE HTML
+========================================================= */
+
+function escapeHTML(
+    value
+) {
+
+
+    return String(
+        value || ""
+    )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
 
 loadPackHQ();
 
+
 </script>
+
 
 </body>
 
