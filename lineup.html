@@ -743,12 +743,24 @@ function renderGameDetails(
                 ${formatted}
             </strong>
 
-            <span>
-                ${escapeHTML(
-                    game.field ||
-                    "Field TBD"
-                )}
-            </span>
+<span>
+
+    ${
+        game.time
+            ? escapeHTML(
+                game.time
+              ) + " • "
+            : ""
+    }
+
+    ${
+        escapeHTML(
+            game.field ||
+            "Field TBD"
+        )
+    }
+
+</span>
 
             <span
                 class="lineup-game-status ${status.toLowerCase()}"

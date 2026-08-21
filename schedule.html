@@ -563,9 +563,20 @@ function createGameRow(game) {
                 )}
             </h3>
 
-            <div class="field-label">
-                ${date.fullDate}
-            </div>
+<div class="field-label">
+
+    ${date.fullDate}
+
+    ${
+        game.time
+            ? " • " +
+              escapeHTML(
+                  game.time
+              )
+            : ""
+    }
+
+</div>
 
         </div>
 

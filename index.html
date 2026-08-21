@@ -22,6 +22,22 @@
 
 <body>
 
+
+<!-- =========================================================
+     GAME DAY CLAW EFFECT
+========================================================= -->
+
+<div
+    id="clawWipe"
+    class="claw-wipe"
+    aria-hidden="true"
+>
+    <div class="claw claw-one"></div>
+    <div class="claw claw-two"></div>
+    <div class="claw claw-three"></div>
+</div>
+
+
 <div class="layout">
 
 
@@ -92,8 +108,6 @@
     <main>
 
 
-        <!-- TOP BAR -->
-
         <div class="topbar">
 
             <div class="page-label">
@@ -117,7 +131,7 @@
         >
 
 
-            <!-- NORMAL WEEK -->
+            <!-- NORMAL MODE -->
 
             <div
                 id="normalHero"
@@ -141,7 +155,7 @@
             </div>
 
 
-            <!-- GAME EVE / GAME DAY -->
+            <!-- GAME EVE / GAME DAY MODE -->
 
             <div
                 id="gameHero"
@@ -165,8 +179,6 @@
                 <div class="game-hero-details">
 
 
-                    <!-- HOME / AWAY + JERSEY -->
-
                     <div
                         id="gameHeroStatus"
                         class="game-hero-status"
@@ -174,12 +186,13 @@
                     </div>
 
 
-                    <!-- DATE + FIELD -->
-
                     <div class="game-hero-info">
 
                         <strong id="gameHeroDate">
                         </strong>
+
+                        <span id="gameHeroTime">
+                        </span>
 
                         <span id="gameHeroField">
                         </span>
@@ -188,7 +201,6 @@
 
 
                 </div>
-
 
             </div>
 
@@ -222,7 +234,7 @@
 
 
         <!-- =================================================
-             LIVE DASHBOARD
+             DASHBOARD
         ================================================== -->
 
         <div
@@ -232,9 +244,7 @@
         >
 
 
-            <!-- =============================================
-                 NEXT PRACTICE
-            ============================================== -->
+            <!-- NEXT PRACTICE -->
 
             <section class="card card-half">
 
@@ -246,12 +256,10 @@
                     Practice
                 </h2>
 
-
                 <div
                     id="nextPracticeContent"
                 >
                 </div>
-
 
                 <a
                     class="text-link"
@@ -263,9 +271,7 @@
             </section>
 
 
-            <!-- =============================================
-                 PACK FOCUS
-            ============================================== -->
+            <!-- PACK FOCUS -->
 
             <section class="card card-half mission">
 
@@ -273,13 +279,9 @@
                     Pack Focus
                 </div>
 
-
-                <h2
-                    id="missionTitle"
-                >
+                <h2 id="missionTitle">
                     Pack Development
                 </h2>
-
 
                 <p
                     id="missionDescription"
@@ -288,7 +290,6 @@
                     Loading this week's focus...
                 </p>
 
-
                 <div class="mission-word">
                     PATIENT • FAST • FIERCE • TOGETHER
                 </div>
@@ -296,9 +297,7 @@
             </section>
 
 
-            <!-- =============================================
-                 PACK ROLES
-            ============================================== -->
+            <!-- ROLES -->
 
             <section class="card card-wide">
 
@@ -387,9 +386,7 @@
             </section>
 
 
-            <!-- =============================================
-                 THIS WEEK
-            ============================================== -->
+            <!-- THIS WEEK -->
 
             <section class="card card-small">
 
@@ -401,7 +398,6 @@
                     Pack Activity
                 </h2>
 
-
                 <div
                     id="weekSummary"
                 >
@@ -410,9 +406,7 @@
             </section>
 
 
-            <!-- =============================================
-                 NEXT GAME
-            ============================================== -->
+            <!-- NEXT GAME -->
 
             <section class="card card-half">
 
@@ -424,12 +418,10 @@
                     Next Game
                 </h2>
 
-
                 <div
                     id="nextGameContent"
                 >
                 </div>
-
 
                 <a
                     class="button"
@@ -441,9 +433,7 @@
             </section>
 
 
-            <!-- =============================================
-                 WEEKLY LINEUP
-            ============================================== -->
+            <!-- LINEUP -->
 
             <section class="card card-half">
 
@@ -455,12 +445,10 @@
                     Weekly Lineup
                 </h2>
 
-
                 <p class="muted">
                     See the Pack's quarter-by-quarter
                     formation for the next game.
                 </p>
-
 
                 <a
                     class="button"
@@ -472,9 +460,7 @@
             </section>
 
 
-            <!-- =============================================
-                 PACK STATUS
-            ============================================== -->
+            <!-- PACK STATUS -->
 
             <section class="card card-full">
 
@@ -486,7 +472,6 @@
                     Ready for the Week
                 </h2>
 
-
                 <div
                     id="packStatus"
                 >
@@ -495,12 +480,9 @@
             </section>
 
 
-            <!-- =============================================
-                 PACK CHALLENGE
-            ============================================== -->
+            <!-- PACK CHALLENGE -->
 
             <section class="card card-full pack-challenge-card">
-
 
                 <div class="pack-challenge-header">
 
@@ -714,21 +696,15 @@ function renderHomepage() {
 
     renderGameDayHero();
 
-
     renderNextPractice();
-
 
     renderMission();
 
-
     renderChallenge();
-
 
     renderNextGame();
 
-
     renderWeekSummary();
-
 
     renderPackStatus();
 
@@ -737,7 +713,7 @@ function renderHomepage() {
 
 
 /* =========================================================
-   GAME EVE / GAME DAY HERO
+   GAME DAY HERO
 ========================================================= */
 
 function renderGameDayHero() {
@@ -766,10 +742,6 @@ function renderGameDayHero() {
             games
         );
 
-
-    /*
-     * No upcoming game.
-     */
 
     if (!nextGame) {
 
@@ -832,8 +804,8 @@ function renderGameDayHero() {
 
 
     /*
-     * Normal mode when game is
-     * more than one day away.
+     * Normal homepage until the
+     * day before the game.
      */
 
     if (
@@ -851,10 +823,6 @@ function renderGameDayHero() {
     }
 
 
-    /*
-     * Activate special hero.
-     */
-
     normalHero.style.display =
         "none";
 
@@ -868,10 +836,6 @@ function renderGameDayHero() {
         "game-day"
     );
 
-
-    /*
-     * HOME / AWAY
-     */
 
     const isHome =
         String(
@@ -888,20 +852,11 @@ function renderGameDayHero() {
             : "AWAY";
 
 
-    /*
-     * HOME = WHITE
-     * AWAY = GREEN
-     */
-
     const jersey =
         isHome
             ? "WHITE"
             : "GREEN";
 
-
-    /*
-     * GAME DATE
-     */
 
     const formattedDate =
         gameDate.toLocaleDateString(
@@ -920,7 +875,7 @@ function renderGameDayHero() {
 
 
     /* =====================================================
-       DAY BEFORE GAME
+       GAME EVE
     ====================================================== */
 
     if (daysUntilGame === 1) {
@@ -978,11 +933,14 @@ function renderGameDayHero() {
             "The Hunt Is On";
 
 
+        playClawWipe();
+
+
     }
 
 
     /* =====================================================
-       STATUS + JERSEY
+       HOME / AWAY + JERSEY
     ====================================================== */
 
     const statusBox =
@@ -1026,6 +984,19 @@ function renderGameDayHero() {
 
 
     /* =====================================================
+       TIME
+    ====================================================== */
+
+    document
+        .getElementById(
+            "gameHeroTime"
+        )
+        .textContent =
+        nextGame.time ||
+        "Time TBD";
+
+
+    /* =====================================================
        FIELD
     ====================================================== */
 
@@ -1036,6 +1007,79 @@ function renderGameDayHero() {
         .textContent =
         nextGame.field ||
         "Field TBD";
+
+
+}
+
+
+/* =========================================================
+   CLAW EFFECT
+========================================================= */
+
+function playClawWipe() {
+
+
+    const wipe =
+        document.getElementById(
+            "clawWipe"
+        );
+
+
+    if (!wipe) {
+        return;
+    }
+
+
+    /*
+     * Play once per browser session.
+     */
+
+    if (
+        sessionStorage.getItem(
+            "wolfpackClawPlayedV2"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    sessionStorage.setItem(
+        "wolfpackClawPlayedV2",
+        "true"
+    );
+
+
+    /*
+     * Force animation restart.
+     */
+
+    wipe.classList.remove(
+        "show"
+    );
+
+
+    void wipe.offsetWidth;
+
+
+    wipe.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        () => {
+
+
+            wipe.classList.remove(
+                "show"
+            );
+
+
+        },
+        1000
+    );
 
 
 }
@@ -1627,6 +1671,14 @@ function renderNextGame() {
                 <span class="muted">
 
                     ${
+                        nextGame.time
+                            ? escapeHTML(
+                                nextGame.time
+                              ) + " • "
+                            : ""
+                    }
+
+                    ${
                         escapeHTML(
                             nextGame.field ||
                             "Field TBD"
@@ -1910,6 +1962,34 @@ function renderPackStatus() {
             <div class="announcement">
 
                 <strong>
+                    Next Game
+                </strong>
+
+                <span class="muted">
+
+                    ${
+                        nextGame.time
+                            ? escapeHTML(
+                                nextGame.time
+                              ) + " • "
+                            : ""
+                    }
+
+                    ${
+                        escapeHTML(
+                            nextGame.field ||
+                            "Field TBD"
+                        )
+                    }
+
+                </span>
+
+            </div>
+
+
+            <div class="announcement">
+
+                <strong>
                     Next Game Snacks
                 </strong>
 
@@ -2013,7 +2093,6 @@ function getNextEvent(
 
 /* =========================================================
    CURRENT WEEK
-   SUNDAY THROUGH SATURDAY
 ========================================================= */
 
 function getCurrentWeek() {

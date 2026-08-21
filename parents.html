@@ -94,8 +94,6 @@
     <main>
 
 
-        <!-- TOP BAR -->
-
         <div class="topbar">
 
             <div class="page-label">
@@ -162,7 +160,7 @@
 
 
         <!-- =================================================
-             PARENT DASHBOARD
+             DASHBOARD
         ================================================== -->
 
         <div
@@ -172,9 +170,7 @@
         >
 
 
-            <!-- =============================================
-                 WHAT TO BRING
-            ============================================== -->
+            <!-- WHAT TO BRING -->
 
             <section class="card card-half">
 
@@ -189,45 +185,36 @@
 
                 <div class="parent-checklist">
 
-
                     <div class="parent-check-item">
                         ⚽ Soccer ball
                     </div>
-
 
                     <div class="parent-check-item">
                         💧 Water
                     </div>
 
-
                     <div class="parent-check-item">
                         🛡️ Shin guards
                     </div>
-
 
                     <div class="parent-check-item">
                         👕 Correct jersey
                     </div>
 
-
                     <div class="parent-check-item">
                         👟 Cleats
                     </div>
 
-
                     <div class="parent-check-item">
                         🐺 Pack mentality
                     </div>
-
 
                 </div>
 
             </section>
 
 
-            <!-- =============================================
-                 NEXT GAME
-            ============================================== -->
+            <!-- NEXT GAME -->
 
             <section class="card card-half">
 
@@ -239,7 +226,6 @@
                     Game Day Details
                 </h2>
 
-
                 <div
                     id="parentNextGame"
                 >
@@ -248,9 +234,7 @@
             </section>
 
 
-            <!-- =============================================
-                 SNACKS
-            ============================================== -->
+            <!-- SNACKS -->
 
             <section class="card card-half">
 
@@ -262,12 +246,10 @@
                     Help Feed the Pack
                 </h2>
 
-
                 <div
                     id="parentSnackStatus"
                 >
                 </div>
-
 
                 <a
                     class="button"
@@ -279,9 +261,7 @@
             </section>
 
 
-            <!-- =============================================
-                 NEXT PRACTICE
-            ============================================== -->
+            <!-- NEXT PRACTICE -->
 
             <section class="card card-half">
 
@@ -293,12 +273,10 @@
                     Upcoming Practice
                 </h2>
 
-
                 <div
                     id="parentNextPractice"
                 >
                 </div>
-
 
                 <a
                     class="text-link"
@@ -310,9 +288,7 @@
             </section>
 
 
-            <!-- =============================================
-                 PHILOSOPHY
-            ============================================== -->
+            <!-- PHILOSOPHY -->
 
             <section class="card card-full">
 
@@ -397,9 +373,7 @@
             </section>
 
 
-            <!-- =============================================
-                 PARENT REMINDERS
-            ============================================== -->
+            <!-- REMINDERS -->
 
             <section class="card card-full">
 
@@ -529,10 +503,12 @@ async function loadParentHub() {
 
         if (!data.ok) {
 
+
             throw new Error(
                 data.error ||
                 "Unable to load parent hub."
             );
+
 
         }
 
@@ -575,20 +551,23 @@ async function loadParentHub() {
 
     }
 
+
 }
 
 
 /* =========================================================
-   RENDER PARENT HUB
+   RENDER
 ========================================================= */
 
 function renderParentHub() {
+
 
     renderNextGame();
 
     renderSnackStatus();
 
     renderNextPractice();
+
 
 }
 
@@ -625,6 +604,7 @@ function renderNextGame() {
 
 
         return;
+
 
     }
 
@@ -687,6 +667,14 @@ function renderNextGame() {
                 <div class="parent-game-field">
 
                     ${
+                        game.time
+                            ? escapeHTML(
+                                game.time
+                              ) + " • "
+                            : ""
+                    }
+
+                    ${
                         escapeHTML(
                             game.field ||
                             "Field TBD"
@@ -695,14 +683,15 @@ function renderNextGame() {
 
                 </div>
 
+
             </div>
 
 
             <div
                 class="game-status ${
                     isHome
-                    ? "home"
-                    : "away"
+                        ? "home"
+                        : "away"
                 }"
             >
 
@@ -731,6 +720,7 @@ function renderNextGame() {
         </div>
 
     `;
+
 
 }
 
@@ -767,6 +757,7 @@ function renderSnackStatus() {
 
 
         return;
+
 
     }
 
@@ -821,7 +812,9 @@ function renderSnackStatus() {
 
         `;
 
+
     }
+
 
 }
 
@@ -858,6 +851,7 @@ function renderNextPractice() {
 
 
         return;
+
 
     }
 
@@ -898,10 +892,10 @@ function renderNextPractice() {
 
                 ${
                     practice.time
-                    ? escapeHTML(
-                        practice.time
-                      )
-                    : "Time TBD"
+                        ? escapeHTML(
+                            practice.time
+                          )
+                        : "Time TBD"
                 }
 
                 •
@@ -944,6 +938,7 @@ function renderNextPractice() {
         </div>
 
     `;
+
 
 }
 
@@ -998,6 +993,7 @@ function getNextEvent(
 
     return upcoming[0] || null;
 
+
 }
 
 
@@ -1010,10 +1006,22 @@ function parseDate(
 ) {
 
 
+    if (!value) {
+
+
+        return new Date(
+            "1900-01-01T12:00:00"
+        );
+
+
+    }
+
+
     return new Date(
         value +
         "T12:00:00"
     );
+
 
 }
 
@@ -1050,6 +1058,7 @@ function escapeHTML(
             "'",
             "&#039;"
         );
+
 
 }
 
