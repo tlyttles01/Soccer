@@ -1,0 +1,3434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        FC Wolfpack | Coach's Den
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="coach-page">
+
+
+    <!-- =====================================================
+         LOGIN
+    ====================================================== -->
+
+    <section
+        id="coachLogin"
+        class="coach-login-screen"
+    >
+
+        <div class="coach-login-card">
+
+            <div class="coach-login-icon">
+                🐺
+            </div>
+
+            <div class="eyebrow">
+                FC Wolfpack
+            </div>
+
+            <h1>
+                Coach's Den
+            </h1>
+
+            <p class="muted">
+                Enter the coach PIN to manage
+                attendance and game lineups.
+            </p>
+
+
+            <input
+                id="coachPin"
+                class="coach-pin-input"
+                type="password"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="Coach PIN"
+            >
+
+
+            <button
+                id="unlockButton"
+                class="coach-primary-button"
+                type="button"
+            >
+                Unlock Coach's Den
+            </button>
+
+
+            <div
+                id="loginMessage"
+                class="coach-message"
+            >
+            </div>
+
+
+            <a
+                class="coach-back-link"
+                href="index.html"
+            >
+                ← Back to Pack HQ
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         COACH APP
+    ====================================================== -->
+
+    <div
+        id="coachApp"
+        style="display:none;"
+    >
+
+
+        <!-- HEADER -->
+
+        <header class="coach-header">
+
+            <div>
+
+                <div class="eyebrow">
+                    Private Coach Tools
+                </div>
+
+                <h1>
+                    🐺 Coach's Den
+                </h1>
+
+                <p>
+                    Set availability, control positions,
+                    generate fair rotations, make manual
+                    changes, and publish the lineup.
+                </p>
+
+            </div>
+
+
+            <div class="coach-header-actions">
+
+                <a
+                    href="lineup.html"
+                    target="_blank"
+                    class="coach-secondary-button"
+                >
+                    View Public Lineup
+                </a>
+
+                <button
+                    id="lockButton"
+                    class="coach-secondary-button"
+                    type="button"
+                >
+                    Lock
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             GAME SELECTOR
+        ================================================== -->
+
+        <section class="coach-card">
+
+            <div class="coach-section-heading">
+
+                <div>
+
+                    <div class="eyebrow">
+                        Game
+                    </div>
+
+                    <h2>
+                        Select Game
+                    </h2>
+
+                </div>
+
+                <div
+                    id="saveStatus"
+                    class="coach-save-status"
+                >
+                </div>
+
+            </div>
+
+
+            <select
+                id="coachGameSelector"
+                class="coach-select"
+            >
+            </select>
+
+
+            <div
+                id="coachGameDetails"
+                class="coach-game-details"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PLAYER AVAILABILITY
+        ================================================== -->
+
+        <section class="coach-card">
+
+            <div class="coach-section-heading">
+
+                <div>
+
+                    <div class="eyebrow">
+                        Game Day
+                    </div>
+
+                    <h2>
+                        Players
+                    </h2>
+
+                    <p class="muted">
+                        Attendance applies only to the selected
+                        game. Position restrictions stay with
+                        the player until you change them.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="coachPlayerList"
+                class="coach-player-list"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LINEUP GENERATOR
+        ================================================== -->
+
+        <section class="coach-card">
+
+            <div class="coach-section-heading">
+
+                <div>
+
+                    <div class="eyebrow">
+                        Lineup Builder
+                    </div>
+
+                    <h2>
+                        Build the Game Plan
+                    </h2>
+
+                    <p class="muted">
+                        The generator prioritizes equal playing
+                        time, avoids consecutive bench periods
+                        when possible, rotates positions, and
+                        respects attendance and position restrictions.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="coach-generator-actions">
+
+                <button
+                    id="generateButton"
+                    class="coach-primary-button"
+                    type="button"
+                >
+                    Generate Full Lineup
+                </button>
+
+
+                <button
+                    id="reloadButton"
+                    class="coach-secondary-button"
+                    type="button"
+                >
+                    Reload Saved Lineup
+                </button>
+
+            </div>
+
+
+            <div
+                id="generatorMessage"
+                class="coach-message"
+            >
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             QUARTERS
+        ================================================== -->
+
+        <div
+            id="coachQuarterGrid"
+            class="coach-quarter-grid"
+        >
+        </div>
+
+
+        <!-- =================================================
+             VALIDATION
+        ================================================== -->
+
+        <section class="coach-card">
+
+            <div class="eyebrow">
+                Lineup Check
+            </div>
+
+            <h2>
+                Validation
+            </h2>
+
+
+            <div
+                id="validationResults"
+                class="coach-validation"
+            >
+
+                Generate or edit the lineup to check it.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SAVE
+        ================================================== -->
+
+        <section class="coach-publish-card">
+
+            <div>
+
+                <div class="eyebrow">
+                    Publish
+                </div>
+
+                <h2>
+                    Update Weekly Lineup
+                </h2>
+
+                <p>
+                    This saves attendance, position restrictions,
+                    and Q1–Q4 directly to the Google Sheet used
+                    by the public Weekly Lineup page.
+                </p>
+
+            </div>
+
+
+            <button
+                id="saveEverythingButton"
+                class="coach-save-button"
+                type="button"
+            >
+                Save & Publish Lineup
+            </button>
+
+        </section>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbx5Fl8Ua7z60fT1d5VsT87W-hCGosv0m5AbIdpRUIsTQjrkjAInCySOYi7WyTxFyz8c/exec";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let coachPin = "";
+
+let games = [];
+
+let players = [];
+
+let savedLineup = [];
+
+let attendanceRows = [];
+
+
+let selectedGameId = "";
+
+
+/*
+ * Local editable player state.
+ */
+
+let playerState = {};
+
+
+/*
+ * Local editable lineup.
+ */
+
+let quarterLineups = {
+
+    "1": createEmptyQuarter(),
+
+    "2": createEmptyQuarter(),
+
+    "3": createEmptyQuarter(),
+
+    "4": createEmptyQuarter()
+
+};
+
+
+/* =========================================================
+   EMPTY QUARTER
+========================================================= */
+
+function createEmptyQuarter() {
+
+    return {
+
+        hunter: "",
+
+        scoutLeft: "",
+
+        scoutRight: "",
+
+        guardianLeft: "",
+
+        guardianRight: "",
+
+        packLeader: ""
+
+    };
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+document
+    .getElementById(
+        "unlockButton"
+    )
+    .addEventListener(
+        "click",
+        unlockCoachDen
+    );
+
+
+document
+    .getElementById(
+        "coachPin"
+    )
+    .addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key ===
+                "Enter"
+            ) {
+
+                unlockCoachDen();
+
+            }
+
+        }
+    );
+
+
+async function unlockCoachDen() {
+
+    const pinInput =
+        document.getElementById(
+            "coachPin"
+        );
+
+
+    const message =
+        document.getElementById(
+            "loginMessage"
+        );
+
+
+    const pin =
+        pinInput
+            .value
+            .trim();
+
+
+    if (!pin) {
+
+        message.textContent =
+            "Enter your coach PIN.";
+
+        return;
+
+    }
+
+
+    message.textContent =
+        "Checking PIN...";
+
+
+    try {
+
+        const result =
+            await postApi(
+                "verifycoachpin",
+                {
+                    pin:
+                        pin
+                }
+            );
+
+
+        if (
+            !result.ok ||
+            !result.valid
+        ) {
+
+            message.textContent =
+                "Incorrect PIN.";
+
+            return;
+
+        }
+
+
+        coachPin =
+            pin;
+
+
+        message.textContent =
+            "";
+
+
+        await loadCoachData();
+
+
+        document
+            .getElementById(
+                "coachLogin"
+            )
+            .style
+            .display =
+            "none";
+
+
+        document
+            .getElementById(
+                "coachApp"
+            )
+            .style
+            .display =
+            "block";
+
+
+    } catch (err) {
+
+        console.error(
+            err
+        );
+
+
+        message.textContent =
+            "Coach's Den could not be unlocked.";
+
+    }
+
+}
+
+
+/* =========================================================
+   LOCK
+========================================================= */
+
+document
+    .getElementById(
+        "lockButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            coachPin =
+                "";
+
+
+            document
+                .getElementById(
+                    "coachPin"
+                )
+                .value =
+                "";
+
+
+            document
+                .getElementById(
+                    "coachApp"
+                )
+                .style
+                .display =
+                "none";
+
+
+            document
+                .getElementById(
+                    "coachLogin"
+                )
+                .style
+                .display =
+                "grid";
+
+        }
+    );
+
+
+/* =========================================================
+   LOAD COACH DATA
+========================================================= */
+
+async function loadCoachData(
+    gameId = ""
+) {
+
+    const query =
+        new URLSearchParams({
+
+            action:
+                "coachdata",
+
+            pin:
+                coachPin
+
+        });
+
+
+    if (gameId) {
+
+        query.set(
+            "gameId",
+            gameId
+        );
+
+    }
+
+
+    const response =
+        await fetch(
+            API_URL +
+            "?" +
+            query.toString()
+        );
+
+
+    const result =
+        await response.json();
+
+
+    if (!result.ok) {
+
+        throw new Error(
+            result.error ||
+            "Coach data could not be loaded."
+        );
+
+    }
+
+
+    games =
+        result.data.games || [];
+
+
+    players =
+        result.data.players || [];
+
+
+    savedLineup =
+        result.data.lineup || [];
+
+
+    attendanceRows =
+        result.data.attendance || [];
+
+
+    if (!selectedGameId) {
+
+        selectedGameId =
+            findBestGame();
+
+    }
+
+
+    buildGameSelector();
+
+
+    await loadSelectedGame();
+
+}
+
+
+/* =========================================================
+   GAME SELECTOR
+========================================================= */
+
+function buildGameSelector() {
+
+    const selector =
+        document.getElementById(
+            "coachGameSelector"
+        );
+
+
+    selector.innerHTML =
+        "";
+
+
+    games.forEach(
+        game => {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                game.gameId;
+
+
+            option.textContent =
+                buildGameLabel(
+                    game
+                );
+
+
+            selector.appendChild(
+                option
+            );
+
+        }
+    );
+
+
+    selector.value =
+        selectedGameId;
+
+}
+
+
+/* =========================================================
+   GAME CHANGE
+========================================================= */
+
+document
+    .getElementById(
+        "coachGameSelector"
+    )
+    .addEventListener(
+        "change",
+        async event => {
+
+            selectedGameId =
+                event.target.value;
+
+
+            await loadSelectedGame();
+
+        }
+    );
+
+
+/* =========================================================
+   LOAD SELECTED GAME
+========================================================= */
+
+async function loadSelectedGame() {
+
+    if (!selectedGameId) {
+
+        return;
+
+    }
+
+
+    const query =
+        new URLSearchParams({
+
+            action:
+                "coachdata",
+
+            pin:
+                coachPin,
+
+            gameId:
+                selectedGameId
+
+        });
+
+
+    const response =
+        await fetch(
+            API_URL +
+            "?" +
+            query.toString()
+        );
+
+
+    const result =
+        await response.json();
+
+
+    if (!result.ok) {
+
+        throw new Error(
+            result.error ||
+            "Game could not be loaded."
+        );
+
+    }
+
+
+    games =
+        result.data.games || [];
+
+
+    players =
+        result.data.players || [];
+
+
+    savedLineup =
+        result.data.lineup || [];
+
+
+    attendanceRows =
+        result.data.attendance || [];
+
+
+    initializePlayerState();
+
+
+    loadSavedQuarterLineups();
+
+
+    renderGameDetails();
+
+
+    renderPlayers();
+
+
+    renderQuarterEditor();
+
+
+    validateLineup();
+
+}
+
+
+/* =========================================================
+   FIND NEXT GAME
+========================================================= */
+
+function findBestGame() {
+
+    if (
+        games.length === 0
+    ) {
+
+        return "";
+
+    }
+
+
+    const today =
+        new Date();
+
+
+    today.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    const upcoming =
+        games.find(
+            game => {
+
+                return (
+                    parseDate(
+                        game.date
+                    ) >=
+                    today
+                );
+
+            }
+        );
+
+
+    return upcoming
+        ? upcoming.gameId
+        : games[
+            games.length - 1
+        ].gameId;
+
+}
+
+
+/* =========================================================
+   GAME LABEL
+========================================================= */
+
+function buildGameLabel(
+    game
+) {
+
+    const date =
+        parseDate(
+            game.date
+        );
+
+
+    let label =
+        date.toLocaleDateString(
+            "en-US",
+            {
+                month:
+                    "short",
+
+                day:
+                    "numeric"
+            }
+        );
+
+
+    if (
+        game.time
+    ) {
+
+        label +=
+            " • " +
+            game.time;
+
+    }
+
+
+    label +=
+        " • " +
+        (
+            game.field ||
+            "Field TBD"
+        );
+
+
+    return label;
+
+}
+
+
+/* =========================================================
+   GAME DETAILS
+========================================================= */
+
+function renderGameDetails() {
+
+    const game =
+        games.find(
+            item =>
+                item.gameId ===
+                selectedGameId
+        );
+
+
+    if (!game) {
+
+        return;
+
+    }
+
+
+    const date =
+        parseDate(
+            game.date
+        );
+
+
+    const formatted =
+        date.toLocaleDateString(
+            "en-US",
+            {
+                weekday:
+                    "long",
+
+                month:
+                    "long",
+
+                day:
+                    "numeric",
+
+                year:
+                    "numeric"
+            }
+        );
+
+
+    document
+        .getElementById(
+            "coachGameDetails"
+        )
+        .innerHTML = `
+
+            <strong>
+                ${escapeHTML(
+                    formatted
+                )}
+            </strong>
+
+            <span>
+                ${
+                    game.time
+                        ? escapeHTML(
+                            game.time
+                          ) +
+                          " • "
+                        : ""
+                }
+
+                ${
+                    escapeHTML(
+                        game.field ||
+                        "Field TBD"
+                    )
+                }
+            </span>
+
+            <span>
+                ${
+                    escapeHTML(
+                        game.homeAway ||
+                        ""
+                    )
+                }
+            </span>
+
+        `;
+
+}
+
+
+/* =========================================================
+   INITIALIZE PLAYER STATE
+========================================================= */
+
+function initializePlayerState() {
+
+    playerState =
+        {};
+
+
+    players.forEach(
+        player => {
+
+            const attendance =
+                attendanceRows.find(
+                    item =>
+                        item.playerId ===
+                        player.playerId
+                );
+
+
+            playerState[
+                player.playerId
+            ] = {
+
+                playerId:
+                    player.playerId,
+
+                firstName:
+                    player.firstName,
+
+                status:
+                    attendance
+                        ? attendance.status
+                        : "Playing",
+
+                availableFromQuarter:
+                    attendance
+                        ? Number(
+                            attendance.availableFromQuarter ||
+                            1
+                          )
+                        : 1,
+
+                positions: {
+
+                    hunter:
+                        player.positions
+                            ? player.positions.hunter !== false
+                            : true,
+
+                    scout:
+                        player.positions
+                            ? player.positions.scout !== false
+                            : true,
+
+                    guardian:
+                        player.positions
+                            ? player.positions.guardian !== false
+                            : true,
+
+                    packLeader:
+                        player.positions
+                            ? player.positions.packLeader !== false
+                            : true
+
+                }
+
+            };
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   PLAYER CARDS
+========================================================= */
+
+function renderPlayers() {
+
+    const container =
+        document.getElementById(
+            "coachPlayerList"
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    players.forEach(
+        player => {
+
+            const state =
+                playerState[
+                    player.playerId
+                ];
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "coach-player-card";
+
+
+            card.dataset.playerId =
+                player.playerId;
+
+
+            card.innerHTML = `
+
+                <div class="coach-player-top">
+
+                    <div>
+
+                        <div class="coach-player-name">
+                            ${
+                                escapeHTML(
+                                    player.firstName
+                                )
+                            }
+                        </div>
+
+                        <div class="coach-player-id">
+                            ${
+                                escapeHTML(
+                                    player.playerId
+                                )
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="coach-player-label">
+                    Attendance
+                </div>
+
+
+                <div class="coach-toggle-row attendance-row">
+
+                    ${attendanceButton(
+                        player.playerId,
+                        "Playing",
+                        state.status
+                    )}
+
+                    ${attendanceButton(
+                        player.playerId,
+                        "Absent",
+                        state.status
+                    )}
+
+                    ${attendanceButton(
+                        player.playerId,
+                        "Late",
+                        state.status
+                    )}
+
+                </div>
+
+
+                <div
+                    class="coach-late-options"
+                    id="lateOptions-${player.playerId}"
+                    ${
+                        state.status === "Late"
+                            ? ""
+                            : 'style="display:none;"'
+                    }
+                >
+
+                    <label>
+                        Available starting
+                    </label>
+
+                    <select
+                        class="coach-quarter-select"
+                        data-player="${player.playerId}"
+                    >
+
+                        ${quarterOption(
+                            1,
+                            state.availableFromQuarter
+                        )}
+
+                        ${quarterOption(
+                            2,
+                            state.availableFromQuarter
+                        )}
+
+                        ${quarterOption(
+                            3,
+                            state.availableFromQuarter
+                        )}
+
+                        ${quarterOption(
+                            4,
+                            state.availableFromQuarter
+                        )}
+
+                    </select>
+
+                </div>
+
+
+                <div class="coach-player-label">
+                    Allowed Positions
+                </div>
+
+
+                <div class="coach-position-row">
+
+                    ${positionButton(
+                        player.playerId,
+                        "hunter",
+                        "🐺",
+                        "Hunter",
+                        state.positions.hunter
+                    )}
+
+                    ${positionButton(
+                        player.playerId,
+                        "scout",
+                        "🔭",
+                        "Scout",
+                        state.positions.scout
+                    )}
+
+                    ${positionButton(
+                        player.playerId,
+                        "guardian",
+                        "🛡️",
+                        "Guardian",
+                        state.positions.guardian
+                    )}
+
+                    ${positionButton(
+                        player.playerId,
+                        "packLeader",
+                        "👑",
+                        "Pack Leader",
+                        state.positions.packLeader
+                    )}
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+    );
+
+
+    attachPlayerEvents();
+
+}
+
+
+/* =========================================================
+   ATTENDANCE BUTTON
+========================================================= */
+
+function attendanceButton(
+    playerId,
+    status,
+    selectedStatus
+) {
+
+    return `
+
+        <button
+            type="button"
+            class="coach-attendance-button ${
+                selectedStatus === status
+                    ? "active"
+                    : ""
+            } ${
+                status
+                    .toLowerCase()
+            }"
+            data-player="${playerId}"
+            data-status="${status}"
+        >
+            ${
+                status === "Playing"
+                    ? "✓ Playing"
+                    : status === "Absent"
+                        ? "✕ Absent"
+                        : "⏰ Late"
+            }
+        </button>
+
+    `;
+
+}
+
+
+/* =========================================================
+   POSITION BUTTON
+========================================================= */
+
+function positionButton(
+    playerId,
+    position,
+    icon,
+    label,
+    allowed
+) {
+
+    return `
+
+        <button
+            type="button"
+            class="coach-position-button ${
+                allowed
+                    ? "allowed"
+                    : "blocked"
+            }"
+            data-player="${playerId}"
+            data-position="${position}"
+        >
+
+            <span>
+                ${icon}
+            </span>
+
+            ${escapeHTML(
+                label
+            )}
+
+        </button>
+
+    `;
+
+}
+
+
+/* =========================================================
+   QUARTER OPTION
+========================================================= */
+
+function quarterOption(
+    quarter,
+    selected
+) {
+
+    return `
+
+        <option
+            value="${quarter}"
+            ${
+                Number(
+                    selected
+                ) ===
+                quarter
+                    ? "selected"
+                    : ""
+            }
+        >
+            Q${quarter}
+        </option>
+
+    `;
+
+}
+
+
+/* =========================================================
+   PLAYER EVENTS
+========================================================= */
+
+function attachPlayerEvents() {
+
+
+    document
+        .querySelectorAll(
+            ".coach-attendance-button"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const playerId =
+                            button.dataset.player;
+
+
+                        const status =
+                            button.dataset.status;
+
+
+                        playerState[
+                            playerId
+                        ].status =
+                            status;
+
+
+                        if (
+                            status ===
+                            "Playing"
+                        ) {
+
+                            playerState[
+                                playerId
+                            ].availableFromQuarter =
+                                1;
+
+                        }
+
+
+                        renderPlayers();
+
+
+                        validateLineup();
+
+                    }
+                );
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(
+            ".coach-position-button"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const playerId =
+                            button.dataset.player;
+
+
+                        const position =
+                            button.dataset.position;
+
+
+                        playerState[
+                            playerId
+                        ].positions[
+                            position
+                        ] =
+                            !playerState[
+                                playerId
+                            ].positions[
+                                position
+                            ];
+
+
+                        renderPlayers();
+
+
+                        renderQuarterEditor();
+
+
+                        validateLineup();
+
+                    }
+                );
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(
+            ".coach-quarter-select"
+        )
+        .forEach(
+            select => {
+
+                select.addEventListener(
+                    "change",
+                    () => {
+
+                        playerState[
+                            select.dataset.player
+                        ].availableFromQuarter =
+                            Number(
+                                select.value
+                            );
+
+
+                        validateLineup();
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   LOAD SAVED LINEUP
+========================================================= */
+
+function loadSavedQuarterLineups() {
+
+
+    quarterLineups = {
+
+        "1":
+            createEmptyQuarter(),
+
+        "2":
+            createEmptyQuarter(),
+
+        "3":
+            createEmptyQuarter(),
+
+        "4":
+            createEmptyQuarter()
+
+    };
+
+
+    [
+        "1",
+        "2",
+        "3",
+        "4"
+    ].forEach(
+        quarter => {
+
+            const row =
+                savedLineup.find(
+                    item =>
+
+                        item.gameId ===
+                        selectedGameId
+
+                        &&
+
+                        String(
+                            item.quarter
+                        ) ===
+                        quarter
+                );
+
+
+            if (!row) {
+
+                return;
+
+            }
+
+
+            const scouts =
+                splitPlayers(
+                    row.scouts
+                );
+
+
+            const guardians =
+                splitPlayers(
+                    row.guardians
+                );
+
+
+            quarterLineups[
+                quarter
+            ] = {
+
+                hunter:
+                    firstPlayer(
+                        row.hunter
+                    ),
+
+                scoutLeft:
+                    scouts[0] || "",
+
+                scoutRight:
+                    scouts[1] || "",
+
+                guardianLeft:
+                    guardians[0] || "",
+
+                guardianRight:
+                    guardians[1] || "",
+
+                packLeader:
+                    firstPlayer(
+                        row.packLeader
+                    )
+
+            };
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   GENERATE LINEUP
+========================================================= */
+
+document
+    .getElementById(
+        "generateButton"
+    )
+    .addEventListener(
+        "click",
+        generateLineup
+    );
+
+
+function generateLineup() {
+
+    const message =
+        document.getElementById(
+            "generatorMessage"
+        );
+
+
+    message.textContent =
+        "";
+
+
+    const stats =
+        {};
+
+
+    players.forEach(
+        player => {
+
+            stats[
+                player.playerId
+            ] = {
+
+                played:
+                    0,
+
+                lastPlayed:
+                    false,
+
+                positionCount: {
+
+                    hunter:
+                        0,
+
+                    scout:
+                        0,
+
+                    guardian:
+                        0,
+
+                    packLeader:
+                        0
+
+                }
+
+            };
+
+        }
+    );
+
+
+    const newLineup =
+        {};
+
+
+    for (
+        let quarter = 1;
+        quarter <= 4;
+        quarter++
+    ) {
+
+        const available =
+            getAvailablePlayers(
+                quarter
+            );
+
+
+        const assigned =
+            new Set();
+
+
+        const quarterResult =
+            createEmptyQuarter();
+
+
+        /*
+         * Fill positions where eligibility
+         * can be restrictive first.
+         */
+
+        const slots = [
+
+            {
+                key:
+                    "packLeader",
+
+                position:
+                    "packLeader"
+            },
+
+            {
+                key:
+                    "hunter",
+
+                position:
+                    "hunter"
+            },
+
+            {
+                key:
+                    "guardianLeft",
+
+                position:
+                    "guardian"
+            },
+
+            {
+                key:
+                    "guardianRight",
+
+                position:
+                    "guardian"
+            },
+
+            {
+                key:
+                    "scoutLeft",
+
+                position:
+                    "scout"
+            },
+
+            {
+                key:
+                    "scoutRight",
+
+                position:
+                    "scout"
+            }
+
+        ];
+
+
+        slots.forEach(
+            slot => {
+
+                const candidate =
+                    pickBestPlayer(
+                        available,
+                        assigned,
+                        slot.position,
+                        stats
+                    );
+
+
+                if (
+                    candidate
+                ) {
+
+                    quarterResult[
+                        slot.key
+                    ] =
+                        candidate.playerId;
+
+
+                    assigned.add(
+                        candidate.playerId
+                    );
+
+
+                    stats[
+                        candidate.playerId
+                    ].played++;
+
+
+                    stats[
+                        candidate.playerId
+                    ].positionCount[
+                        slot.position
+                    ]++;
+
+                }
+
+            }
+        );
+
+
+        /*
+         * Track whether each player played
+         * this quarter.
+         */
+
+        available.forEach(
+            player => {
+
+                stats[
+                    player.playerId
+                ].lastPlayed =
+                    assigned.has(
+                        player.playerId
+                    );
+
+            }
+        );
+
+
+        newLineup[
+            String(
+                quarter
+            )
+        ] =
+            quarterResult;
+
+    }
+
+
+    quarterLineups =
+        newLineup;
+
+
+    renderQuarterEditor();
+
+
+    validateLineup();
+
+
+    message.textContent =
+        "Lineup generated. You can manually change any position before publishing.";
+
+}
+
+
+/* =========================================================
+   PICK BEST PLAYER
+========================================================= */
+
+function pickBestPlayer(
+    available,
+    assigned,
+    position,
+    stats
+) {
+
+    const eligible =
+        available
+            .filter(
+                player => {
+
+                    if (
+                        assigned.has(
+                            player.playerId
+                        )
+                    ) {
+
+                        return false;
+
+                    }
+
+
+                    return (
+                        playerState[
+                            player.playerId
+                        ].positions[
+                            position
+                        ] !== false
+                    );
+
+                }
+            );
+
+
+    if (
+        eligible.length === 0
+    ) {
+
+        return null;
+
+    }
+
+
+    eligible.sort(
+        (a, b) => {
+
+            const scoreA =
+                playerScore(
+                    a.playerId,
+                    position,
+                    stats
+                );
+
+
+            const scoreB =
+                playerScore(
+                    b.playerId,
+                    position,
+                    stats
+                );
+
+
+            return (
+                scoreA -
+                scoreB
+            );
+
+        }
+    );
+
+
+    return eligible[0];
+
+}
+
+
+/* =========================================================
+   PLAYER SCORE
+========================================================= */
+
+function playerScore(
+    playerId,
+    position,
+    stats
+) {
+
+    const stat =
+        stats[
+            playerId
+        ];
+
+
+    let score =
+        stat.played *
+        100;
+
+
+    /*
+     * Prefer somebody who did not play
+     * last quarter.
+     */
+
+    if (
+        !stat.lastPlayed
+    ) {
+
+        score -=
+            25;
+
+    }
+
+
+    /*
+     * Prefer a position they have
+     * played less often.
+     */
+
+    score +=
+        stat.positionCount[
+            position
+        ] *
+        15;
+
+
+    /*
+     * Tiny random factor prevents
+     * identical lineups every generation.
+     */
+
+    score +=
+        Math.random() *
+        5;
+
+
+    return score;
+
+}
+
+
+/* =========================================================
+   AVAILABLE PLAYERS
+========================================================= */
+
+function getAvailablePlayers(
+    quarter
+) {
+
+    return players.filter(
+        player => {
+
+            const state =
+                playerState[
+                    player.playerId
+                ];
+
+
+            if (!state) {
+
+                return false;
+
+            }
+
+
+            if (
+                state.status ===
+                "Absent"
+            ) {
+
+                return false;
+
+            }
+
+
+            if (
+                state.status ===
+                "Late"
+            ) {
+
+                return (
+                    quarter >=
+                    Number(
+                        state.availableFromQuarter ||
+                        1
+                    )
+                );
+
+            }
+
+
+            return true;
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   QUARTER EDITOR
+========================================================= */
+
+function renderQuarterEditor() {
+
+    const container =
+        document.getElementById(
+            "coachQuarterGrid"
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    [
+        "1",
+        "2",
+        "3",
+        "4"
+    ].forEach(
+        quarter => {
+
+            const lineup =
+                quarterLineups[
+                    quarter
+                ];
+
+
+            const card =
+                document.createElement(
+                    "section"
+                );
+
+
+            card.className =
+                "coach-quarter-card";
+
+
+            card.innerHTML = `
+
+                <div class="coach-quarter-heading">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            Quarter
+                        </div>
+
+                        <h2>
+                            Q${quarter}
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="coach-reset-quarter"
+                        data-quarter="${quarter}"
+                    >
+                        Clear Q${quarter}
+                    </button>
+
+                </div>
+
+
+                ${positionSelectHTML(
+                    quarter,
+                    "hunter",
+                    "🐺 Hunter",
+                    "hunter",
+                    lineup.hunter
+                )}
+
+
+                ${positionSelectHTML(
+                    quarter,
+                    "scoutLeft",
+                    "🔭 Scout — Left",
+                    "scout",
+                    lineup.scoutLeft
+                )}
+
+
+                ${positionSelectHTML(
+                    quarter,
+                    "scoutRight",
+                    "🔭 Scout — Right",
+                    "scout",
+                    lineup.scoutRight
+                )}
+
+
+                ${positionSelectHTML(
+                    quarter,
+                    "guardianLeft",
+                    "🛡️ Guardian — Left",
+                    "guardian",
+                    lineup.guardianLeft
+                )}
+
+
+                ${positionSelectHTML(
+                    quarter,
+                    "guardianRight",
+                    "🛡️ Guardian — Right",
+                    "guardian",
+                    lineup.guardianRight
+                )}
+
+
+                ${positionSelectHTML(
+                    quarter,
+                    "packLeader",
+                    "👑 Pack Leader (Goalie)",
+                    "packLeader",
+                    lineup.packLeader
+                )}
+
+
+                <div class="coach-bench-box">
+
+                    <div class="coach-position-label">
+                        Bench
+                    </div>
+
+                    <div
+                        id="coachBench-${quarter}"
+                        class="coach-bench-list"
+                    >
+                    </div>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+
+            renderCoachBench(
+                quarter
+            );
+
+        }
+    );
+
+
+    attachQuarterEvents();
+
+}
+
+
+/* =========================================================
+   POSITION SELECT
+========================================================= */
+
+function positionSelectHTML(
+    quarter,
+    slot,
+    label,
+    position,
+    selectedPlayer
+) {
+
+    const available =
+        getAvailablePlayers(
+            Number(
+                quarter
+            )
+        );
+
+
+    const eligible =
+        available.filter(
+            player => {
+
+                return (
+                    playerState[
+                        player.playerId
+                    ].positions[
+                        position
+                    ] !== false
+                );
+
+            }
+        );
+
+
+    let options = `
+
+        <option value="">
+            Open
+        </option>
+
+    `;
+
+
+    eligible.forEach(
+        player => {
+
+            options += `
+
+                <option
+                    value="${player.playerId}"
+                    ${
+                        player.playerId ===
+                        selectedPlayer
+                            ? "selected"
+                            : ""
+                    }
+                >
+                    ${
+                        escapeHTML(
+                            player.firstName
+                        )
+                    }
+                </option>
+
+            `;
+
+        }
+    );
+
+
+    return `
+
+        <div class="coach-position-editor">
+
+            <label class="coach-position-label">
+                ${label}
+            </label>
+
+
+            <select
+                class="coach-lineup-select"
+                data-quarter="${quarter}"
+                data-slot="${slot}"
+                data-position="${position}"
+            >
+
+                ${options}
+
+            </select>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   QUARTER EVENTS
+========================================================= */
+
+function attachQuarterEvents() {
+
+
+    document
+        .querySelectorAll(
+            ".coach-lineup-select"
+        )
+        .forEach(
+            select => {
+
+                select.addEventListener(
+                    "change",
+                    () => {
+
+                        manualPositionChange(
+                            select
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(
+            ".coach-reset-quarter"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        quarterLineups[
+                            button.dataset.quarter
+                        ] =
+                            createEmptyQuarter();
+
+
+                        renderQuarterEditor();
+
+
+                        validateLineup();
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   MANUAL POSITION CHANGE
+========================================================= */
+
+function manualPositionChange(
+    select
+) {
+
+    const quarter =
+        select.dataset.quarter;
+
+
+    const slot =
+        select.dataset.slot;
+
+
+    const newPlayer =
+        select.value;
+
+
+    const lineup =
+        quarterLineups[
+            quarter
+        ];
+
+
+    const oldPlayer =
+        lineup[
+            slot
+        ];
+
+
+    /*
+     * If selected player already occupies another
+     * slot, swap them.
+     */
+
+    if (
+        newPlayer
+    ) {
+
+        const otherSlot =
+            Object
+                .keys(
+                    lineup
+                )
+                .find(
+                    key =>
+
+                        key !==
+                        slot
+
+                        &&
+
+                        lineup[
+                            key
+                        ] ===
+                        newPlayer
+                );
+
+
+        if (
+            otherSlot
+        ) {
+
+            lineup[
+                otherSlot
+            ] =
+                oldPlayer;
+
+        }
+
+    }
+
+
+    lineup[
+        slot
+    ] =
+        newPlayer;
+
+
+    renderQuarterEditor();
+
+
+    validateLineup();
+
+}
+
+
+/* =========================================================
+   BENCH
+========================================================= */
+
+function renderCoachBench(
+    quarter
+) {
+
+    const container =
+        document.getElementById(
+            "coachBench-" +
+            quarter
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    const available =
+        getAvailablePlayers(
+            Number(
+                quarter
+            )
+        );
+
+
+    const lineup =
+        quarterLineups[
+            quarter
+        ];
+
+
+    const fieldPlayers =
+        new Set(
+            Object
+                .values(
+                    lineup
+                )
+                .filter(Boolean)
+        );
+
+
+    const bench =
+        available.filter(
+            player =>
+
+                !fieldPlayers.has(
+                    player.playerId
+                )
+        );
+
+
+    if (
+        bench.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <span class="coach-bench-empty">
+                No players on bench
+            </span>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        bench
+            .map(
+                player => `
+
+                    <span class="coach-bench-player">
+                        ${
+                            escapeHTML(
+                                player.firstName
+                            )
+                        }
+                    </span>
+
+                `
+            )
+            .join("");
+
+}
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+function validateLineup() {
+
+    const results =
+        document.getElementById(
+            "validationResults"
+        );
+
+
+    const problems =
+        [];
+
+
+    [
+        "1",
+        "2",
+        "3",
+        "4"
+    ].forEach(
+        quarter => {
+
+            const lineup =
+                quarterLineups[
+                    quarter
+                ];
+
+
+            const slotPositions = {
+
+                hunter:
+                    "hunter",
+
+                scoutLeft:
+                    "scout",
+
+                scoutRight:
+                    "scout",
+
+                guardianLeft:
+                    "guardian",
+
+                guardianRight:
+                    "guardian",
+
+                packLeader:
+                    "packLeader"
+
+            };
+
+
+            const seen =
+                new Set();
+
+
+            Object
+                .entries(
+                    lineup
+                )
+                .forEach(
+                    ([slot, playerId]) => {
+
+                        if (!playerId) {
+
+                            return;
+
+                        }
+
+
+                        if (
+                            seen.has(
+                                playerId
+                            )
+                        ) {
+
+                            problems.push(
+                                `Q${quarter}: ${
+                                    getPlayerName(
+                                        playerId
+                                    )
+                                } appears more than once.`
+                            );
+
+                        }
+
+
+                        seen.add(
+                            playerId
+                        );
+
+
+                        const state =
+                            playerState[
+                                playerId
+                            ];
+
+
+                        if (!state) {
+
+                            problems.push(
+                                `Q${quarter}: Unknown player ${playerId}.`
+                            );
+
+                            return;
+
+                        }
+
+
+                        if (
+                            state.status ===
+                            "Absent"
+                        ) {
+
+                            problems.push(
+                                `Q${quarter}: ${
+                                    state.firstName
+                                } is marked absent.`
+                            );
+
+                        }
+
+
+                        if (
+                            state.status ===
+                            "Late"
+
+                            &&
+
+                            Number(
+                                quarter
+                            ) <
+                            Number(
+                                state.availableFromQuarter
+                            )
+                        ) {
+
+                            problems.push(
+                                `Q${quarter}: ${
+                                    state.firstName
+                                } is not available yet.`
+                            );
+
+                        }
+
+
+                        const position =
+                            slotPositions[
+                                slot
+                            ];
+
+
+                        if (
+                            !state.positions[
+                                position
+                            ]
+                        ) {
+
+                            problems.push(
+                                `Q${quarter}: ${
+                                    state.firstName
+                                } cannot play ${
+                                    positionDisplayName(
+                                        position
+                                    )
+                                }.`
+                            );
+
+                        }
+
+                    }
+                );
+
+        }
+    );
+
+
+    if (
+        problems.length === 0
+    ) {
+
+        results.className =
+            "coach-validation valid";
+
+
+        results.innerHTML = `
+
+            <strong>
+                ✓ Lineup looks good
+            </strong>
+
+            <span>
+                No attendance, duplication, or position conflicts found.
+            </span>
+
+        `;
+
+
+        return true;
+
+    }
+
+
+    results.className =
+        "coach-validation invalid";
+
+
+    results.innerHTML = `
+
+        <strong>
+            ⚠ Check the lineup
+        </strong>
+
+        <ul>
+            ${
+                problems
+                    .map(
+                        problem => `
+
+                            <li>
+                                ${
+                                    escapeHTML(
+                                        problem
+                                    )
+                                }
+                            </li>
+
+                        `
+                    )
+                    .join("")
+            }
+        </ul>
+
+    `;
+
+
+    return false;
+
+}
+
+
+/* =========================================================
+   POSITION DISPLAY
+========================================================= */
+
+function positionDisplayName(
+    position
+) {
+
+    if (
+        position ===
+        "packLeader"
+    ) {
+
+        return "Pack Leader";
+
+    }
+
+
+    return position
+        .charAt(0)
+        .toUpperCase() +
+        position.slice(1);
+
+}
+
+
+/* =========================================================
+   RELOAD SAVED LINEUP
+========================================================= */
+
+document
+    .getElementById(
+        "reloadButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            loadSavedQuarterLineups();
+
+            renderQuarterEditor();
+
+            validateLineup();
+
+            document
+                .getElementById(
+                    "generatorMessage"
+                )
+                .textContent =
+                "Saved Weekly Lineup restored.";
+
+        }
+    );
+
+
+/* =========================================================
+   SAVE EVERYTHING
+========================================================= */
+
+document
+    .getElementById(
+        "saveEverythingButton"
+    )
+    .addEventListener(
+        "click",
+        saveEverything
+    );
+
+
+async function saveEverything() {
+
+    const button =
+        document.getElementById(
+            "saveEverythingButton"
+        );
+
+
+    const status =
+        document.getElementById(
+            "saveStatus"
+        );
+
+
+    if (
+        !validateLineup()
+    ) {
+
+        status.textContent =
+            "Fix lineup conflicts before publishing.";
+
+        status.className =
+            "coach-save-status error";
+
+        return;
+
+    }
+
+
+    button.disabled =
+        true;
+
+
+    button.textContent =
+        "Saving...";
+
+
+    status.textContent =
+        "Saving changes...";
+
+
+    status.className =
+        "coach-save-status";
+
+
+    try {
+
+
+        /*
+         * Save player restrictions
+         * and attendance.
+         */
+
+        for (
+            const player of players
+        ) {
+
+            const state =
+                playerState[
+                    player.playerId
+                ];
+
+
+            await postApi(
+                "saveplayerrestrictions",
+                {
+
+                    pin:
+                        coachPin,
+
+                    playerId:
+                        player.playerId,
+
+                    hunter:
+                        state.positions.hunter,
+
+                    scout:
+                        state.positions.scout,
+
+                    guardian:
+                        state.positions.guardian,
+
+                    packLeader:
+                        state.positions.packLeader
+
+                }
+            );
+
+
+            await postApi(
+                "saveattendance",
+                {
+
+                    pin:
+                        coachPin,
+
+                    gameId:
+                        selectedGameId,
+
+                    playerId:
+                        player.playerId,
+
+                    status:
+                        state.status,
+
+                    availableFromQuarter:
+                        state.availableFromQuarter
+
+                }
+            );
+
+        }
+
+
+        /*
+         * Save all four quarters.
+         */
+
+        for (
+            const quarter of [
+                "1",
+                "2",
+                "3",
+                "4"
+            ]
+        ) {
+
+            const lineup =
+                quarterLineups[
+                    quarter
+                ];
+
+
+            const bench =
+                getBenchPlayerIds(
+                    quarter
+                );
+
+
+            const result =
+                await postApi(
+                    "savelineup",
+                    {
+
+                        pin:
+                            coachPin,
+
+                        gameId:
+                            selectedGameId,
+
+                        quarter:
+                            quarter,
+
+                        hunter:
+                            lineup.hunter,
+
+                        scouts:
+                            [
+                                lineup.scoutLeft,
+                                lineup.scoutRight
+                            ]
+                                .filter(Boolean)
+                                .join(","),
+
+                        guardians:
+                            [
+                                lineup.guardianLeft,
+                                lineup.guardianRight
+                            ]
+                                .filter(Boolean)
+                                .join(","),
+
+                        packLeader:
+                            lineup.packLeader,
+
+                        bench:
+                            bench.join(",")
+
+                    }
+                );
+
+
+            if (
+                !result.ok
+            ) {
+
+                throw new Error(
+                    result.error ||
+                    `Q${quarter} could not be saved.`
+                );
+
+            }
+
+        }
+
+
+        status.textContent =
+            "✓ Lineup published";
+
+
+        status.className =
+            "coach-save-status success";
+
+
+        button.textContent =
+            "Saved ✓";
+
+
+        /*
+         * Reload from Google Sheets so
+         * local data matches published data.
+         */
+
+        await loadSelectedGame();
+
+
+        setTimeout(
+            () => {
+
+                button.textContent =
+                    "Save & Publish Lineup";
+
+                button.disabled =
+                    false;
+
+            },
+            1600
+        );
+
+
+    } catch (err) {
+
+        console.error(
+            err
+        );
+
+
+        status.textContent =
+            err.message ||
+            "Save failed.";
+
+
+        status.className =
+            "coach-save-status error";
+
+
+        button.textContent =
+            "Save & Publish Lineup";
+
+
+        button.disabled =
+            false;
+
+    }
+
+}
+
+
+/* =========================================================
+   BENCH PLAYER IDS
+========================================================= */
+
+function getBenchPlayerIds(
+    quarter
+) {
+
+    const available =
+        getAvailablePlayers(
+            Number(
+                quarter
+            )
+        );
+
+
+    const lineup =
+        quarterLineups[
+            quarter
+        ];
+
+
+    const field =
+        new Set(
+            Object
+                .values(
+                    lineup
+                )
+                .filter(Boolean)
+        );
+
+
+    return available
+        .filter(
+            player =>
+
+                !field.has(
+                    player.playerId
+                )
+        )
+        .map(
+            player =>
+                player.playerId
+        );
+
+}
+
+
+/* =========================================================
+   API POST
+========================================================= */
+
+async function postApi(
+    action,
+    values
+) {
+
+    const body =
+        new URLSearchParams();
+
+
+    body.set(
+        "action",
+        action
+    );
+
+
+    Object
+        .entries(
+            values
+        )
+        .forEach(
+            ([key, value]) => {
+
+                body.set(
+                    key,
+                    String(
+                        value
+                    )
+                );
+
+            }
+        );
+
+
+    const response =
+        await fetch(
+            API_URL,
+            {
+
+                method:
+                    "POST",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/x-www-form-urlencoded"
+
+                },
+
+                body:
+                    body.toString()
+
+            }
+        );
+
+
+    const result =
+        await response.json();
+
+
+    if (
+        !result.ok
+    ) {
+
+        throw new Error(
+            result.error ||
+            "Request failed."
+        );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function splitPlayers(
+    value
+) {
+
+    if (!value) {
+
+        return [];
+
+    }
+
+
+    return String(
+        value
+    )
+        .split(",")
+        .map(
+            value =>
+                value.trim()
+        )
+        .filter(Boolean);
+
+}
+
+
+function firstPlayer(
+    value
+) {
+
+    return splitPlayers(
+        value
+    )[0] || "";
+
+}
+
+
+function getPlayerName(
+    playerId
+) {
+
+    const player =
+        players.find(
+            item =>
+                item.playerId ===
+                playerId
+        );
+
+
+    return player
+        ? player.firstName
+        : playerId;
+
+}
+
+
+function parseDate(
+    value
+) {
+
+    if (!value) {
+
+        return new Date(
+            "1900-01-01T12:00:00"
+        );
+
+    }
+
+
+    return new Date(
+        value +
+        "T12:00:00"
+    );
+
+}
+
+
+function escapeHTML(
+    value
+) {
+
+    return String(
+        value || ""
+    )
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

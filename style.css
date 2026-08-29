@@ -2959,3 +2959,1062 @@ main {
 
 }
 
+/* =========================================================
+   COACH'S DEN
+========================================================= */
+
+.coach-page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 28px;
+
+    background:
+        #f4f6f3;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.coach-login-screen {
+    min-height: calc(100vh - 56px);
+
+    display: grid;
+    place-items: center;
+}
+
+
+.coach-login-card {
+    width: 100%;
+    max-width: 430px;
+
+    padding: 38px;
+
+    border-radius: 22px;
+
+    background: #ffffff;
+
+    border:
+        1px solid
+        var(--border);
+
+    box-shadow:
+        0 18px 50px
+        rgba(15, 35, 22, 0.12);
+
+    text-align: center;
+}
+
+
+.coach-login-icon {
+    width: 70px;
+    height: 70px;
+
+    display: grid;
+    place-items: center;
+
+    margin:
+        0 auto 16px;
+
+    border-radius: 20px;
+
+    background:
+        var(--green);
+
+    font-size: 2rem;
+}
+
+
+.coach-login-card h1 {
+    margin:
+        8px 0 10px;
+
+    font-size: 2rem;
+}
+
+
+.coach-pin-input {
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding:
+        15px 16px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 12px;
+
+    font: inherit;
+
+    font-size: 1.1rem;
+
+    text-align: center;
+
+    letter-spacing: 0.18em;
+}
+
+
+.coach-back-link {
+    display: inline-block;
+
+    margin-top: 18px;
+
+    color:
+        var(--muted);
+
+    text-decoration: none;
+
+    font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.coach-primary-button,
+.coach-secondary-button,
+.coach-save-button {
+    border: 0;
+
+    border-radius: 11px;
+
+    padding:
+        12px 16px;
+
+    font: inherit;
+
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+
+.coach-primary-button {
+    background:
+        var(--green);
+
+    color: white;
+}
+
+
+.coach-login-card .coach-primary-button {
+    width: 100%;
+
+    margin-top: 12px;
+}
+
+
+.coach-secondary-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #edf2ee;
+
+    color:
+        var(--green-dark);
+
+    text-decoration: none;
+}
+
+
+.coach-save-button {
+    background: white;
+
+    color:
+        var(--green-dark);
+
+    min-width: 220px;
+}
+
+
+.coach-save-button:disabled {
+    opacity: 0.65;
+
+    cursor: wait;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.coach-header {
+    max-width: 1250px;
+
+    margin:
+        0 auto 22px;
+
+    padding:
+        30px 34px;
+
+    border-radius: 22px;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    gap: 24px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0c2117,
+            #1f6f46
+        );
+}
+
+
+.coach-header h1 {
+    margin:
+        6px 0;
+
+    font-size:
+        clamp(
+            2rem,
+            5vw,
+            3rem
+        );
+}
+
+
+.coach-header p {
+    margin: 0;
+
+    color: #d5e7db;
+
+    max-width: 660px;
+
+    line-height: 1.5;
+}
+
+
+.coach-header .eyebrow {
+    color: #a9ceb7;
+}
+
+
+.coach-header-actions {
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.coach-card {
+    max-width: 1250px;
+
+    margin:
+        0 auto 20px;
+
+    padding: 26px;
+
+    background: white;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 6px 20px
+        rgba(20, 35, 25, 0.05);
+}
+
+
+.coach-section-heading {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        flex-start;
+
+    gap: 20px;
+
+    margin-bottom: 18px;
+}
+
+
+.coach-section-heading h2 {
+    margin:
+        5px 0 5px;
+}
+
+
+/* =========================================================
+   GAME
+========================================================= */
+
+.coach-select {
+    width: 100%;
+
+    padding:
+        13px 14px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 11px;
+
+    background: white;
+
+    color:
+        var(--text);
+
+    font: inherit;
+
+    font-weight: 700;
+}
+
+
+.coach-game-details {
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin-top: 15px;
+
+    color:
+        var(--muted);
+}
+
+
+.coach-game-details strong {
+    color:
+        var(--text);
+}
+
+
+/* =========================================================
+   PLAYER LIST
+========================================================= */
+
+.coach-player-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 16px;
+}
+
+
+.coach-player-card {
+    padding: 20px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 16px;
+
+    background:
+        #fafcfb;
+}
+
+
+.coach-player-top {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom: 16px;
+}
+
+
+.coach-player-name {
+    font-size: 1.25rem;
+
+    font-weight: 900;
+}
+
+
+.coach-player-id {
+    margin-top: 2px;
+
+    color:
+        var(--muted);
+
+    font-size: 0.68rem;
+}
+
+
+.coach-player-label {
+    margin:
+        15px 0 8px;
+
+    color:
+        var(--muted);
+
+    font-size: 0.68rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.09em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   ATTENDANCE
+========================================================= */
+
+.coach-toggle-row {
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+
+.coach-attendance-button {
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 9px;
+
+    padding:
+        9px 11px;
+
+    background: white;
+
+    color:
+        var(--muted);
+
+    font: inherit;
+
+    font-size: 0.76rem;
+
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+
+.coach-attendance-button.playing.active {
+    background:
+        var(--green-soft);
+
+    color:
+        var(--green-dark);
+
+    border-color:
+        #bcd9c6;
+}
+
+
+.coach-attendance-button.absent.active {
+    background:
+        #fbe7e7;
+
+    color:
+        #8a2828;
+
+    border-color:
+        #e8baba;
+}
+
+
+.coach-attendance-button.late.active {
+    background:
+        #fff3d9;
+
+    color:
+        #85600e;
+
+    border-color:
+        #e8d099;
+}
+
+
+.coach-late-options {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 10px;
+
+    color:
+        var(--muted);
+
+    font-size: 0.78rem;
+}
+
+
+.coach-quarter-select {
+    padding:
+        7px 10px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 8px;
+
+    background: white;
+
+    font: inherit;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   POSITION TOGGLES
+========================================================= */
+
+.coach-position-row {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 7px;
+}
+
+
+.coach-position-button {
+    min-height: 42px;
+
+    border-radius: 9px;
+
+    padding:
+        9px 10px;
+
+    border:
+        1px solid
+        var(--border);
+
+    font: inherit;
+
+    font-size: 0.75rem;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+
+.coach-position-button span {
+    margin-right: 5px;
+}
+
+
+.coach-position-button.allowed {
+    background:
+        var(--green-soft);
+
+    color:
+        var(--green-dark);
+
+    border-color:
+        #bfd9c7;
+}
+
+
+.coach-position-button.blocked {
+    background:
+        #eeeeee;
+
+    color:
+        #8a918c;
+
+    text-decoration:
+        line-through;
+}
+
+
+/* =========================================================
+   GENERATOR
+========================================================= */
+
+.coach-generator-actions {
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+
+.coach-message {
+    min-height: 18px;
+
+    margin-top: 10px;
+
+    color:
+        var(--muted);
+
+    font-size: 0.8rem;
+}
+
+
+/* =========================================================
+   QUARTERS
+========================================================= */
+
+.coach-quarter-grid {
+    max-width: 1250px;
+
+    margin:
+        0 auto 20px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 18px;
+}
+
+
+.coach-quarter-card {
+    padding: 24px;
+
+    background: white;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 6px 20px
+        rgba(20, 35, 25, 0.05);
+}
+
+
+.coach-quarter-heading {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom: 16px;
+}
+
+
+.coach-quarter-heading h2 {
+    margin:
+        4px 0 0;
+}
+
+
+.coach-reset-quarter {
+    border: 0;
+
+    background: transparent;
+
+    color:
+        var(--muted);
+
+    font: inherit;
+
+    font-size: 0.75rem;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MANUAL LINEUP EDITOR
+========================================================= */
+
+.coach-position-editor {
+    display: grid;
+
+    grid-template-columns:
+        160px 1fr;
+
+    gap: 12px;
+
+    align-items: center;
+
+    padding:
+        8px 0;
+
+    border-bottom:
+        1px solid
+        #eef1ef;
+}
+
+
+.coach-position-label {
+    font-size: 0.78rem;
+
+    font-weight: 900;
+}
+
+
+.coach-lineup-select {
+    width: 100%;
+
+    padding:
+        9px 10px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 9px;
+
+    background: white;
+
+    font: inherit;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   BENCH
+========================================================= */
+
+.coach-bench-box {
+    margin-top: 16px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    background:
+        #f3f6f4;
+}
+
+
+.coach-bench-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 8px;
+}
+
+
+.coach-bench-player {
+    padding:
+        6px 9px;
+
+    border-radius: 999px;
+
+    background: white;
+
+    border:
+        1px solid
+        var(--border);
+
+    color:
+        var(--green-dark);
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+}
+
+
+.coach-bench-empty {
+    color:
+        var(--muted);
+
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+.coach-validation {
+    padding: 15px;
+
+    border-radius: 12px;
+
+    background:
+        #f2f5f3;
+
+    color:
+        var(--muted);
+}
+
+
+.coach-validation.valid {
+    background:
+        var(--green-soft);
+
+    color:
+        var(--green-dark);
+}
+
+
+.coach-validation.invalid {
+    background:
+        #fff3d9;
+
+    color:
+        #7b590d;
+}
+
+
+.coach-validation strong {
+    display: block;
+
+    margin-bottom: 5px;
+}
+
+
+.coach-validation span {
+    font-size: 0.82rem;
+}
+
+
+.coach-validation ul {
+    margin:
+        8px 0 0;
+
+    padding-left: 20px;
+}
+
+
+/* =========================================================
+   PUBLISH
+========================================================= */
+
+.coach-publish-card {
+    max-width: 1250px;
+
+    margin:
+        0 auto 40px;
+
+    padding:
+        26px;
+
+    border-radius: 18px;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    gap: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #10291d,
+            #1f6f46
+        );
+
+    color: white;
+}
+
+
+.coach-publish-card .eyebrow {
+    color: #a9ceb7;
+}
+
+
+.coach-publish-card h2 {
+    margin:
+        5px 0;
+}
+
+
+.coach-publish-card p {
+    margin: 0;
+
+    max-width: 650px;
+
+    color: #d3e5d9;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SAVE STATUS
+========================================================= */
+
+.coach-save-status {
+    color:
+        var(--muted);
+
+    font-size: 0.8rem;
+
+    font-weight: 800;
+}
+
+
+.coach-save-status.success {
+    color:
+        var(--green);
+}
+
+
+.coach-save-status.error {
+    color:
+        #a13333;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .coach-page {
+        padding: 18px;
+    }
+
+
+    .coach-header {
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+
+    .coach-player-list {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .coach-quarter-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .coach-publish-card {
+        align-items:
+            stretch;
+
+        flex-direction:
+            column;
+    }
+
+
+    .coach-save-button {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 560px) {
+
+    .coach-page {
+        padding: 10px;
+    }
+
+
+    .coach-login-card {
+        padding: 28px 20px;
+    }
+
+
+    .coach-header {
+        padding: 24px 20px;
+
+        border-radius: 16px;
+    }
+
+
+    .coach-card,
+    .coach-quarter-card {
+        padding: 18px;
+
+        border-radius: 14px;
+    }
+
+
+    .coach-position-row {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .coach-position-editor {
+        grid-template-columns:
+            1fr;
+
+        gap: 5px;
+    }
+
+
+    .coach-generator-actions {
+        flex-direction:
+            column;
+    }
+
+
+    .coach-generator-actions button {
+        width: 100%;
+    }
+
+
+    .coach-header-actions {
+        width: 100%;
+    }
+
+
+    .coach-header-actions a,
+    .coach-header-actions button {
+        flex: 1;
+    }
+
+}
