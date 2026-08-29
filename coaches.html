@@ -96,7 +96,7 @@
 
 
     <!-- =====================================================
-         COACH APP
+         APP
     ====================================================== -->
 
     <div
@@ -104,8 +104,6 @@
         style="display:none;"
     >
 
-
-        <!-- HEADER -->
 
         <header class="coach-header">
 
@@ -120,9 +118,10 @@
                 </h1>
 
                 <p>
-                    Set availability, control positions,
-                    generate fair rotations, make manual
-                    changes, and publish the lineup.
+                    Set attendance, control positions,
+                    generate rotations, lock completed
+                    quarters, make manual changes, and
+                    publish the lineup.
                 </p>
 
             </div>
@@ -138,12 +137,13 @@
                     View Public Lineup
                 </a>
 
+
                 <button
                     id="lockButton"
                     class="coach-secondary-button"
                     type="button"
                 >
-                    Lock
+                    Lock Coach's Den
                 </button>
 
             </div>
@@ -217,8 +217,8 @@
 
                     <p class="muted">
                         Attendance applies only to this game.
-                        Position restrictions stay with the
-                        player until you change them.
+                        Position restrictions persist until
+                        you change them.
                     </p>
 
                 </div>
@@ -241,29 +241,21 @@
 
         <section class="coach-card">
 
-            <div class="coach-section-heading">
-
-                <div>
-
-                    <div class="eyebrow">
-                        Lineup Builder
-                    </div>
-
-                    <h2>
-                        Build the Game Plan
-                    </h2>
-
-                    <p class="muted">
-                        The generator prioritizes equal
-                        playing time, avoids consecutive
-                        bench quarters when possible,
-                        rotates positions, and respects
-                        attendance and position restrictions.
-                    </p>
-
-                </div>
-
+            <div class="eyebrow">
+                Lineup Builder
             </div>
+
+            <h2>
+                Build the Game Plan
+            </h2>
+
+            <p class="muted">
+                Locked quarters are never changed.
+                They still count toward playing-time
+                history. Anyone who sat the previous
+                quarter is prioritized to play next
+                whenever a legal rotation exists.
+            </p>
 
 
             <div class="coach-generator-actions">
@@ -273,7 +265,7 @@
                     class="coach-primary-button"
                     type="button"
                 >
-                    Generate Full Lineup
+                    Generate / Recalculate Unlocked Quarters
                 </button>
 
 
@@ -327,14 +319,13 @@
                 id="validationResults"
                 class="coach-validation"
             >
-                Generate or edit the lineup to check it.
             </div>
 
         </section>
 
 
         <!-- =================================================
-             PUBLISH
+             SAVE
         ================================================== -->
 
         <section class="coach-publish-card">
@@ -350,9 +341,9 @@
                 </h2>
 
                 <p>
-                    Save attendance, position restrictions,
-                    and Q1–Q4 to the Google Sheet used by
-                    the public Weekly Lineup page.
+                    Saves attendance, restrictions,
+                    quarter locks, and Q1–Q4 to the data
+                    used by the public Weekly Lineup page.
                 </p>
 
             </div>
@@ -405,19 +396,22 @@ let selectedGameId = "";
 let playerState = {};
 
 
+let quarterLocks = {
+
+    "1": false,
+    "2": false,
+    "3": false,
+    "4": false
+
+};
+
+
 let quarterLineups = {
 
-    "1":
-        createEmptyQuarter(),
-
-    "2":
-        createEmptyQuarter(),
-
-    "3":
-        createEmptyQuarter(),
-
-    "4":
-        createEmptyQuarter()
+    "1": createEmptyQuarter(),
+    "2": createEmptyQuarter(),
+    "3": createEmptyQuarter(),
+    "4": createEmptyQuarter()
 
 };
 
@@ -501,9 +495,7 @@ async function unlockCoachDen() {
 
 
     const pin =
-        input
-            .value
-            .trim();
+        input.value.trim();
 
 
     if (!pin) {
@@ -526,10 +518,8 @@ async function unlockCoachDen() {
             await postApi(
                 "verifycoachpin",
                 {
-
                     pin:
                         pin
-
                 }
             );
 
@@ -592,7 +582,7 @@ async function unlockCoachDen() {
 
 
 /* =========================================================
-   LOCK
+   LOCK APP
 ========================================================= */
 
 document
@@ -637,7 +627,7 @@ document
 
 
 /* =========================================================
-   LOAD INITIAL COACH DATA
+   LOAD INITIAL DATA
 ========================================================= */
 
 async function loadCoachData() {
@@ -656,11 +646,9 @@ async function loadCoachData() {
 
     const response =
         await fetch(
-
             API_URL +
             "?" +
             query.toString()
-
         );
 
 
@@ -672,7 +660,7 @@ async function loadCoachData() {
 
         throw new Error(
             result.error ||
-            "Coach data could not be loaded."
+            "Unable to load Coach's Den."
         );
 
     }
@@ -807,11 +795,9 @@ async function loadSelectedGame() {
 
     const response =
         await fetch(
-
             API_URL +
             "?" +
             query.toString()
-
         );
 
 
@@ -823,7 +809,7 @@ async function loadSelectedGame() {
 
         throw new Error(
             result.error ||
-            "Game could not be loaded."
+            "Unable to load game."
         );
 
     }
@@ -845,6 +831,18 @@ async function loadSelectedGame() {
         result.data.attendance || [];
 
 
+    quarterLocks =
+        Object.assign(
+            {
+                "1": false,
+                "2": false,
+                "3": false,
+                "4": false
+            },
+            result.data.locks || {}
+        );
+
+
     initializePlayerState();
 
 
@@ -852,8 +850,7 @@ async function loadSelectedGame() {
 
 
     /*
-     * Repair a saved lineup if attendance
-     * has changed since it was created.
+     * Repairs only unlocked quarters.
      */
 
     repairAllQuarterLineups();
@@ -861,12 +858,9 @@ async function loadSelectedGame() {
 
     renderGameDetails();
 
-
     renderPlayers();
 
-
     renderQuarterEditor();
-
 
     validateLineup();
 
@@ -902,12 +896,16 @@ function findBestGame() {
 
     const upcoming =
         games.find(
-            game =>
+            game => {
 
-                parseDate(
-                    game.date
-                ) >=
-                today
+                return (
+                    parseDate(
+                        game.date
+                    ) >=
+                    today
+                );
+
+            }
         );
 
 
@@ -938,13 +936,11 @@ function buildGameLabel(
         date.toLocaleDateString(
             "en-US",
             {
-
                 month:
                     "short",
 
                 day:
                     "numeric"
-
             }
         );
 
@@ -1001,27 +997,6 @@ function renderGameDetails() {
         );
 
 
-    const formatted =
-        date.toLocaleDateString(
-            "en-US",
-            {
-
-                weekday:
-                    "long",
-
-                month:
-                    "long",
-
-                day:
-                    "numeric",
-
-                year:
-                    "numeric"
-
-            }
-        );
-
-
     document
         .getElementById(
             "coachGameDetails"
@@ -1029,10 +1004,30 @@ function renderGameDetails() {
         .innerHTML = `
 
             <strong>
-                ${escapeHTML(
-                    formatted
-                )}
+
+                ${
+                    escapeHTML(
+                        date.toLocaleDateString(
+                            "en-US",
+                            {
+                                weekday:
+                                    "long",
+
+                                month:
+                                    "long",
+
+                                day:
+                                    "numeric",
+
+                                year:
+                                    "numeric"
+                            }
+                        )
+                    )
+                }
+
             </strong>
+
 
             <span>
 
@@ -1053,6 +1048,7 @@ function renderGameDetails() {
                 }
 
             </span>
+
 
             <span>
 
@@ -1184,31 +1180,13 @@ function renderPlayers() {
 
             card.innerHTML = `
 
-                <div class="coach-player-top">
+                <div class="coach-player-name">
 
-                    <div>
-
-                        <div class="coach-player-name">
-
-                            ${
-                                escapeHTML(
-                                    player.firstName
-                                )
-                            }
-
-                        </div>
-
-                        <div class="coach-player-id">
-
-                            ${
-                                escapeHTML(
-                                    player.playerId
-                                )
-                            }
-
-                        </div>
-
-                    </div>
+                    ${
+                        escapeHTML(
+                            player.firstName
+                        )
+                    }
 
                 </div>
 
@@ -1243,7 +1221,7 @@ function renderPlayers() {
 
                 <div
                     class="coach-late-options"
-                    id="lateOptions-${player.playerId}"
+
                     ${
                         state.status ===
                         "Late"
@@ -1354,6 +1332,43 @@ function attendanceButton(
     selectedStatus
 ) {
 
+    let label =
+        status;
+
+
+    if (
+        status ===
+        "Playing"
+    ) {
+
+        label =
+            "✓ Playing";
+
+    }
+
+
+    if (
+        status ===
+        "Absent"
+    ) {
+
+        label =
+            "✕ Absent";
+
+    }
+
+
+    if (
+        status ===
+        "Late"
+    ) {
+
+        label =
+            "⏰ Late";
+
+    }
+
+
     return `
 
         <button
@@ -1363,28 +1378,18 @@ function attendanceButton(
                 coach-attendance-button
                 ${status.toLowerCase()}
                 ${
-                    selectedStatus ===
-                    status
+                    selectedStatus === status
                         ? "active"
                         : ""
                 }
             "
 
             data-player="${playerId}"
+
             data-status="${status}"
         >
 
-            ${
-                status ===
-                "Playing"
-                    ? "✓ Playing"
-                    :
-                status ===
-                "Absent"
-                    ? "✕ Absent"
-                    :
-                    "⏰ Late"
-            }
+            ${label}
 
         </button>
 
@@ -1420,6 +1425,7 @@ function positionButton(
             "
 
             data-player="${playerId}"
+
             data-position="${position}"
         >
 
@@ -1478,10 +1484,6 @@ function quarterOption(
 function attachPlayerEvents() {
 
 
-    /*
-     * ATTENDANCE
-     */
-
     document
         .querySelectorAll(
             ".coach-attendance-button"
@@ -1520,22 +1522,12 @@ function attachPlayerEvents() {
                         }
 
 
-                        /*
-                         * Immediately repair the lineup.
-                         *
-                         * If this player is no longer
-                         * available, an eligible bench
-                         * player is pulled onto the field.
-                         */
-
                         repairAllQuarterLineups();
 
 
                         renderPlayers();
 
-
                         renderQuarterEditor();
-
 
                         validateLineup();
 
@@ -1545,10 +1537,6 @@ function attachPlayerEvents() {
             }
         );
 
-
-    /*
-     * POSITION RESTRICTIONS
-     */
 
     document
         .querySelectorAll(
@@ -1581,20 +1569,12 @@ function attachPlayerEvents() {
                             ];
 
 
-                        /*
-                         * If this player is currently
-                         * assigned to the newly-blocked
-                         * position, repair it.
-                         */
-
                         repairAllQuarterLineups();
 
 
                         renderPlayers();
 
-
                         renderQuarterEditor();
-
 
                         validateLineup();
 
@@ -1604,10 +1584,6 @@ function attachPlayerEvents() {
             }
         );
 
-
-    /*
-     * LATE STARTING QUARTER
-     */
 
     document
         .querySelectorAll(
@@ -1633,7 +1609,6 @@ function attachPlayerEvents() {
 
                         renderQuarterEditor();
 
-
                         validateLineup();
 
                     }
@@ -1646,11 +1621,10 @@ function attachPlayerEvents() {
 
 
 /* =========================================================
-   LOAD SAVED LINEUP
+   LOAD SAVED LINEUPS
 ========================================================= */
 
 function loadSavedQuarterLineups() {
-
 
     quarterLineups = {
 
@@ -1679,17 +1653,19 @@ function loadSavedQuarterLineups() {
 
             const row =
                 savedLineup.find(
-                    item =>
+                    item => {
 
-                        item.gameId ===
-                        selectedGameId
+                        return (
+                            item.gameId ===
+                            selectedGameId
+                            &&
+                            String(
+                                item.quarter
+                            ) ===
+                            quarter
+                        );
 
-                        &&
-
-                        String(
-                            item.quarter
-                        ) ===
-                        quarter
+                    }
                 );
 
 
@@ -1747,54 +1723,592 @@ function loadSavedQuarterLineups() {
 
 
 /* =========================================================
-   REPAIR ALL QUARTERS
+   GENERATE BUTTON
 ========================================================= */
 
-function repairAllQuarterLineups() {
+document
+    .getElementById(
+        "generateButton"
+    )
+    .addEventListener(
+        "click",
+        generateLineup
+    );
 
-    [
-        1,
-        2,
-        3,
-        4
-    ].forEach(
-        quarter => {
 
-            repairQuarterLineup(
+/* =========================================================
+   GENERATE
+========================================================= */
+
+function generateLineup() {
+
+    const stats =
+        createGenerationStats();
+
+
+    for (
+        let quarter = 1;
+        quarter <= 4;
+        quarter++
+    ) {
+
+        const quarterKey =
+            String(
                 quarter
             );
 
+
+        /*
+         * Locked quarter remains unchanged,
+         * but is still counted as history.
+         */
+
+        if (
+            quarterLocks[
+                quarterKey
+            ]
+        ) {
+
+            updateStatsFromQuarter(
+                quarter,
+                quarterLineups[
+                    quarterKey
+                ],
+                stats
+            );
+
+
+            continue;
+
         }
-    );
+
+
+        quarterLineups[
+            quarterKey
+        ] =
+            generateQuarter(
+                quarter,
+                stats
+            );
+
+
+        updateStatsFromQuarter(
+            quarter,
+            quarterLineups[
+                quarterKey
+            ],
+            stats
+        );
+
+    }
+
+
+    renderQuarterEditor();
+
+    validateLineup();
+
+
+    document
+        .getElementById(
+            "generatorMessage"
+        )
+        .textContent =
+        "Unlocked quarters recalculated. Locked quarters were preserved.";
 
 }
 
 
 /* =========================================================
-   REPAIR QUARTER
+   GENERATION STATS
 ========================================================= */
 
-function repairQuarterLineup(
-    quarter
+function createGenerationStats() {
+
+    const stats =
+        {};
+
+
+    players.forEach(
+        player => {
+
+            stats[
+                player.playerId
+            ] = {
+
+                played:
+                    0,
+
+                lastPlayed:
+                    null,
+
+                positionCount: {
+
+                    hunter:
+                        0,
+
+                    scout:
+                        0,
+
+                    guardian:
+                        0,
+
+                    packLeader:
+                        0
+
+                }
+
+            };
+
+        }
+    );
+
+
+    return stats;
+
+}
+
+
+/* =========================================================
+   GENERATE ONE QUARTER
+========================================================= */
+
+function generateQuarter(
+    quarter,
+    stats
 ) {
 
-    const quarterKey =
-        String(
+    const available =
+        getAvailablePlayers(
             quarter
         );
 
 
     const lineup =
-        quarterLineups[
-            quarterKey
+        createEmptyQuarter();
+
+
+    const assigned =
+        new Set();
+
+
+    /*
+     * Players who were available and
+     * sat last quarter are must-play
+     * candidates whenever possible.
+     */
+
+    const mustPlay =
+        new Set();
+
+
+    if (
+        quarter > 1
+    ) {
+
+        available.forEach(
+            player => {
+
+                const playerId =
+                    player.playerId;
+
+
+                if (
+                    playerWasAvailable(
+                        playerId,
+                        quarter - 1
+                    )
+                    &&
+                    !playerPlayedQuarter(
+                        playerId,
+                        quarter - 1
+                    )
+                ) {
+
+                    mustPlay.add(
+                        playerId
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    const slots = [
+
+        {
+            slot:
+                "packLeader",
+
+            position:
+                "packLeader"
+        },
+
+        {
+            slot:
+                "hunter",
+
+            position:
+                "hunter"
+        },
+
+        {
+            slot:
+                "guardianLeft",
+
+            position:
+                "guardian"
+        },
+
+        {
+            slot:
+                "guardianRight",
+
+            position:
+                "guardian"
+        },
+
+        {
+            slot:
+                "scoutLeft",
+
+            position:
+                "scout"
+        },
+
+        {
+            slot:
+                "scoutRight",
+
+            position:
+                "scout"
+        }
+
+    ];
+
+
+    const remainingSlots =
+        [...slots];
+
+
+    while (
+        remainingSlots.length >
+        0
+    ) {
+
+        /*
+         * Fill the slot with the fewest
+         * legal candidates first.
+         */
+
+        remainingSlots.sort(
+            (a, b) => {
+
+                const countA =
+                    countEligibleCandidates(
+                        available,
+                        assigned,
+                        a.position,
+                        mustPlay
+                    );
+
+
+                const countB =
+                    countEligibleCandidates(
+                        available,
+                        assigned,
+                        b.position,
+                        mustPlay
+                    );
+
+
+                return (
+                    countA -
+                    countB
+                );
+
+            }
+        );
+
+
+        const nextSlot =
+            remainingSlots.shift();
+
+
+        const player =
+            selectGeneratorPlayer(
+                available,
+                assigned,
+                nextSlot.position,
+                mustPlay,
+                stats
+            );
+
+
+        if (!player) {
+
+            continue;
+
+        }
+
+
+        lineup[
+            nextSlot.slot
+        ] =
+            player.playerId;
+
+
+        assigned.add(
+            player.playerId
+        );
+
+
+        mustPlay.delete(
+            player.playerId
+        );
+
+    }
+
+
+    return lineup;
+
+}
+
+
+/* =========================================================
+   COUNT ELIGIBLE CANDIDATES
+========================================================= */
+
+function countEligibleCandidates(
+    available,
+    assigned,
+    position,
+    mustPlay
+) {
+
+    const eligible =
+        available.filter(
+            player => {
+
+                if (
+                    assigned.has(
+                        player.playerId
+                    )
+                ) {
+
+                    return false;
+
+                }
+
+
+                return (
+                    playerState[
+                        player.playerId
+                    ].positions[
+                        position
+                    ] !== false
+                );
+
+            }
+        );
+
+
+    const priority =
+        eligible.filter(
+            player => {
+
+                return mustPlay.has(
+                    player.playerId
+                );
+
+            }
+        );
+
+
+    return priority.length > 0
+        ? priority.length
+        : eligible.length;
+
+}
+
+
+/* =========================================================
+   SELECT PLAYER
+========================================================= */
+
+function selectGeneratorPlayer(
+    available,
+    assigned,
+    position,
+    mustPlay,
+    stats
+) {
+
+    const eligible =
+        available.filter(
+            player => {
+
+                if (
+                    assigned.has(
+                        player.playerId
+                    )
+                ) {
+
+                    return false;
+
+                }
+
+
+                return (
+                    playerState[
+                        player.playerId
+                    ].positions[
+                        position
+                    ] !== false
+                );
+
+            }
+        );
+
+
+    if (
+        eligible.length ===
+        0
+    ) {
+
+        return null;
+
+    }
+
+
+    /*
+     * Hard priority:
+     * if a player who sat last quarter
+     * can legally fill this position,
+     * use that candidate group first.
+     */
+
+    const mustPlayEligible =
+        eligible.filter(
+            player => {
+
+                return mustPlay.has(
+                    player.playerId
+                );
+
+            }
+        );
+
+
+    const pool =
+        mustPlayEligible.length > 0
+            ? mustPlayEligible
+            : eligible;
+
+
+    pool.sort(
+        (a, b) => {
+
+            const scoreA =
+                generatorScore(
+                    a.playerId,
+                    position,
+                    stats
+                );
+
+
+            const scoreB =
+                generatorScore(
+                    b.playerId,
+                    position,
+                    stats
+                );
+
+
+            return (
+                scoreA -
+                scoreB
+            );
+
+        }
+    );
+
+
+    return pool[0];
+
+}
+
+
+/* =========================================================
+   GENERATOR SCORE
+========================================================= */
+
+function generatorScore(
+    playerId,
+    position,
+    stats
+) {
+
+    const stat =
+        stats[
+            playerId
         ];
 
 
-    if (!lineup) {
+    /*
+     * Equal playing time first.
+     */
 
-        return;
+    let score =
+        stat.played *
+        1000;
 
-    }
+
+    /*
+     * Rotate positions.
+     */
+
+    score +=
+        stat.positionCount[
+            position
+        ] *
+        100;
+
+
+    /*
+     * Small tie breaker.
+     */
+
+    score +=
+        Math.random() *
+        2;
+
+
+    return score;
+
+}
+
+
+/* =========================================================
+   UPDATE STATS FROM QUARTER
+========================================================= */
+
+function updateStatsFromQuarter(
+    quarter,
+    lineup,
+    stats
+) {
+
+    const fieldPlayers =
+        new Set(
+            Object
+                .values(
+                    lineup
+                )
+                .filter(Boolean)
+        );
 
 
     const slotPositions = {
@@ -1820,14 +2334,242 @@ function repairQuarterLineup(
     };
 
 
+    Object
+        .entries(
+            lineup
+        )
+        .forEach(
+            ([slot, playerId]) => {
+
+                if (
+                    !playerId ||
+                    !stats[
+                        playerId
+                    ]
+                ) {
+
+                    return;
+
+                }
+
+
+                stats[
+                    playerId
+                ].played++;
+
+
+                stats[
+                    playerId
+                ].positionCount[
+                    slotPositions[
+                        slot
+                    ]
+                ]++;
+
+            }
+        );
+
+
+    players.forEach(
+        player => {
+
+            const playerId =
+                player.playerId;
+
+
+            if (
+                !playerWasAvailable(
+                    playerId,
+                    quarter
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            stats[
+                playerId
+            ].lastPlayed =
+                fieldPlayers.has(
+                    playerId
+                );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   AVAILABILITY
+========================================================= */
+
+function getAvailablePlayers(
+    quarter
+) {
+
+    return players.filter(
+        player => {
+
+            return playerWasAvailable(
+                player.playerId,
+                quarter
+            );
+
+        }
+    );
+
+}
+
+
+function playerWasAvailable(
+    playerId,
+    quarter
+) {
+
+    const state =
+        playerState[
+            playerId
+        ];
+
+
+    if (!state) {
+
+        return false;
+
+    }
+
+
+    if (
+        state.status ===
+        "Absent"
+    ) {
+
+        return false;
+
+    }
+
+
+    if (
+        state.status ===
+        "Late"
+    ) {
+
+        return (
+            Number(
+                quarter
+            ) >=
+            Number(
+                state.availableFromQuarter ||
+                1
+            )
+        );
+
+    }
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   REPAIR ALL UNLOCKED QUARTERS
+========================================================= */
+
+function repairAllQuarterLineups() {
+
+    for (
+        let quarter = 1;
+        quarter <= 4;
+        quarter++
+    ) {
+
+        if (
+            quarterLocks[
+                String(
+                    quarter
+                )
+            ]
+        ) {
+
+            continue;
+
+        }
+
+
+        repairQuarterLineup(
+            quarter
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   REPAIR ONE QUARTER
+========================================================= */
+
+function repairQuarterLineup(
+    quarter
+) {
+
+    const quarterKey =
+        String(
+            quarter
+        );
+
+
+    if (
+        quarterLocks[
+            quarterKey
+        ]
+    ) {
+
+        return;
+
+    }
+
+
+    const lineup =
+        quarterLineups[
+            quarterKey
+        ];
+
+
+    const positions = {
+
+        hunter:
+            "hunter",
+
+        scoutLeft:
+            "scout",
+
+        scoutRight:
+            "scout",
+
+        guardianLeft:
+            "guardian",
+
+        guardianRight:
+            "guardian",
+
+        packLeader:
+            "packLeader"
+
+    };
+
+
     /*
-     * Remove players who are no longer
-     * valid for the quarter/position.
+     * Remove invalid assignments.
      */
 
     Object
         .entries(
-            slotPositions
+            positions
         )
         .forEach(
             ([slot, position]) => {
@@ -1864,10 +2606,6 @@ function repairQuarterLineup(
         );
 
 
-    /*
-     * Track players who remain assigned.
-     */
-
     const assigned =
         new Set(
             Object
@@ -1878,13 +2616,47 @@ function repairQuarterLineup(
         );
 
 
-    /*
-     * Fill open positions.
-     */
+    const mustPlay =
+        new Set();
+
+
+    if (
+        quarter > 1
+    ) {
+
+        getAvailablePlayers(
+            quarter
+        )
+            .forEach(
+                player => {
+
+                    if (
+                        playerWasAvailable(
+                            player.playerId,
+                            quarter - 1
+                        )
+                        &&
+                        !playerPlayedQuarter(
+                            player.playerId,
+                            quarter - 1
+                        )
+                    ) {
+
+                        mustPlay.add(
+                            player.playerId
+                        );
+
+                    }
+
+                }
+            );
+
+    }
+
 
     Object
         .entries(
-            slotPositions
+            positions
         )
         .forEach(
             ([slot, position]) => {
@@ -1895,30 +2667,30 @@ function repairQuarterLineup(
                     ]
                 ) {
 
+                    mustPlay.delete(
+                        lineup[
+                            slot
+                        ]
+                    );
+
+
                     return;
 
                 }
 
 
-                const candidates =
+                const eligible =
                     getAvailablePlayers(
                         quarter
                     )
                         .filter(
                             player => {
 
-                                if (
-                                    assigned.has(
+                                return (
+                                    !assigned.has(
                                         player.playerId
                                     )
-                                ) {
-
-                                    return false;
-
-                                }
-
-
-                                return (
+                                    &&
                                     playerState[
                                         player.playerId
                                     ].positions[
@@ -1930,8 +2702,26 @@ function repairQuarterLineup(
                         );
 
 
+                const priority =
+                    eligible.filter(
+                        player => {
+
+                            return mustPlay.has(
+                                player.playerId
+                            );
+
+                        }
+                    );
+
+
+                const pool =
+                    priority.length > 0
+                        ? priority
+                        : eligible;
+
+
                 if (
-                    candidates.length ===
+                    pool.length ===
                     0
                 ) {
 
@@ -1940,37 +2730,24 @@ function repairQuarterLineup(
                 }
 
 
-                /*
-                 * Prefer:
-                 *
-                 * 1. Player who sat previous quarter.
-                 * 2. Player with fewer total quarters.
-                 * 3. Player with fewer appearances at
-                 *    this position.
-                 */
-
-                candidates.sort(
+                pool.sort(
                     (a, b) => {
 
-                        const scoreA =
-                            repairCandidateScore(
-                                a.playerId,
-                                quarter,
-                                position
+                        const totalA =
+                            countPlayerQuarters(
+                                a.playerId
                             );
 
 
-                        const scoreB =
-                            repairCandidateScore(
-                                b.playerId,
-                                quarter,
-                                position
+                        const totalB =
+                            countPlayerQuarters(
+                                b.playerId
                             );
 
 
                         return (
-                            scoreA -
-                            scoreB
+                            totalA -
+                            totalB
                         );
 
                     }
@@ -1978,7 +2755,7 @@ function repairQuarterLineup(
 
 
                 const replacement =
-                    candidates[0];
+                    pool[0];
 
 
                 lineup[
@@ -1991,6 +2768,11 @@ function repairQuarterLineup(
                     replacement.playerId
                 );
 
+
+                mustPlay.delete(
+                    replacement.playerId
+                );
+
             }
         );
 
@@ -1998,7 +2780,7 @@ function repairQuarterLineup(
 
 
 /* =========================================================
-   PLAYER ELIGIBLE FOR SLOT
+   ELIGIBILITY
 ========================================================= */
 
 function playerEligibleForSlot(
@@ -2007,41 +2789,10 @@ function playerEligibleForSlot(
     position
 ) {
 
-    const state =
-        playerState[
-            playerId
-        ];
-
-
-    if (!state) {
-
-        return false;
-
-    }
-
-
     if (
-        state.status ===
-        "Absent"
-    ) {
-
-        return false;
-
-    }
-
-
-    if (
-        state.status ===
-        "Late"
-
-        &&
-
-        Number(
+        !playerWasAvailable(
+            playerId,
             quarter
-        ) <
-        Number(
-            state.availableFromQuarter ||
-            1
         )
     ) {
 
@@ -2050,746 +2801,24 @@ function playerEligibleForSlot(
     }
 
 
-    if (
+    const state =
+        playerState[
+            playerId
+        ];
+
+
+    return (
+        state &&
         state.positions[
             position
-        ] ===
-        false
-    ) {
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-/* =========================================================
-   REPAIR CANDIDATE SCORE
-========================================================= */
-
-function repairCandidateScore(
-    playerId,
-    quarter,
-    position
-) {
-
-    let score =
-        0;
-
-
-    /*
-     * Fewer total quarters is strongly
-     * preferred.
-     */
-
-    score +=
-        countPlayerQuarters(
-            playerId
-        ) *
-        1000;
-
-
-    /*
-     * Sitting previous quarter gets
-     * a very large priority.
-     */
-
-    if (
-        Number(
-            quarter
-        ) > 1
-    ) {
-
-        const previousLineup =
-            quarterLineups[
-                String(
-                    Number(
-                        quarter
-                    ) - 1
-                )
-            ];
-
-
-        const playedPrevious =
-            previousLineup
-                ? Object
-                    .values(
-                        previousLineup
-                    )
-                    .includes(
-                        playerId
-                    )
-                : false;
-
-
-        if (
-            !playedPrevious
-        ) {
-
-            score -=
-                750;
-
-        }
-
-    }
-
-
-    /*
-     * Prefer less-used positions.
-     */
-
-    score +=
-        countPlayerPosition(
-            playerId,
-            position
-        ) *
-        100;
-
-
-    return score;
-
-}
-
-
-/* =========================================================
-   COUNT PLAYER QUARTERS
-========================================================= */
-
-function countPlayerQuarters(
-    playerId
-) {
-
-    let count =
-        0;
-
-
-    [
-        "1",
-        "2",
-        "3",
-        "4"
-    ].forEach(
-        quarter => {
-
-            const lineup =
-                quarterLineups[
-                    quarter
-                ];
-
-
-            if (!lineup) {
-
-                return;
-
-            }
-
-
-            if (
-                Object
-                    .values(
-                        lineup
-                    )
-                    .includes(
-                        playerId
-                    )
-            ) {
-
-                count++;
-
-            }
-
-        }
-    );
-
-
-    return count;
-
-}
-
-
-/* =========================================================
-   COUNT PLAYER POSITION
-========================================================= */
-
-function countPlayerPosition(
-    playerId,
-    position
-) {
-
-    let count =
-        0;
-
-
-    const positionSlots = {
-
-        hunter: [
-            "hunter"
-        ],
-
-        scout: [
-            "scoutLeft",
-            "scoutRight"
-        ],
-
-        guardian: [
-            "guardianLeft",
-            "guardianRight"
-        ],
-
-        packLeader: [
-            "packLeader"
-        ]
-
-    };
-
-
-    const slots =
-        positionSlots[
-            position
-        ] || [];
-
-
-    [
-        "1",
-        "2",
-        "3",
-        "4"
-    ].forEach(
-        quarter => {
-
-            const lineup =
-                quarterLineups[
-                    quarter
-                ];
-
-
-            if (!lineup) {
-
-                return;
-
-            }
-
-
-            slots.forEach(
-                slot => {
-
-                    if (
-                        lineup[
-                            slot
-                        ] ===
-                        playerId
-                    ) {
-
-                        count++;
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-    return count;
-
-}
-
-
-/* =========================================================
-   GENERATE BUTTON
-========================================================= */
-
-document
-    .getElementById(
-        "generateButton"
-    )
-    .addEventListener(
-        "click",
-        generateLineup
-    );
-
-
-/* =========================================================
-   GENERATE LINEUP
-========================================================= */
-
-function generateLineup() {
-
-    const message =
-        document.getElementById(
-            "generatorMessage"
-        );
-
-
-    message.textContent =
-        "";
-
-
-    /*
-     * Stats are built progressively
-     * quarter-by-quarter.
-     */
-
-    const stats =
-        {};
-
-
-    players.forEach(
-        player => {
-
-            stats[
-                player.playerId
-            ] = {
-
-                played:
-                    0,
-
-                /*
-                 * null = no previous quarter
-                 * true = played previous quarter
-                 * false = sat previous quarter
-                 */
-
-                lastPlayed:
-                    null,
-
-                positionCount: {
-
-                    hunter:
-                        0,
-
-                    scout:
-                        0,
-
-                    guardian:
-                        0,
-
-                    packLeader:
-                        0
-
-                }
-
-            };
-
-        }
-    );
-
-
-    const generated =
-        {};
-
-
-    for (
-        let quarter = 1;
-        quarter <= 4;
-        quarter++
-    ) {
-
-        const available =
-            getAvailablePlayers(
-                quarter
-            );
-
-
-        const assigned =
-            new Set();
-
-
-        const result =
-            createEmptyQuarter();
-
-
-        /*
-         * Fill the more restrictive
-         * positions first.
-         */
-
-        const slots = [
-
-            {
-
-                key:
-                    "packLeader",
-
-                position:
-                    "packLeader"
-
-            },
-
-            {
-
-                key:
-                    "hunter",
-
-                position:
-                    "hunter"
-
-            },
-
-            {
-
-                key:
-                    "guardianLeft",
-
-                position:
-                    "guardian"
-
-            },
-
-            {
-
-                key:
-                    "guardianRight",
-
-                position:
-                    "guardian"
-
-            },
-
-            {
-
-                key:
-                    "scoutLeft",
-
-                position:
-                    "scout"
-
-            },
-
-            {
-
-                key:
-                    "scoutRight",
-
-                position:
-                    "scout"
-
-            }
-
-        ];
-
-
-        slots.forEach(
-            slot => {
-
-                const candidate =
-                    pickBestPlayer(
-                        available,
-                        assigned,
-                        slot.position,
-                        stats
-                    );
-
-
-                if (!candidate) {
-
-                    return;
-
-                }
-
-
-                result[
-                    slot.key
-                ] =
-                    candidate.playerId;
-
-
-                assigned.add(
-                    candidate.playerId
-                );
-
-
-                stats[
-                    candidate.playerId
-                ].played++;
-
-
-                stats[
-                    candidate.playerId
-                ].positionCount[
-                    slot.position
-                ]++;
-
-            }
-        );
-
-
-        /*
-         * Update previous-quarter state
-         * only for players who were
-         * actually available.
-         */
-
-        available.forEach(
-            player => {
-
-                stats[
-                    player.playerId
-                ].lastPlayed =
-                    assigned.has(
-                        player.playerId
-                    );
-
-            }
-        );
-
-
-        generated[
-            String(
-                quarter
-            )
-        ] =
-            result;
-
-    }
-
-
-    quarterLineups =
-        generated;
-
-
-    /*
-     * Final repair pass catches any
-     * open positions that can legally
-     * be filled.
-     */
-
-    repairAllQuarterLineups();
-
-
-    renderQuarterEditor();
-
-
-    validateLineup();
-
-
-    message.textContent =
-        "Lineup generated. Players who sit are prioritized for the next quarter. You can manually adjust anything before publishing.";
-
-}
-
-
-/* =========================================================
-   PICK BEST PLAYER
-========================================================= */
-
-function pickBestPlayer(
-    available,
-    assigned,
-    position,
-    stats
-) {
-
-    const eligible =
-        available
-            .filter(
-                player => {
-
-                    if (
-                        assigned.has(
-                            player.playerId
-                        )
-                    ) {
-
-                        return false;
-
-                    }
-
-
-                    return (
-                        playerState[
-                            player.playerId
-                        ].positions[
-                            position
-                        ] !== false
-                    );
-
-                }
-            );
-
-
-    if (
-        eligible.length ===
-        0
-    ) {
-
-        return null;
-
-    }
-
-
-    eligible.sort(
-        (a, b) => {
-
-            const scoreA =
-                playerScore(
-                    a.playerId,
-                    position,
-                    stats
-                );
-
-
-            const scoreB =
-                playerScore(
-                    b.playerId,
-                    position,
-                    stats
-                );
-
-
-            return (
-                scoreA -
-                scoreB
-            );
-
-        }
-    );
-
-
-    return eligible[0];
-
-}
-
-
-/* =========================================================
-   PLAYER GENERATION SCORE
-
-   LOWER SCORE = MORE LIKELY TO PLAY
-========================================================= */
-
-function playerScore(
-    playerId,
-    position,
-    stats
-) {
-
-    const stat =
-        stats[
-            playerId
-        ];
-
-
-    /*
-     * Playing-time balance is the
-     * strongest general factor.
-     */
-
-    let score =
-        stat.played *
-        1000;
-
-
-    /*
-     * HARD PRIORITY:
-     *
-     * If the player sat the previous
-     * quarter, make a very strong effort
-     * to put them back on the field.
-     */
-
-    if (
-        stat.lastPlayed ===
-        false
-    ) {
-
-        score -=
-            750;
-
-    }
-
-
-    /*
-     * Rotate positions.
-     */
-
-    score +=
-        stat.positionCount[
-            position
-        ] *
-        100;
-
-
-    /*
-     * Randomness only breaks close ties.
-     */
-
-    score +=
-        Math.random() *
-        2;
-
-
-    return score;
-
-}
-
-
-/* =========================================================
-   AVAILABLE PLAYERS
-========================================================= */
-
-function getAvailablePlayers(
-    quarter
-) {
-
-    return players.filter(
-        player => {
-
-            const state =
-                playerState[
-                    player.playerId
-                ];
-
-
-            if (!state) {
-
-                return false;
-
-            }
-
-
-            if (
-                state.status ===
-                "Absent"
-            ) {
-
-                return false;
-
-            }
-
-
-            if (
-                state.status ===
-                "Late"
-            ) {
-
-                return (
-                    Number(
-                        quarter
-                    ) >=
-                    Number(
-                        state.availableFromQuarter ||
-                        1
-                    )
-                );
-
-            }
-
-
-            return true;
-
-        }
+        ] !== false
     );
 
 }
 
 
 /* =========================================================
-   QUARTER EDITOR
+   RENDER QUARTERS
 ========================================================= */
 
 function renderQuarterEditor() {
@@ -2818,6 +2847,12 @@ function renderQuarterEditor() {
                 ];
 
 
+            const locked =
+                quarterLocks[
+                    quarter
+                ] === true;
+
+
             const card =
                 document.createElement(
                     "section"
@@ -2825,7 +2860,12 @@ function renderQuarterEditor() {
 
 
             card.className =
-                "coach-quarter-card";
+                "coach-quarter-card" +
+                (
+                    locked
+                        ? " coach-quarter-locked"
+                        : ""
+                );
 
 
             card.innerHTML = `
@@ -2839,21 +2879,82 @@ function renderQuarterEditor() {
                         </div>
 
                         <h2>
+
                             Q${quarter}
+
+                            ${
+                                locked
+                                    ? " 🔒"
+                                    : ""
+                            }
+
                         </h2>
 
                     </div>
 
 
-                    <button
-                        type="button"
-                        class="coach-reset-quarter"
-                        data-quarter="${quarter}"
-                    >
-                        Clear Q${quarter}
-                    </button>
+                    <div class="coach-quarter-actions">
+
+                        <button
+                            type="button"
+
+                            class="
+                                coach-quarter-lock-button
+                                ${
+                                    locked
+                                        ? "locked"
+                                        : ""
+                                }
+                            "
+
+                            data-quarter="${quarter}"
+                        >
+
+                            ${
+                                locked
+                                    ? "Unlock Q" + quarter
+                                    : "Lock Q" + quarter
+                            }
+
+                        </button>
+
+
+                        <button
+                            type="button"
+
+                            class="coach-reset-quarter"
+
+                            data-quarter="${quarter}"
+
+                            ${
+                                locked
+                                    ? "disabled"
+                                    : ""
+                            }
+                        >
+                            Clear
+                        </button>
+
+                    </div>
 
                 </div>
+
+
+                ${
+                    locked
+                        ? `
+
+                            <div class="coach-lock-notice">
+
+                                🔒 Q${quarter} is locked.
+                                Attendance changes and
+                                recalculation will not alter it.
+
+                            </div>
+
+                        `
+                        : ""
+                }
 
 
                 ${positionSelectHTML(
@@ -2861,7 +2962,8 @@ function renderQuarterEditor() {
                     "hunter",
                     "🐺 Hunter",
                     "hunter",
-                    lineup.hunter
+                    lineup.hunter,
+                    locked
                 )}
 
 
@@ -2870,7 +2972,8 @@ function renderQuarterEditor() {
                     "scoutLeft",
                     "🔭 Scout — Left",
                     "scout",
-                    lineup.scoutLeft
+                    lineup.scoutLeft,
+                    locked
                 )}
 
 
@@ -2879,7 +2982,8 @@ function renderQuarterEditor() {
                     "scoutRight",
                     "🔭 Scout — Right",
                     "scout",
-                    lineup.scoutRight
+                    lineup.scoutRight,
+                    locked
                 )}
 
 
@@ -2888,7 +2992,8 @@ function renderQuarterEditor() {
                     "guardianLeft",
                     "🛡️ Guardian — Left",
                     "guardian",
-                    lineup.guardianLeft
+                    lineup.guardianLeft,
+                    locked
                 )}
 
 
@@ -2897,7 +3002,8 @@ function renderQuarterEditor() {
                     "guardianRight",
                     "🛡️ Guardian — Right",
                     "guardian",
-                    lineup.guardianRight
+                    lineup.guardianRight,
+                    locked
                 )}
 
 
@@ -2906,7 +3012,8 @@ function renderQuarterEditor() {
                     "packLeader",
                     "👑 Pack Leader (Goalie)",
                     "packLeader",
-                    lineup.packLeader
+                    lineup.packLeader,
+                    locked
                 )}
 
 
@@ -2955,27 +3062,65 @@ function positionSelectHTML(
     slot,
     label,
     position,
-    selectedPlayer
+    selectedPlayer,
+    locked
 ) {
 
-    const available =
+    const eligible =
         getAvailablePlayers(
             Number(
                 quarter
             )
-        );
+        )
+            .filter(
+                player => {
+
+                    return (
+                        playerState[
+                            player.playerId
+                        ].positions[
+                            position
+                        ] !== false
+                    );
+
+                }
+            );
 
 
-    const eligible =
-        available.filter(
+    /*
+     * Keep historical player visible
+     * in locked quarter even if current
+     * attendance/restrictions changed.
+     */
+
+    if (
+        selectedPlayer &&
+        !eligible.some(
             player =>
+                player.playerId ===
+                selectedPlayer
+        )
+    ) {
 
-                playerState[
-                    player.playerId
-                ].positions[
-                    position
-                ] !== false
-        );
+        const existing =
+            players.find(
+                player =>
+                    player.playerId ===
+                    selectedPlayer
+            );
+
+
+        if (
+            existing
+        ) {
+
+            eligible.push(
+                existing
+            );
+
+        }
+
+    }
 
 
     let options = `
@@ -3034,6 +3179,12 @@ function positionSelectHTML(
                 data-slot="${slot}"
 
                 data-position="${position}"
+
+                ${
+                    locked
+                        ? "disabled"
+                        : ""
+                }
             >
 
                 ${options}
@@ -3087,14 +3238,28 @@ function attachQuarterEvents() {
                     "click",
                     () => {
 
+                        const quarter =
+                            button.dataset.quarter;
+
+
+                        if (
+                            quarterLocks[
+                                quarter
+                            ]
+                        ) {
+
+                            return;
+
+                        }
+
+
                         quarterLineups[
-                            button.dataset.quarter
+                            quarter
                         ] =
                             createEmptyQuarter();
 
 
                         renderQuarterEditor();
-
 
                         validateLineup();
 
@@ -3103,6 +3268,164 @@ function attachQuarterEvents() {
 
             }
         );
+
+
+    document
+        .querySelectorAll(
+            ".coach-quarter-lock-button"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    async () => {
+
+                        await toggleQuarterLock(
+                            button.dataset.quarter
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   TOGGLE QUARTER LOCK
+========================================================= */
+
+async function toggleQuarterLock(
+    quarter
+) {
+
+    const currentlyLocked =
+        quarterLocks[
+            quarter
+        ] === true;
+
+
+    const newState =
+        !currentlyLocked;
+
+
+    const status =
+        document.getElementById(
+            "saveStatus"
+        );
+
+
+    status.textContent =
+        newState
+            ? `Locking Q${quarter}...`
+            : `Unlocking Q${quarter}...`;
+
+
+    status.className =
+        "coach-save-status";
+
+
+    try {
+
+
+        /*
+         * Locking immediately saves
+         * that quarter first.
+         */
+
+        if (
+            newState
+        ) {
+
+            if (
+                !validateQuarter(
+                    quarter
+                )
+            ) {
+
+                status.textContent =
+                    `Q${quarter} cannot be locked while a position is open or duplicated.`;
+
+
+                status.className =
+                    "coach-save-status error";
+
+
+                return;
+
+            }
+
+
+            await saveSingleQuarter(
+                quarter
+            );
+
+        }
+
+
+        const result =
+            await postApi(
+                "savelineuplock",
+                {
+
+                    pin:
+                        coachPin,
+
+                    gameId:
+                        selectedGameId,
+
+                    quarter:
+                        quarter,
+
+                    locked:
+                        newState
+
+                }
+            );
+
+
+        quarterLocks[
+            quarter
+        ] =
+            result.locked === true;
+
+
+        status.textContent =
+            quarterLocks[
+                quarter
+            ]
+                ? `✓ Q${quarter} saved and locked`
+                : `Q${quarter} unlocked`;
+
+
+        status.className =
+            "coach-save-status success";
+
+
+        renderQuarterEditor();
+
+        validateLineup();
+
+
+    } catch (err) {
+
+        console.error(
+            err
+        );
+
+
+        status.textContent =
+            err.message ||
+            "Quarter lock failed.";
+
+
+        status.className =
+            "coach-save-status error";
+
+    }
 
 }
 
@@ -3117,6 +3440,17 @@ function manualPositionChange(
 
     const quarter =
         select.dataset.quarter;
+
+
+    if (
+        quarterLocks[
+            quarter
+        ]
+    ) {
+
+        return;
+
+    }
 
 
     const slot =
@@ -3140,9 +3474,8 @@ function manualPositionChange(
 
 
     /*
-     * If the selected player is already
-     * in another position this quarter,
-     * swap the two players.
+     * Selecting someone already on
+     * the field swaps them.
      */
 
     if (
@@ -3155,29 +3488,25 @@ function manualPositionChange(
                     lineup
                 )
                 .find(
-                    key =>
+                    key => {
 
-                        key !==
-                        slot
+                        return (
+                            key !==
+                            slot
+                            &&
+                            lineup[
+                                key
+                            ] ===
+                            newPlayer
+                        );
 
-                        &&
-
-                        lineup[
-                            key
-                        ] ===
-                        newPlayer
+                    }
                 );
 
 
         if (
             otherSlot
         ) {
-
-            /*
-             * Only place old player in the
-             * other position if they're
-             * eligible for it.
-             */
 
             const otherPosition =
                 slotToPosition(
@@ -3221,10 +3550,6 @@ function manualPositionChange(
         newPlayer;
 
 
-    /*
-     * Fill any hole created by the swap.
-     */
-
     repairQuarterLineup(
         Number(
             quarter
@@ -3234,14 +3559,13 @@ function manualPositionChange(
 
     renderQuarterEditor();
 
-
     validateLineup();
 
 }
 
 
 /* =========================================================
-   SLOT TO POSITION
+   SLOT POSITION
 ========================================================= */
 
 function slotToPosition(
@@ -3317,17 +3641,13 @@ function renderCoachBench(
         );
 
 
-    const lineup =
-        quarterLineups[
-            quarter
-        ];
-
-
-    const fieldPlayers =
+    const field =
         new Set(
             Object
                 .values(
-                    lineup
+                    quarterLineups[
+                        quarter
+                    ]
                 )
                 .filter(Boolean)
         );
@@ -3335,11 +3655,15 @@ function renderCoachBench(
 
     const bench =
         available.filter(
-            player =>
+            player => {
 
-                !fieldPlayers.has(
-                    player.playerId
-                )
+                return (
+                    !field.has(
+                        player.playerId
+                    )
+                );
+
+            }
         );
 
 
@@ -3348,13 +3672,8 @@ function renderCoachBench(
         0
     ) {
 
-        container.innerHTML = `
-
-            <span class="coach-bench-empty">
-                No players on bench
-            </span>
-
-        `;
+        container.innerHTML =
+            `<span class="coach-bench-empty">No players on bench</span>`;
 
         return;
 
@@ -3364,381 +3683,25 @@ function renderCoachBench(
     container.innerHTML =
         bench
             .map(
-                player => `
+                player => {
 
-                    <span class="coach-bench-player">
+                    return `
 
-                        ${
-                            escapeHTML(
-                                player.firstName
-                            )
-                        }
+                        <span class="coach-bench-player">
 
-                    </span>
+                            ${
+                                escapeHTML(
+                                    player.firstName
+                                )
+                            }
 
-                `
+                        </span>
+
+                    `;
+
+                }
             )
             .join("");
-
-}
-
-
-/* =========================================================
-   VALIDATION
-========================================================= */
-
-function validateLineup() {
-
-    const results =
-        document.getElementById(
-            "validationResults"
-        );
-
-
-    const problems =
-        [];
-
-
-    const warnings =
-        [];
-
-
-    const slotPositions = {
-
-        hunter:
-            "hunter",
-
-        scoutLeft:
-            "scout",
-
-        scoutRight:
-            "scout",
-
-        guardianLeft:
-            "guardian",
-
-        guardianRight:
-            "guardian",
-
-        packLeader:
-            "packLeader"
-
-    };
-
-
-    [
-        "1",
-        "2",
-        "3",
-        "4"
-    ].forEach(
-        quarter => {
-
-            const lineup =
-                quarterLineups[
-                    quarter
-                ];
-
-
-            const seen =
-                new Set();
-
-
-            Object
-                .entries(
-                    lineup
-                )
-                .forEach(
-                    ([slot, playerId]) => {
-
-                        if (!playerId) {
-
-                            problems.push(
-                                `Q${quarter}: ${positionDisplayName(
-                                    slotPositions[
-                                        slot
-                                    ]
-                                )} is open.`
-                            );
-
-                            return;
-
-                        }
-
-
-                        if (
-                            seen.has(
-                                playerId
-                            )
-                        ) {
-
-                            problems.push(
-                                `Q${quarter}: ${getPlayerName(
-                                    playerId
-                                )} appears more than once.`
-                            );
-
-                        }
-
-
-                        seen.add(
-                            playerId
-                        );
-
-
-                        const position =
-                            slotPositions[
-                                slot
-                            ];
-
-
-                        if (
-                            !playerEligibleForSlot(
-                                playerId,
-                                Number(
-                                    quarter
-                                ),
-                                position
-                            )
-                        ) {
-
-                            problems.push(
-                                `Q${quarter}: ${getPlayerName(
-                                    playerId
-                                )} is not eligible for ${positionDisplayName(
-                                    position
-                                )}.`
-                            );
-
-                        }
-
-                    }
-                );
-
-        }
-    );
-
-
-    /*
-     * Check consecutive bench quarters.
-     */
-
-    players.forEach(
-        player => {
-
-            for (
-                let quarter = 2;
-                quarter <= 4;
-                quarter++
-            ) {
-
-                const state =
-                    playerState[
-                        player.playerId
-                    ];
-
-
-                if (!state) {
-
-                    continue;
-
-                }
-
-
-                /*
-                 * Only evaluate quarters where
-                 * the player was actually available.
-                 */
-
-                const availableCurrent =
-                    getAvailablePlayers(
-                        quarter
-                    )
-                        .some(
-                            item =>
-                                item.playerId ===
-                                player.playerId
-                        );
-
-
-                const availablePrevious =
-                    getAvailablePlayers(
-                        quarter - 1
-                    )
-                        .some(
-                            item =>
-                                item.playerId ===
-                                player.playerId
-                        );
-
-
-                if (
-                    !availableCurrent ||
-                    !availablePrevious
-                ) {
-
-                    continue;
-
-                }
-
-
-                const playedCurrent =
-                    playerPlayedQuarter(
-                        player.playerId,
-                        quarter
-                    );
-
-
-                const playedPrevious =
-                    playerPlayedQuarter(
-                        player.playerId,
-                        quarter - 1
-                    );
-
-
-                if (
-                    !playedCurrent &&
-                    !playedPrevious
-                ) {
-
-                    warnings.push(
-                        `${player.firstName} sits Q${quarter - 1} and Q${quarter}.`
-                    );
-
-                }
-
-            }
-
-        }
-    );
-
-
-    if (
-        problems.length === 0 &&
-        warnings.length === 0
-    ) {
-
-        results.className =
-            "coach-validation valid";
-
-
-        results.innerHTML = `
-
-            <strong>
-                ✓ Lineup looks good
-            </strong>
-
-            <span>
-                No attendance, position, duplication,
-                or consecutive-bench conflicts found.
-            </span>
-
-        `;
-
-
-        return true;
-
-    }
-
-
-    if (
-        problems.length === 0
-    ) {
-
-        results.className =
-            "coach-validation invalid";
-
-
-        results.innerHTML = `
-
-            <strong>
-                ⚠ Rotation warning
-            </strong>
-
-            <ul>
-
-                ${
-                    warnings
-                        .map(
-                            warning => `
-
-                                <li>
-                                    ${escapeHTML(
-                                        warning
-                                    )}
-                                </li>
-
-                            `
-                        )
-                        .join("")
-                }
-
-            </ul>
-
-        `;
-
-
-        /*
-         * Consecutive bench is a warning,
-         * not a hard block, because sometimes
-         * restrictions make it unavoidable.
-         */
-
-        return true;
-
-    }
-
-
-    results.className =
-        "coach-validation invalid";
-
-
-    results.innerHTML = `
-
-        <strong>
-            ⚠ Fix the lineup
-        </strong>
-
-        <ul>
-
-            ${
-                problems
-                    .map(
-                        problem => `
-
-                            <li>
-                                ${escapeHTML(
-                                    problem
-                                )}
-                            </li>
-
-                        `
-                    )
-                    .join("")
-            }
-
-            ${
-                warnings
-                    .map(
-                        warning => `
-
-                            <li>
-                                ${escapeHTML(
-                                    warning
-                                )}
-                            </li>
-
-                        `
-                    )
-                    .join("")
-            }
-
-        </ul>
-
-    `;
-
-
-    return false;
 
 }
 
@@ -3779,33 +3742,301 @@ function playerPlayedQuarter(
 
 
 /* =========================================================
-   POSITION DISPLAY
+   COUNT QUARTERS
 ========================================================= */
 
-function positionDisplayName(
-    position
+function countPlayerQuarters(
+    playerId
 ) {
 
-    if (
-        position ===
-        "packLeader"
-    ) {
-
-        return "Pack Leader";
-
-    }
+    let total =
+        0;
 
 
-    return position
-        .charAt(0)
-        .toUpperCase() +
-        position.slice(1);
+    [
+        "1",
+        "2",
+        "3",
+        "4"
+    ].forEach(
+        quarter => {
+
+            if (
+                playerPlayedQuarter(
+                    playerId,
+                    Number(
+                        quarter
+                    )
+                )
+            ) {
+
+                total++;
+
+            }
+
+        }
+    );
+
+
+    return total;
 
 }
 
 
 /* =========================================================
-   RELOAD SAVED LINEUP
+   VALIDATE SINGLE QUARTER
+========================================================= */
+
+function validateQuarter(
+    quarter
+) {
+
+    const lineup =
+        quarterLineups[
+            String(
+                quarter
+            )
+        ];
+
+
+    const values =
+        Object.values(
+            lineup
+        );
+
+
+    if (
+        values.some(
+            value =>
+                !value
+        )
+    ) {
+
+        return false;
+
+    }
+
+
+    return (
+        new Set(
+            values
+        ).size ===
+        values.length
+    );
+
+}
+
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+function validateLineup() {
+
+    const container =
+        document.getElementById(
+            "validationResults"
+        );
+
+
+    const errors =
+        [];
+
+
+    const warnings =
+        [];
+
+
+    [
+        1,
+        2,
+        3,
+        4
+    ].forEach(
+        quarter => {
+
+            const lineup =
+                quarterLineups[
+                    String(
+                        quarter
+                    )
+                ];
+
+
+            const values =
+                Object
+                    .values(
+                        lineup
+                    )
+                    .filter(Boolean);
+
+
+            if (
+                values.length < 6
+            ) {
+
+                errors.push(
+                    `Q${quarter} has an open position.`
+                );
+
+            }
+
+
+            if (
+                new Set(
+                    values
+                ).size !==
+                values.length
+            ) {
+
+                errors.push(
+                    `Q${quarter} has a duplicate player.`
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+     * Consecutive-bench warning.
+     */
+
+    players.forEach(
+        player => {
+
+            for (
+                let quarter = 2;
+                quarter <= 4;
+                quarter++
+            ) {
+
+                if (
+                    !playerWasAvailable(
+                        player.playerId,
+                        quarter - 1
+                    )
+                    ||
+                    !playerWasAvailable(
+                        player.playerId,
+                        quarter
+                    )
+                ) {
+
+                    continue;
+
+                }
+
+
+                if (
+                    !playerPlayedQuarter(
+                        player.playerId,
+                        quarter - 1
+                    )
+                    &&
+                    !playerPlayedQuarter(
+                        player.playerId,
+                        quarter
+                    )
+                ) {
+
+                    warnings.push(
+                        `${player.firstName} sits Q${quarter - 1} and Q${quarter}.`
+                    );
+
+                }
+
+            }
+
+        }
+    );
+
+
+    if (
+        errors.length === 0 &&
+        warnings.length === 0
+    ) {
+
+        container.className =
+            "coach-validation valid";
+
+
+        container.innerHTML = `
+
+            <strong>
+                ✓ Lineup looks good
+            </strong>
+
+            <span>
+                No lineup or consecutive-bench
+                conflicts detected.
+            </span>
+
+        `;
+
+
+        return true;
+
+    }
+
+
+    container.className =
+        "coach-validation invalid";
+
+
+    container.innerHTML = `
+
+        <strong>
+
+            ${
+                errors.length > 0
+                    ? "⚠ Fix the lineup"
+                    : "⚠ Rotation warning"
+            }
+
+        </strong>
+
+
+        <ul>
+
+            ${
+                errors
+                    .concat(
+                        warnings
+                    )
+                    .map(
+                        item => {
+
+                            return `
+
+                                <li>
+                                    ${escapeHTML(
+                                        item
+                                    )}
+                                </li>
+
+                            `;
+
+                        }
+                    )
+                    .join("")
+            }
+
+        </ul>
+
+    `;
+
+
+    return (
+        errors.length === 0
+    );
+
+}
+
+
+/* =========================================================
+   RELOAD SAVED
 ========================================================= */
 
 document
@@ -3814,18 +4045,9 @@ document
     )
     .addEventListener(
         "click",
-        () => {
+        async () => {
 
-            loadSavedQuarterLineups();
-
-
-            repairAllQuarterLineups();
-
-
-            renderQuarterEditor();
-
-
-            validateLineup();
+            await loadSelectedGame();
 
 
             document
@@ -3833,14 +4055,14 @@ document
                     "generatorMessage"
                 )
                 .textContent =
-                "Saved Weekly Lineup restored.";
+                "Saved lineup restored.";
 
         }
     );
 
 
 /* =========================================================
-   SAVE
+   SAVE EVERYTHING
 ========================================================= */
 
 document
@@ -3872,7 +4094,7 @@ async function saveEverything() {
     ) {
 
         status.textContent =
-            "Fix lineup conflicts before publishing.";
+            "Fix lineup errors before publishing.";
 
 
         status.className =
@@ -3904,7 +4126,7 @@ async function saveEverything() {
 
 
         /*
-         * SAVE PLAYER SETTINGS
+         * Save player settings and attendance.
          */
 
         for (
@@ -3969,7 +4191,7 @@ async function saveEverything() {
 
 
         /*
-         * SAVE QUARTERS
+         * Save all quarters and locks.
          */
 
         for (
@@ -3981,69 +4203,31 @@ async function saveEverything() {
             ]
         ) {
 
-            const lineup =
-                quarterLineups[
-                    quarter
-                ];
+            await saveSingleQuarter(
+                quarter
+            );
 
 
-            const bench =
-                getBenchPlayerIds(
-                    quarter
-                );
+            await postApi(
+                "savelineuplock",
+                {
 
+                    pin:
+                        coachPin,
 
-            const result =
-                await postApi(
-                    "savelineup",
-                    {
+                    gameId:
+                        selectedGameId,
 
-                        pin:
-                            coachPin,
+                    quarter:
+                        quarter,
 
-                        gameId:
-                            selectedGameId,
+                    locked:
+                        quarterLocks[
+                            quarter
+                        ]
 
-                        quarter:
-                            quarter,
-
-                        hunter:
-                            lineup.hunter,
-
-                        scouts:
-                            [
-                                lineup.scoutLeft,
-                                lineup.scoutRight
-                            ]
-                                .filter(Boolean)
-                                .join(","),
-
-                        guardians:
-                            [
-                                lineup.guardianLeft,
-                                lineup.guardianRight
-                            ]
-                                .filter(Boolean)
-                                .join(","),
-
-                        packLeader:
-                            lineup.packLeader,
-
-                        bench:
-                            bench.join(",")
-
-                    }
-                );
-
-
-            if (!result.ok) {
-
-                throw new Error(
-                    result.error ||
-                    `Q${quarter} could not be saved.`
-                );
-
-            }
+                }
+            );
 
         }
 
@@ -4107,6 +4291,72 @@ async function saveEverything() {
 
 
 /* =========================================================
+   SAVE SINGLE QUARTER
+========================================================= */
+
+async function saveSingleQuarter(
+    quarter
+) {
+
+    const lineup =
+        quarterLineups[
+            String(
+                quarter
+            )
+        ];
+
+
+    const bench =
+        getBenchPlayerIds(
+            quarter
+        );
+
+
+    return postApi(
+        "savelineup",
+        {
+
+            pin:
+                coachPin,
+
+            gameId:
+                selectedGameId,
+
+            quarter:
+                quarter,
+
+            hunter:
+                lineup.hunter,
+
+            scouts:
+                [
+                    lineup.scoutLeft,
+                    lineup.scoutRight
+                ]
+                    .filter(Boolean)
+                    .join(","),
+
+            guardians:
+                [
+                    lineup.guardianLeft,
+                    lineup.guardianRight
+                ]
+                    .filter(Boolean)
+                    .join(","),
+
+            packLeader:
+                lineup.packLeader,
+
+            bench:
+                bench.join(",")
+
+        }
+    );
+
+}
+
+
+/* =========================================================
    BENCH IDS
 ========================================================= */
 
@@ -4114,37 +4364,35 @@ function getBenchPlayerIds(
     quarter
 ) {
 
-    const available =
-        getAvailablePlayers(
-            Number(
-                quarter
-            )
-        );
-
-
-    const lineup =
-        quarterLineups[
-            quarter
-        ];
-
-
     const field =
         new Set(
             Object
                 .values(
-                    lineup
+                    quarterLineups[
+                        String(
+                            quarter
+                        )
+                    ]
                 )
                 .filter(Boolean)
         );
 
 
-    return available
+    return getAvailablePlayers(
+        Number(
+            quarter
+        )
+    )
         .filter(
-            player =>
+            player => {
 
-                !field.has(
-                    player.playerId
-                )
+                return (
+                    !field.has(
+                        player.playerId
+                    )
+                );
+
+            }
         )
         .map(
             player =>
@@ -4267,26 +4515,6 @@ function firstPlayer(
     return splitPlayers(
         value
     )[0] || "";
-
-}
-
-
-function getPlayerName(
-    playerId
-) {
-
-    const player =
-        players.find(
-            item =>
-
-                item.playerId ===
-                playerId
-        );
-
-
-    return player
-        ? player.firstName
-        : playerId;
 
 }
 
