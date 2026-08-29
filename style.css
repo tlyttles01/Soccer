@@ -4018,3 +4018,39 @@ main {
     }
 
 }
+
+/* =========================================================
+   COACH ACCESS
+========================================================= */
+
+.coach-access-link {
+    margin-top: auto;
+    padding-top: 24px;
+}
+
+
+.coach-access-link a {
+    display: block;
+
+    padding: 10px 12px;
+
+    border-radius: 9px;
+
+    color: #7f9186;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+
+    text-decoration: none;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+
+.coach-access-link a:hover {
+    background: rgba(255, 255, 255, 0.06);
+
+    color: white;
+}
