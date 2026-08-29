@@ -3394,7 +3394,252 @@ function parseDate(
 
 }
 
+function repairQuarterLineup(
+    quarter
+) {
 
+    const lineup =
+        quarterLineups[
+            String(
+                quarter
+            )
+        ];
+
+
+    if (!lineup) {
+        return;
+    }
+
+
+    const slotPositions = {
+
+        hunter:
+            "hunter",
+
+        scoutLeft:
+            "scout",
+
+        scoutRight:
+            "scout",
+
+        guardianLeft:
+            "guardian",
+
+        guardianRight:
+            "guardian",
+
+        packLeader:
+            "packLeader"
+
+    };
+
+
+    /*
+     * First remove anyone who is no longer
+     * eligible for this quarter or position.
+     */
+
+    Object
+        .entries(
+            slotPositions
+        )
+        .forEach(
+            ([slot, position]) => {
+
+                const playerId =
+                    lineup[
+                        slot
+                    ];
+
+
+                if (!playerId) {
+                    return;
+                }
+
+
+                const state =
+                    playerState[
+                        playerId
+                    ];
+
+
+                let valid =
+                    true;
+
+
+                if (!state) {
+
+                    valid =
+                        false;
+
+                }
+
+
+                if (
+                    state &&
+                    state.status ===
+                    "Absent"
+                ) {
+
+                    valid =
+                        false;
+
+                }
+
+
+                if (
+                    state &&
+                    state.status ===
+                    "Late"
+                    &&
+                    Number(
+                        quarter
+                    ) <
+                    Number(
+                        state.availableFromQuarter ||
+                        1
+                    )
+                ) {
+
+                    valid =
+                        false;
+
+                }
+
+
+                if (
+                    state &&
+                    state.positions[
+                        position
+                    ] ===
+                    false
+                ) {
+
+                    valid =
+                        false;
+
+                }
+
+
+                if (!valid) {
+
+                    lineup[
+                        slot
+                    ] =
+                        "";
+
+                }
+
+            }
+        );
+
+
+    /*
+     * Current field players after invalid
+     * assignments were removed.
+     */
+
+    const assigned =
+        new Set(
+            Object
+                .values(
+                    lineup
+                )
+                .filter(Boolean)
+        );
+
+
+    /*
+     * Fill any newly-open field position
+     * with an eligible available player.
+     */
+
+    Object
+        .entries(
+            slotPositions
+        )
+        .forEach(
+            ([slot, position]) => {
+
+                if (
+                    lineup[
+                        slot
+                    ]
+                ) {
+
+                    return;
+
+                }
+
+
+                const candidates =
+                    getAvailablePlayers(
+                        Number(
+                            quarter
+                        )
+                    )
+                        .filter(
+                            player => {
+
+                                if (
+                                    assigned.has(
+                                        player.playerId
+                                    )
+                                ) {
+
+                                    return false;
+
+                                }
+
+
+                                return (
+                                    playerState[
+                                        player.playerId
+                                    ].positions[
+                                        position
+                                    ] !== false
+                                );
+
+                            }
+                        );
+
+
+                if (
+                    candidates.length === 0
+                ) {
+
+                    return;
+
+                }
+
+
+                /*
+                 * Prefer someone who is currently
+                 * on the bench for this quarter.
+                 *
+                 * Since anyone not already assigned
+                 * is effectively on the bench,
+                 * the first eligible candidate works.
+                 */
+
+                const replacement =
+                    candidates[0];
+
+
+                lineup[
+                    slot
+                ] =
+                    replacement.playerId;
+
+
+                assigned.add(
+                    replacement.playerId
+                );
+
+            }
+        );
+
+}
 function escapeHTML(
     value
 ) {
